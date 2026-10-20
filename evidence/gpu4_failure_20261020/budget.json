@@ -1,0 +1,16 @@
+{
+  "total_gpu_seconds": 7200.0,
+  "grace_gpu_seconds": 300.0,
+  "gpu_used_seconds": 20.467,
+  "remaining_seconds": 7179.533,
+  "entries": [
+    {
+      "stage": "model_load",
+      "wall_seconds": 20.467,
+      "gpu_seconds": 20.467,
+      "cuda_seconds": 20.467,
+      "note": "R model + pristine B/R copies",
+      "ts": 1792495317.578055
+    }
+  ]
+}

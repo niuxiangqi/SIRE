@@ -1,0 +1,24 @@
+{
+  "run_id": "dev-audit",
+  "created_utc": "2026-10-20T09:54:40Z",
+  "status": "complete",
+  "stages": {
+    "audit": {
+      "status": "done",
+      "utc": "2026-10-20T09:54:50Z",
+      "configs": {
+        "config_diff_keys": [
+          "rope_theta",
+          "sliding_window",
+          "transformers_version"
+        ]
+      },
+      "paths": {
+        "model_audit": "/home/nxq/SIRE/runs/dev-audit/audit/model_audit.json"
+      }
+    }
+  },
+  "next_stage": "data",
+  "resume_command": "bash scripts/run_gpu4.sh resume --run-id dev-audit",
+  "updated_utc": "2026-10-20T09:54:50Z"
+}

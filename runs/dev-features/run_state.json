@@ -1,0 +1,16 @@
+{
+  "run_id": "dev-features",
+  "created_utc": "2026-10-20T09:55:02Z",
+  "status": "partial",
+  "stages": {
+    "features": {
+      "status": "done",
+      "utc": "2026-10-20T10:10:03Z",
+      "samples": 8,
+      "u_vs_absg": 0.473036820624079
+    }
+  },
+  "next_stage": "correctness",
+  "resume_command": "bash scripts/run_gpu4.sh resume --run-id dev-features",
+  "updated_utc": "2026-10-20T10:10:03Z"
+}

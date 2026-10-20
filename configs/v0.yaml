@@ -1,0 +1,73 @@
+# SIRE v0 frozen protocol.
+# Any change to data, formula space, generation budget or precision after the
+# freeze invalidates earlier results and is recorded in DECISIONS.md.
+version: v0
+run_prefix: v0
+
+paths:
+  work: /home/nxq/SIRE
+  base_model: /home/nxq/data/KEPT/models/Qwen2.5-7B
+  reasoning_model: /home/nxq/data/KEPT/models/DeepSeek-R1-Distill-Qwen-7B
+  data_root: /home/nxq/data/dataset/SIRE
+  raw_data: /home/nxq/data/dataset/SIRE/raw
+  runs: /home/nxq/SIRE/runs
+
+device:
+  physical_index: 4
+  expected_uuid: GPU-d7952610-13af-406a-e102-716a3f90ad66
+
+budget:
+  total_gpu_seconds: 7200
+  grace_gpu_seconds: 300
+
+data:
+  dataset: AI-MO/NuminaMath-CoT
+  dataset_source: cn_k12
+  monitor_dataset: HuggingFaceH4/no_robots
+  global_seed: 20261020
+  sizes:
+    pilot: 4
+    calibration: 8
+    search: 8
+    selection: 8
+    test: 16
+    monitor: 8
+  max_calibration_tokens: 2048
+  max_problem_chars: 2000
+  pool_cap: 50000
+  near_duplicate_hamming: 3
+
+features:
+  dtype: float32
+  max_seq_len: 2048
+  calibration_samples: 8
+  grad_checkpointing: true
+  storage_dtype: float16
+
+generation:
+  temperature: 0.6
+  top_p: 0.95
+  max_new_tokens: 2048
+  do_sample: true
+  # R tokenizer eos=151643; <|im_end|>=151645 stops a completed chat turn.
+  stop_ids: [151643, 151645]
+  batch_size: 8
+
+curve:
+  rhos: [0.01, 0.02, 0.05, 0.10, 0.20, 0.30, 0.50, 1.0]
+  anchors: [0.05, 0.20]
+
+search:
+  seed: 20261020
+  initial: ["A", "Neg(U)", "Mul(A, U)", "SafeDiv(A, U)"]
+  min_new_candidates: 8
+  max_new_candidates: 16
+  max_depth: 3
+  max_ops: 4
+
+mask:
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+baselines:
+  random_seed: 20261020
+  methods: ["random", "magnitude_A", "low_grad_NegU"]

@@ -1,0 +1,25 @@
+Tue Oct 20 11:28:52 AM UTC 2026
+--- nvidia-smi query ---
+Unable to determine the device handle for GPU4: 0000:1A:00.0: Unknown Error
+index, uuid, name, memory.used [MiB], utilization.gpu [%]
+0, GPU-a73fdd31-a0e4-c6bb-cf5f-88e6b241915b, NVIDIA A800 80GB PCIe, 0 MiB, 0 %
+1, GPU-f0da13d3-8de3-2c28-cc04-8d54df28af14, NVIDIA A800 80GB PCIe, 0 MiB, 0 %
+2, GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7, NVIDIA A800 80GB PCIe, 0 MiB, 0 %
+3, GPU-ae105b55-58b6-8199-0316-8bb741aa0a5e, NVIDIA A800 80GB PCIe, 40161 MiB, 0 %
+5, GPU-d0730ebd-0302-00bd-a271-8d7b82561242, NVIDIA A800 80GB PCIe, 40021 MiB, 0 %
+6, GPU-7f90f3e6-6f62-e582-4e62-9f8bd0a2b59c, NVIDIA A800 80GB PCIe, 40021 MiB, 0 %
+7, GPU-16a14f9f-5a04-2aa6-238f-ae828c7004b7, NVIDIA A800 80GB PCIe, 39941 MiB, 0 %
+--- nvidia-smi -q -i 4 ---
+Unable to determine the device handle for GPU4: 0000:1A:00.0: Unknown Error
+No devices were found
+--- lspci ---
+1a:00.0 3D controller: NVIDIA Corporation Device 20f5 (rev ff)
+--- sysfs ---
+power_state: D0
+current_link_speed: Unknown
+current_link_width: 63
+enable: 1
+aer_dev_fatal: Undefined 0
+aer_dev_nonfatal: Undefined 0
+--- dmesg ---
+dmesg: read kernel buffer failed: Operation not permitted

@@ -1,0 +1,16 @@
+{
+  "total_gpu_seconds": 7200.0,
+  "grace_gpu_seconds": 300.0,
+  "gpu_used_seconds": 0.0,
+  "remaining_seconds": 7200.0,
+  "entries": [
+    {
+      "stage": "audit",
+      "wall_seconds": 10.069,
+      "gpu_seconds": 0.0,
+      "cuda_seconds": null,
+      "note": "",
+      "ts": 1792490090.2190726
+    }
+  ]
+}

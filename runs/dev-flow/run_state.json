@@ -1,0 +1,10 @@
+{
+  "run_id": "dev-flow",
+  "created_utc": "2026-10-20T11:21:36Z",
+  "status": "failed",
+  "stages": {},
+  "next_stage": "audit",
+  "resume_command": "bash scripts/run_gpu4.sh resume --run-id dev-flow",
+  "last_error": "AcceleratorError(\"CUDA error: unknown error\\nSearch for `cudaErrorUnknown' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\\nFor more detailed error information, run with CUDA_LOG_FILE=stderr\\n\")",
+  "updated_utc": "2026-10-20T11:23:25Z"
+}

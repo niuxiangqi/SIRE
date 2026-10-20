@@ -1,0 +1,168 @@
+{
+  "results": [
+    {
+      "name": "exact_quota_and_boundaries",
+      "passed": true,
+      "detail": {
+        "cases": {
+          "n1_rho0.0": 0,
+          "n1_rho0.01": 0,
+          "n1_rho0.02": 0,
+          "n1_rho0.05": 0,
+          "n1_rho0.5": 0,
+          "n1_rho0.99": 0,
+          "n1_rho1.0": 1,
+          "n2_rho0.0": 0,
+          "n2_rho0.01": 0,
+          "n2_rho0.02": 0,
+          "n2_rho0.05": 0,
+          "n2_rho0.5": 1,
+          "n2_rho0.99": 1,
+          "n2_rho1.0": 2,
+          "n7_rho0.0": 0,
+          "n7_rho0.01": 0,
+          "n7_rho0.02": 0,
+          "n7_rho0.05": 0,
+          "n7_rho0.5": 3,
+          "n7_rho0.99": 6,
+          "n7_rho1.0": 7,
+          "n1000_rho0.0": 0,
+          "n1000_rho0.01": 10,
+          "n1000_rho0.02": 20,
+          "n1000_rho0.05": 50,
+          "n1000_rho0.5": 500,
+          "n1000_rho0.99": 990,
+          "n1000_rho1.0": 1000,
+          "n1001_rho0.0": 0,
+          "n1001_rho0.01": 10,
+          "n1001_rho0.02": 20,
+          "n1001_rho0.05": 50,
+          "n1001_rho0.5": 500,
+          "n1001_rho0.99": 990,
+          "n1001_rho1.0": 1001
+        }
+      }
+    },
+    {
+      "name": "tie_break_lowest_index",
+      "passed": true,
+      "detail": {
+        "kept": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "name": "safediv_zero_behaviour",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "mean_abs_g_not_abs_mean_g",
+      "passed": true,
+      "detail": {
+        "U": 2.0,
+        "absG": 0.5
+      }
+    },
+    {
+      "name": "hand_criteria_matches_dsl",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "parse_failure_counts_wrong",
+      "passed": true,
+      "detail": {
+        "parsed": null
+      }
+    },
+    {
+      "name": "resume_does_not_recompute",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "name": "split_isolation",
+      "passed": true,
+      "detail": {
+        "n": 32,
+        "unique_clusters": 32
+      }
+    },
+    {
+      "name": "rho1_where_path_bitwise",
+      "passed": true,
+      "detail": {
+        "sampled": 4
+      }
+    },
+    {
+      "name": "rho1_full_reconstruction_bitwise",
+      "passed": true,
+      "detail": {
+        "mask_sha256": "8ac4d30424ca8d7139b578a97a46ab66da6d76df6fe7935d0280194643e3e7ea",
+        "tensors": 196
+      }
+    },
+    {
+      "name": "nontarget_parameters_equal_R",
+      "passed": true,
+      "detail": {
+        "sampled": [
+          "lm_head.weight",
+          "model.layers.11.input_layernorm.weight",
+          "model.layers.14.self_attn.k_proj.bias",
+          "model.layers.17.self_attn.v_proj.bias"
+        ],
+        "hashes_sample": {
+          "lm_head.weight": "f488410fd383000028bb93177e33a6d9eac9a53a581f78bd3737412496edd41d",
+          "model.layers.11.input_layernorm.weight": "0796e143d316244eb9f3003edd3c22f570f0d7f127a123a2e1d5dab38c8f93a5",
+          "model.layers.14.self_attn.k_proj.bias": "04fd34a5718348e3351f5af2daf7d9308caddd5fa6394f9061247e4b465c44c2",
+          "model.layers.17.self_attn.v_proj.bias": "ac41c10e1c8d72b3b3fd08ff1317b8ba5cb58177b0ec8a7d7dee828a17e59bcc",
+          "model.layers.20.post_attention_layernorm.weight": "37f4e8a01304bab76ca6bdd74c640ddd8b418aa1d16a081f5a1073065305ae7d",
+          "model.layers.23.self_attn.q_proj.bias": "4f8c7e79ec271c7d63dc8c07a472ee449dac30bd57d9379b4833c4609846bd12",
+          "model.layers.27.input_layernorm.weight": "010bebdabb60f6ec251090a5b15b96d352f0d54d1cfe45954c6e9b41ec5e0161",
+          "model.layers.5.self_attn.k_proj.bias": "6e3fe5d16491e9fcac5a07f1db92aa353cd8aa7ea91b8e26d7729219b43acb96"
+        }
+      }
+    },
+    {
+      "name": "no_drift_after_mask_switches",
+      "passed": true,
+      "detail": {
+        "switches": 3
+      }
+    },
+    {
+      "name": "hand_criteria_matches_dsl_real",
+      "passed": false,
+      "detail": {
+        "sampled": 4
+      }
+    },
+    {
+      "name": "real_mask_quota_exact",
+      "passed": true,
+      "detail": {
+        "cases": {
+          "0.01": {
+            "total_kept": 65252768,
+            "expected": 65252768,
+            "mask_sha256": "5b7f0d48afccb3a7cfd0f19875553498606bc1b0a407c0328f14916531f50111"
+          },
+          "0.2": {
+            "total_kept": 1305057628,
+            "expected": 1305057628,
+            "mask_sha256": "e280a6b2b91827abca210b130927ecaed4a15e6b67d5d58e6a72fddd26dc56b3"
+          }
+        }
+      }
+    }
+  ],
+  "n_passed": 13,
+  "n_failed": 1
+}
