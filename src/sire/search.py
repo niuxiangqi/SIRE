@@ -210,7 +210,12 @@ def run_search(model_refs, store, tok, cfg, run_dir, run_id, split_manifest,
     t0 = time.monotonic()
     last_cost = max((r.get("seconds", 90.0) for r in records), default=90.0)
 
-    while new_count < target_new:
+    while new_count < max_new:
+        # Always secure the contract minimum first; then use spare budget for
+        # extra search, but never eat into the reserve kept for selection/test.
+        if new_count >= target_new and budget_left() - last_cost * 3.0 < reserve_seconds:
+            print("[search] stopping: reserve would be violated", flush=True)
+            break
         if budget_left() - last_cost * 1.2 < reserve_seconds:
             print("[search] stopping early: reserve would be violated", flush=True)
             break

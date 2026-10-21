@@ -1,0 +1,48 @@
+{
+  "run_id": "v0-20261021-formal",
+  "created_utc": "2026-10-21T06:07:29Z",
+  "status": "failed",
+  "stages": {
+    "audit": {
+      "status": "done",
+      "utc": "2026-10-21T06:07:36Z",
+      "configs": {
+        "config_diff_keys": [
+          "rope_theta",
+          "sliding_window",
+          "transformers_version"
+        ]
+      },
+      "paths": {
+        "model_audit": "/home/nxq/SIRE/runs/v0-20261021-formal/audit/model_audit.json"
+      }
+    },
+    "data": {
+      "status": "done",
+      "utc": "2026-10-21T06:08:19Z",
+      "sizes": {
+        "pilot": 4,
+        "calibration": 8,
+        "search": 8,
+        "selection": 8,
+        "test": 16
+      },
+      "sha256": "18e3d48a33df12281847265f35532817653df0c4454b117411c5f0171cc53d6f"
+    },
+    "features": {
+      "status": "done",
+      "utc": "2026-10-21T06:26:23Z",
+      "samples": 8,
+      "u_vs_absg": 0.48731980970951344
+    },
+    "correctness": {
+      "status": "done",
+      "utc": "2026-10-21T06:40:47Z",
+      "n": 14
+    }
+  },
+  "next_stage": "pilot",
+  "resume_command": "bash scripts/run_gpu4.sh resume --run-id v0-20261021-formal",
+  "updated_utc": "2026-10-21T06:43:32Z",
+  "last_error": "AcceleratorError(\"CUDA error: unknown error\\nSearch for `cudaErrorUnknown' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\\nFor more detailed error information, run with CUDA_LOG_FILE=stderr\\n\")"
+}

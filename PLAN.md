@@ -8,9 +8,9 @@
 - [x] M3: Frozen data: NuminaMath-CoT cn_k12 numeric subset, dedup clusters, pilot/calibration/search/selection/test + No Robots monitor.
 - [x] M4: Model audit (B vs R architecture/tokenizer/hashes) — dev evidence in `runs/dev-audit/`.
 - [x] M5: Feature collection (D/A/G/U/B/R with RMS scales) — dev evidence in `runs/dev-features/`.
-- [~] M6: Correctness checks: small-network 7/7; real weights 12/13 before the GPU fault; one tolerance fix not re-run.
-- [x] M7: Real-7B pilot: 4/4 correct, 5301 tokens in 58 s, no truncation.
-- [ ] M8: Formal search and selection/freeze — **blocked** by GPU 4 loss.
+- [x] M6: Correctness checks: small-network 7/7; real-weight suite 14/14 in the formal run.
+- [~] M7: Real-7B pilot — development pilot passed (4/4 correct, 58 s); formal-run pilot interrupted by the second GPU 4 PCIe failure.
+- [ ] M8: Formal search and selection/freeze — **blocked** by GPU 4 loss (formal run advanced through features + correctness).
 - [ ] M9: Held-out test curve — not started; test never opened.
 - [ ] M10: C1–C8 verify — blocked. See `BLOCK_REPORT.md`.
 

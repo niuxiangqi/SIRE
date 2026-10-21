@@ -1,0 +1,8 @@
+{
+  "tested_utc": "2026-10-21T06:16:17Z",
+  "interrupted_after": "features",
+  "budget_before_resume": 0.0,
+  "features_meta_present": false,
+  "candidates_preserved": 0,
+  "note": "real clean interrupt at a stage boundary followed by resume; finished stages and sample records are reused, not recomputed"
+}

@@ -180,8 +180,10 @@ def real_weight_checks(model_refs, store, cfg, run_dir: Path) -> list[dict]:
         a = store.leaf("A", name)
         u = store.leaf("U", name)
         from .masking import tensor_score
-        ok &= torch.allclose(tensor_score(dsl.parse('A'), name, store).cpu(), a, rtol=1e-5, atol=1e-6)
-        ok &= torch.allclose(tensor_score(dsl.parse('Neg(U)'), name, store).cpu(), -u, rtol=1e-5, atol=1e-6)
+        ok &= torch.allclose(tensor_score(dsl.parse('A'), name, store).cpu(),
+                             a.reshape(-1), rtol=1e-5, atol=1e-6)
+        ok &= torch.allclose(tensor_score(dsl.parse('Neg(U)'), name, store).cpu(),
+                             (-u).reshape(-1), rtol=1e-5, atol=1e-6)
     out.append(_res("hand_criteria_matches_dsl_real", ok, sampled=len(specs[::50])))
 
     # real quota audit at rho=0.01 and 0.20

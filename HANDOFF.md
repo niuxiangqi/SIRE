@@ -4,10 +4,12 @@ This document is for someone who **clones this repository and wants to run the
 experiment from scratch**. It assumes the protocol in [`GOAL.md`](GOAL.md) and the
 decisions in [`DECISIONS.md`](DECISIONS.md).
 
-> Current status: the formal run has **not** been completed. The reference machine
-> lost physical GPU 4 (`0000:1A:00.0: Unknown Error`, `lspci ... rev ff`) during the
-> first real search candidate. See [`BLOCK_REPORT.md`](BLOCK_REPORT.md). The
-> `runs/dev-*` directories are development evidence, not results.
+> Current status: the formal run (`v0-20261021-formal`) advanced through audit,
+> data, features and 14/14 correctness checks, then **physical GPU 4 failed again
+> during the pilot** (`0000:1A:00.0: Unknown Error`, `lspci ... rev ff`). No pilot,
+> search or test result exists. Resume skips features and correctness. See
+> [`BLOCK_REPORT.md`](BLOCK_REPORT.md). The `runs/dev-*` directories are development
+> evidence, not results.
 
 ## 0. What you need
 
@@ -223,13 +225,27 @@ Budget the formal run from the pilot, not from these numbers.
 
 ## 9. Current blocker and what “done” means
 
-The reference machine's GPU 4 failed at the PCIe level. Raw evidence is in
-`evidence/gpu4_failure_20261020/`. On a healthy GPU 4, the next command is:
+The reference machine's GPU 4 failed twice at the PCIe level, on 2026-10-20 during
+development search and on 2026-10-21 during the formal pilot. Raw evidence is in
+`evidence/gpu4_failure_20261020/` and `evidence/gpu4_failure_20261021/`.
+
+The formal run `v0-20261021-formal` has already completed `audit`, `data`,
+`features` and `correctness` (14/14). When a stable GPU 4 is available, resume
+instead of starting over:
 
 ```bash
 nvidia-smi --query-gpu=index,uuid --format=csv,noheader   # GPU 4 must be present
-bash scripts/run_gpu4.sh run --config configs/v0.yaml --gpu-budget-seconds 7200
+bash scripts/run_gpu4.sh resume --run-id v0-20261021-formal
+bash scripts/run_gpu4.sh verify --run-id v0-20261021-formal
 ```
+
+Resume skips the finished stages (features and correctness are not recomputed) and
+continues from `pilot`, with the budget ledger starting at 809.5 s used. If you
+prefer a fresh run, use `run --config configs/v0.yaml --gpu-budget-seconds 7200`.
+
+Before resuming, a burn-in test on GPU 4 is advised: repeated 13 GB weight swaps
+and long batched generation. The failure signature is reproducible enough that a
+single successful model load is not sufficient evidence of stability.
 
 The experiment is complete only when C1–C8 pass and the root artifacts exist and
 match regenerated logs. A running process, passing unit tests, a full budget
