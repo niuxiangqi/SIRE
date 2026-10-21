@@ -96,6 +96,9 @@ class FeatureStore:
                 safe_open(key, framework="pt", device="cpu"))
         return self._handles[key]
 
+    def clear_cache(self):
+        self._cache.clear()
+
     def _raw(self, sym: str, name: str):
         import torch
 
@@ -135,6 +138,7 @@ def tensor_score(expr, name: str, store: FeatureStore):
     import torch
     from . import dsl
 
+    store.clear_cache()
     needed = dsl.leaves_of(expr)
     leaves = {s: store.leaf(s, name) for s in needed}
     gpu = {s: t.cuda(non_blocking=True) for s, t in leaves.items()}
@@ -145,6 +149,7 @@ def tensor_score(expr, name: str, store: FeatureStore):
     if not torch.isfinite(score).all():
         raise FloatingPointError(f"non-finite score in {name}")
     del gpu, leaves
+    store.clear_cache()
     return score.reshape(-1)
 
 
@@ -271,6 +276,19 @@ def build_apply(model, specs, r_ref, b_ref, store, expr=None, rho: float = None,
             "total_kept": sum(t["quota"] for t in tensors)}
 
 
+class CheckpointRefs:
+    """Read pristine tensors on demand; never cache CUDA copies."""
+    def __init__(self, root, device, dtype):
+        self.root = Path(root)
+        self.device, self.dtype = device, dtype
+        self.weight_map = json.loads((self.root / "model.safetensors.index.json").read_text())["weight_map"]
+
+    def __getitem__(self, name):
+        from safetensors import safe_open
+        with safe_open(str(self.root / self.weight_map[name]), framework="pt", device="cpu") as f:
+            return f.get_tensor(name).to(device=self.device, dtype=self.dtype)
+
+
 class ModelRefs:
     """One resident R model, pristine R/B copies for target tensors."""
 
@@ -287,6 +305,13 @@ class ModelRefs:
         self.model.eval()
         self.specs = specs_with_shapes(Path(cfg["paths"]["base_model"]),
                                        Path(cfg["paths"]["reasoning_model"]))
+        storage = cfg.get("runtime", {}).get("reference_storage", "gpu")
+        if storage == "stream":
+            self.r_ref = CheckpointRefs(cfg["paths"]["reasoning_model"], "cuda:0", torch.bfloat16)
+            self.b_ref = CheckpointRefs(cfg["paths"]["base_model"], "cuda:0", torch.bfloat16)
+            return
+        if storage != "gpu":
+            raise ValueError(f"unsupported reference storage: {storage}")
         self.r_ref, self.b_ref = {}, {}
         b_index = json.loads((Path(cfg["paths"]["base_model"]) /
                               "model.safetensors.index.json").read_text())["weight_map"]

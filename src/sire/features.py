@@ -1,9 +1,8 @@
 """Feature collection: per-tensor D, A, G, U, B, R with fixed RMS scales.
 
 G = mean_z g(z) and U = mean_z |g(z)| are computed on the full R model with
-autograd, per-sample forward/backward, FP32 parameters (TF32 matmul allowed) and
-FP32 accumulation. Per-sample gradients are never all held in memory: each
-sample's gradient is folded into CPU accumulators immediately.
+autograd, per-sample forward/backward, configurable FP32/BF16 parameters and FP32 accumulation. Statistics can be
+kept in RAM (legacy profile) or transactionally accumulated on disk per tensor.
 """
 from __future__ import annotations
 
@@ -99,8 +98,13 @@ def collect_gradients(cfg: dict, run_dir: Path, split_manifest: dict, specs: lis
     feat = run_dir / "features"
     examples = _calibration_examples(cfg, split_manifest)
     n = len(examples)
+    param_dtype = cfg["features"].get("param_dtype", "float32")
+    if param_dtype not in ("float32", "bfloat16"):
+        raise ValueError(f"unsupported gradient dtype: {param_dtype}")
+    if param_dtype == "bfloat16" and not torch.cuda.is_bf16_supported():
+        raise RuntimeError("selected GPU/runtime does not support BF16")
     model = AutoModelForCausalLM.from_pretrained(
-        cfg["paths"]["reasoning_model"], dtype=torch.float32, device_map={"": 0},
+        cfg["paths"]["reasoning_model"], dtype=getattr(torch, param_dtype), device_map={"": 0},
         attn_implementation="sdpa", local_files_only=True)
     model.config.use_cache = False
     if cfg["features"]["grad_checkpointing"]:
@@ -114,11 +118,24 @@ def collect_gradients(cfg: dict, run_dir: Path, split_manifest: dict, specs: lis
         p.requires_grad_(True)
         params[spec["name"]] = p
 
-    g_sum = {s["name"]: torch.zeros(s["numel"], dtype=torch.float32) for s in specs}
-    u_sum = {s["name"]: torch.zeros(s["numel"], dtype=torch.float32) for s in specs}
+    disk_stats = cfg["features"].get("accumulator", "memory") == "disk"
+    accum = None
+    if disk_stats:
+        from .accumulation import TensorAccumulators
+        from .util import sha256_file
+        identity = {"specs": specs, "samples": [e["item_id"] for e in examples],
+                    "param_dtype": param_dtype, "max_seq_len": cfg["features"]["max_seq_len"],
+                    "checkpointing": cfg["features"]["grad_checkpointing"],
+                    "split_sha256": sha256_file(Path(cfg["paths"]["data_root"]) / "prepared" / "splits.json"),
+                    "model": str(Path(cfg["paths"]["reasoning_model"]).resolve())}
+        accum = TensorAccumulators(feat / "accumulators", specs, identity)
+        g_sum, u_sum = {}, {}
+    else:
+        g_sum = {s["name"]: torch.zeros(s["numel"], dtype=torch.float32) for s in specs}
+        u_sum = {s["name"]: torch.zeros(s["numel"], dtype=torch.float32) for s in specs}
     cursor = 0
     partial = feat / "accum_partial.pt"
-    if partial.exists():
+    if not disk_stats and partial.exists():
         state = torch.load(partial, map_location="cpu", weights_only=False)
         if state.get("n_items") != n:
             raise RuntimeError("partial gradient state has different calibration count")
@@ -128,6 +145,11 @@ def collect_gradients(cfg: dict, run_dir: Path, split_manifest: dict, specs: lis
         cursor = int(state["cursor"])
         print(f"[features] resumed gradients at sample {cursor}/{n}", flush=True)
 
+    if disk_stats:
+        cursor = accum.cursor()
+        if cursor > n:
+            raise ValueError("gradient cursor exceeds calibration sample count")
+        print(f"[features] disk statistics cursor {cursor}/{n}", flush=True)
     t0 = time.monotonic()
     gpu_compute = 0.0
     for si in range(cursor, n):
@@ -150,15 +172,18 @@ def collect_gradients(cfg: dict, run_dir: Path, split_manifest: dict, specs: lis
             if g is None:
                 raise RuntimeError(f"missing gradient for {name}")
             gf = g.detach().to(torch.float32).reshape(-1).cpu()
-            g_sum[name] += gf
-            u_sum[name] += gf.abs()
+            if disk_stats:
+                accum.add(name, si, gf)
+            else:
+                g_sum[name] += gf
+                u_sum[name] += gf.abs()
             params[name].grad = None
             del gf, g
         del out, ids, labels, attn
         gc.collect()
         torch.cuda.empty_cache()
         print(f"[features] grad sample {si + 1}/{n} ({time.monotonic() - t0:.1f}s)", flush=True)
-        if (si + 1) % 4 == 0 or si + 1 == n:
+        if not disk_stats and ((si + 1) % 4 == 0 or si + 1 == n):
             torch.save({"cursor": si + 1, "n_items": n, "g_sum": g_sum, "u_sum": u_sum},
                        partial)
 
@@ -173,8 +198,11 @@ def collect_gradients(cfg: dict, run_dir: Path, split_manifest: dict, specs: lis
     # Recompute delta RMS if this is a fresh directory (meta written later).
     for spec in specs:
         name, numel = spec["name"], spec["numel"]
-        G = g_sum[name] / n
-        U = u_sum[name] / n
+        if disk_stats:
+            G, U = accum.means(name, n)
+        else:
+            G = g_sum[name] / n
+            U = u_sum[name] / n
         if not torch.isfinite(G).all() or not torch.isfinite(U).all():
             raise RuntimeError(f"non-finite gradient statistic in {name}")
         np.save(feat / f"{index[name]:04d}.G.npy", G.half().numpy())
@@ -195,7 +223,7 @@ def collect_gradients(cfg: dict, run_dir: Path, split_manifest: dict, specs: lis
             "u_vs_abs_g_max_relative_diff": max(relative),
             "u_vs_abs_g_mean_relative_diff": sum(relative) / len(relative),
             "checkpointing": bool(cfg["features"]["grad_checkpointing"]),
-            "param_dtype": "float32", "tf32": True}
+            "param_dtype": param_dtype, "tf32": True}
 
 
 def collect(cfg: dict, run_id: str, run_dir: Path) -> dict:

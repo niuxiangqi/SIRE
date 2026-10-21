@@ -14,7 +14,7 @@ from pathlib import Path
 
 import yaml
 
-WORK = Path("/home/nxq/SIRE")
+WORK = Path(__file__).resolve().parents[2]
 
 
 # ----------------------------------------------------------------------------
@@ -88,7 +88,14 @@ def load_config(path: str | Path = None) -> dict:
     if path is None:
         path = WORK / "configs" / "v0.yaml"
     with open(path, encoding="utf-8") as f:
-        return yaml.safe_load(f)
+        cfg = yaml.safe_load(f)
+    for key, value in cfg.get("paths", {}).items():
+        if isinstance(value, str):
+            expanded = os.path.expandvars(os.path.expanduser(value))
+            if "$" in expanded:
+                raise ValueError(f"unresolved environment variable in paths.{key}: {value}")
+            cfg["paths"][key] = str(Path(expanded).resolve())
+    return cfg
 
 
 # ----------------------------------------------------------------------------
@@ -107,14 +114,30 @@ def nvidia_smi_uuid(index: int) -> str:
 
 def configure_gpu4(cfg: dict) -> dict:
     """Must be called before importing torch. Returns an evidence dict."""
+    mode = cfg["device"].get("mode", "physical")
+    if mode in ("slurm", "visible"):
+        if mode == "slurm" and not os.environ.get("SLURM_JOB_ID"):
+            raise RuntimeError("slurm device mode requires a Slurm allocation")
+        mask = os.environ.get("CUDA_VISIBLE_DEVICES", "")
+        tokens = [x.strip() for x in mask.split(",") if x.strip()]
+        if len(tokens) != 1 or tokens[0] in ("-1", "NoDevFiles", "all"):
+            raise RuntimeError("allocation mode requires exactly one CUDA_VISIBLE_DEVICES entry")
+        # Do not reinterpret numeric masks or replace scheduler visibility.
+        return {"mode": mode, "uuid": None, "pid": os.getpid(),
+                "host": socket.gethostname(), "CUDA_VISIBLE_DEVICES": mask,
+                "slurm_job_id": os.environ.get("SLURM_JOB_ID")}
+    if mode != "physical":
+        raise ValueError(f"unknown device mode: {mode}")
+    if os.environ.get("SLURM_JOB_ID"):
+        raise RuntimeError("use device.mode=slurm inside Slurm; physical selection is forbidden")
     idx = cfg["device"]["physical_index"]
     expected = cfg["device"]["expected_uuid"]
     uuid = nvidia_smi_uuid(idx)
-    if uuid != expected:
+    if expected and uuid != expected:
         raise RuntimeError(f"GPU {idx} UUID {uuid} != expected {expected}")
     os.environ["CUDA_VISIBLE_DEVICES"] = uuid
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-    return {"physical_index": idx, "uuid": uuid, "pid": os.getpid(), "host": socket.gethostname(),
+    return {"mode": "physical", "physical_index": idx, "uuid": uuid, "pid": os.getpid(), "host": socket.gethostname(),
             "CUDA_VISIBLE_DEVICES": uuid}
 
 

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 
@@ -302,7 +303,12 @@ def prepare(cfg: dict, run_id: str) -> dict:
     gsm = [Path("/home/nxq/data/KEPT/datasets/gsm8k.parquet"),
            Path("/home/nxq/data/KEPT/datasets/gsm8k_test.parquet"),
            Path("/home/nxq/data/KEPT/datasets/gsm8k_train.parquet")]
+    gsm = [Path(os.path.expandvars(os.path.expanduser(p)))
+           for p in cfg["data"].get("gsm8k_files", [str(p) for p in gsm])]
     cross = crosscheck_gsm8k(reps, gsm)
+    cross["requested_files"] = [str(p) for p in gsm]
+    cross["missing_files"] = [str(p) for p in gsm if not p.exists()]
+    cross["status"] = "checked" if cross["gsm8k_reference_items"] else "not_audited"
 
     # Deterministic order; splits are assigned from disjoint clusters.
     reps.sort(key=lambda it: sha256_text(f"{seed}|order|{it['cluster_id']}"))

@@ -97,7 +97,7 @@ def run_audit(cfg: dict, run_dir: Path, gpu_evidence: dict, torch_evidence: dict
     atomic_write_json(Path(run_dir) / "env.json", {
         "created_utc": utc_stamp(),
         "sys_executable": sys.executable,
-        "conda_prefix": os.environ.get("CONDA_PREFIX") or str(Path(sys.executable).parents[1]),
+        "conda_prefix": os.environ.get("CONDA_PREFIX"),
         "python": sys.version,
         "gpu": gpu_evidence,
         "torch": torch_evidence,

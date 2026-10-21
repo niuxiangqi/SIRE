@@ -79,6 +79,13 @@ tests/                   (add project-specific tests here)
 runs/                    per-run evidence (feature arrays are git-ignored)
 ```
 
+## Portable / Slurm migration
+
+See [docs/CLUSTER.md](docs/CLUSTER.md) for the separate BF16 A100-40GB profile,
+configurable CLI, allocation-aware launcher, streamed pristine weights and bounded
+per-tensor disk accumulators. Original v0 settings remain in place. CPU checks
+are available; real GPU memory fit and ARM compatibility are not yet measured.
+
 ## Quick start
 
 ### 1. Hardware

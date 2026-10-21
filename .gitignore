@@ -54,3 +54,10 @@ mlruns/
 # --- temporary / scratch ---
 *.tmp
 *.swp
+
+# Portable runtime outputs
+runs-cluster/
+runs-portable/
+slurm-*.out
+diagnostics/
+cluster-preflight-*.txt

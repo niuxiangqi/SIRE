@@ -20,3 +20,29 @@
 | 16 | Formal run stopped because physical GPU 4 disappeared (`0000:1A:00.0: Unknown Error`, `lspci ... rev ff`). No card switch, no host reboot, no other-user process killed. | Contract section 14: GPU 4 unavailable is a block condition. | `BLOCK_REPORT.md`, `evidence/gpu4_failure_20261020/` |
 | 17 | The 5 s GPU monitor now selects the expected UUID explicitly; the first version logged the first `nvidia-smi` row (GPU 0). | Monitoring must corroborate isolation on GPU 4, not just show that some GPU exists. | `util.GpuMonitor` |
 
+
+
+## 2026-10-21: user-authorized portable BF16 profiles
+
+The user requested CLI-configurable paths/device/precision and a separate cluster
+configuration. Added a distinct BF16 protocol for N32-H A100-40GB and local CPU
+development on the original server. The old FP32 contract and run evidence remain
+unchanged. New runs use independent directories and frozen configurations; they
+cannot be claimed as continuations or results of the old formal run. Slurm may
+assign a different GPU between jobs; isolation is verified per process/allocation
+with UUID monitoring, while explicitly pinned local profiles retain their pin.
+Disk FP32 per-tensor accumulation avoids model-wide host accumulators; pristine
+weights stream per tensor to avoid two GPU-resident target copies. This adds I/O.
+GPU peak memory, backward execution and ARM software compatibility require real
+cluster testing; no result is claimed from CPU checks. See docs/CLUSTER.md.
+
+## 2026-10-21: failure diagnosis and preparation entry point
+
+Added structured failure history and resource evidence. Classification labels
+are hypotheses, never confirmed root causes. A device runtime exception by itself
+does not prove a hardware fault. A refused NFS quota RPC does not imply unlimited
+storage. Stage snapshots report process-lifetime memory peaks. Slurm hard kills
+must be investigated using scheduler records because Python cannot catch SIGKILL.
+A read-only preflight script inventories the N32-H environment before selecting
+ARM-compatible packages or downloading model/data snapshots. Forward activation
+inputs remain pending and are not misrepresented as already implemented.

@@ -14,7 +14,7 @@ from pathlib import Path
 import yaml
 
 from .util import (BudgetLedger, GpuMonitor, WORK, atomic_write_json, atomic_write_text,
-                   configure_gpu4, import_torch_checked, load_config, read_json, read_jsonl,
+                   configure_gpu4, import_torch_checked, load_config, read_json, read_jsonl, append_jsonl,
                    run_id_now, sha256_file, sha256_text, utc_stamp)
 
 STAGES = ["audit", "data", "features", "correctness", "pilot", "search",
@@ -24,12 +24,21 @@ STAGES = ["audit", "data", "features", "correctness", "pilot", "search",
 class Ctx:
     def __init__(self, cfg: dict, run_id: str, total_budget: float | None = None,
                  start_monitor: bool = True):
+        if cfg.get("runtime", {}).get("require_conda") and not os.environ.get("CONDA_PREFIX"):
+            raise RuntimeError("activate a conda environment before running SIRE")
         self.cfg = cfg
         self.run_id = run_id
         self.run_dir = Path(cfg["paths"]["runs"]) / run_id
         self.run_dir.mkdir(parents=True, exist_ok=True)
         self.gpu_evidence = configure_gpu4(cfg)
         self.torch, self.torch_evidence = import_torch_checked()
+        actual_uuid = self.torch_evidence["device_uuid"]
+        expected = cfg["device"].get("expected_uuid")
+        if expected and actual_uuid != expected:
+            raise RuntimeError(f"visible GPU UUID {actual_uuid} != expected {expected}")
+        self.gpu_evidence["uuid"] = actual_uuid
+        append_jsonl(self.run_dir / "allocations.jsonl", self.gpu_evidence)
+        atomic_write_text(self.run_dir / "runtime_config.yaml", yaml.safe_dump(cfg, sort_keys=False))
         total = float(total_budget if total_budget is not None
                       else cfg["budget"]["total_gpu_seconds"])
         self.ledger = BudgetLedger(self.run_dir / "budget.json", total,
@@ -37,12 +46,12 @@ class Ctx:
         self.state = read_json(self.run_dir / "run_state.json") or {
             "run_id": run_id, "created_utc": utc_stamp(), "status": "running",
             "stages": {}, "next_stage": STAGES[0],
-            "resume_command": f"bash scripts/run_gpu4.sh resume --run-id {run_id}",
+            "resume_command": f"bash scripts/run.sh resume --config {self.run_dir / 'runtime_config.yaml'} --run-id {run_id}",
         }
         self.monitor = None
         if start_monitor:
             self.monitor = GpuMonitor(self.run_dir / "gpu_monitor.jsonl",
-                                      cfg["device"]["expected_uuid"], interval=5.0)
+                                      actual_uuid, interval=5.0)
             self.monitor.start()
         self.tokenizer = None
         self.model_refs = None
@@ -135,7 +144,7 @@ def stage_features(ctx: Ctx):
     wall = time.monotonic() - t0
     ctx.ledger.add("features_grad", wall=wall,
                    gpu=grad["gpu_compute_seconds"], cuda=grad["gpu_compute_seconds"],
-                   note="per-sample forward/backward; FP32 params, FP32 accumulation",
+                   note=f"per-sample forward/backward; {grad['param_dtype']} params, FP32 accumulation",
                    detail={"samples": grad["samples"], "cuda_compute": grad["gpu_compute_seconds"],
                            "wall": wall})
     meta = {
@@ -153,6 +162,9 @@ def stage_features(ctx: Ctx):
         "spec_sha256": sha256_text(json.dumps(specs, sort_keys=True)),
     }
     atomic_write_json(ctx.run_dir / "features" / "meta.json", meta)
+    if ctx.cfg["features"].get("accumulator") == "disk":
+        import shutil
+        shutil.rmtree(ctx.run_dir / "features" / "accumulators", ignore_errors=True)
     ctx.mark("features", samples=grad["samples"],
              u_vs_absg=grad["u_vs_abs_g_max_relative_diff"])
 
@@ -405,9 +417,26 @@ def _load_frozen_cfg(cfg: dict, run_dir: Path) -> dict:
     return cfg
 
 
+def resolve_run_config(cfg: dict, run_id: str, resume: bool) -> dict:
+    run_dir = Path(cfg["paths"]["runs"]) / run_id
+    recorded = [load_config(run_dir / name) for name in ("frozen_config.yaml", "runtime_config.yaml")
+                if (run_dir / name).exists()]
+    if resume and recorded:
+        public = lambda value: {k: v for k, v in value.items() if not k.startswith("_")}
+        if not any(public(cfg) == public(saved) for saved in recorded):
+            raise ValueError("resume configuration changed (paths/device/features/data/generation); "
+                             "use recorded config or a new run ID")
+        return recorded[0]  # pilot-frozen protocol, when present
+    if not resume and (run_dir / "run_state.json").exists():
+        raise ValueError("run ID already exists; use resume or a new run ID")
+    return cfg
+
+
 def execute(cfg: dict, run_id: str, total_budget: float | None, only: list[str] | None = None,
             resume: bool = False) -> int:
+    cfg = resolve_run_config(cfg, run_id, resume or only is not None)
     ctx = Ctx(cfg, run_id, total_budget)
+    active_stage = "initialization"
     interrupted = {"flag": False}
 
     def handler(signum, frame):
@@ -441,9 +470,15 @@ def execute(cfg: dict, run_id: str, total_budget: float | None, only: list[str] 
             if resume and ctx.state["stages"].get(stage, {}).get("status") == "done":
                 print(f"[run] skip finished stage {stage}", flush=True)
                 continue
+            active_stage = stage
             print(f"[run] stage {stage} start", flush=True)
             t0 = time.monotonic()
             STAGE_FUNCS[stage](ctx)
+            from .diagnostics import resource_snapshot
+            append_jsonl(ctx.run_dir / "resources.jsonl", {
+                "stage": stage, "status": "done",
+                **resource_snapshot(ctx.torch, {"run": ctx.run_dir,
+                                               "data": ctx.cfg["paths"]["data_root"]})})
             print(f"[run] stage {stage} done in {time.monotonic() - t0:.1f}s", flush=True)
             if os.environ.get("SIRE_INTERRUPT_AFTER") == stage:
                 ctx.state["status"] = "interrupted"
@@ -465,16 +500,18 @@ def execute(cfg: dict, run_id: str, total_budget: float | None, only: list[str] 
         ctx.state["status"] = "interrupted"
         ctx.state["last_error"] = f"KeyboardInterrupt: {exc}"
         ctx.save_state()
-        atomic_write_json(ctx.run_dir / "last_error.json", {"error": repr(exc), "utc": utc_stamp(),
-                                                            "traceback": traceback.format_exc()})
+        from .diagnostics import record_failure
+        record_failure(ctx.run_dir, exc, active_stage, traceback.format_exc(), ctx.torch,
+                       {"run": ctx.run_dir, "data": ctx.cfg["paths"]["data_root"]})
         print("[run] interrupted cleanly; resume with the recorded command", file=sys.stderr)
         return 130
     except Exception as exc:
         ctx.state["status"] = "failed"
         ctx.state["last_error"] = repr(exc)
         ctx.save_state()
-        atomic_write_json(ctx.run_dir / "last_error.json", {"error": repr(exc), "utc": utc_stamp(),
-                                                            "traceback": traceback.format_exc()})
+        from .diagnostics import record_failure
+        record_failure(ctx.run_dir, exc, active_stage, traceback.format_exc(), ctx.torch,
+                       {"run": ctx.run_dir, "data": ctx.cfg["paths"]["data_root"]})
         traceback.print_exc()
         return 1
     finally:
@@ -482,7 +519,40 @@ def execute(cfg: dict, run_id: str, total_budget: float | None, only: list[str] 
         ctx.close()
 
 
-def main(argv=None) -> int:
+def apply_overrides(cfg: dict, overrides: list[str]) -> dict:
+    import copy
+    cfg = copy.deepcopy(cfg)
+    for item in overrides:
+        key, sep, value = item.partition("=")
+        if not sep or not key:
+            raise ValueError(f"expected KEY=VALUE, got {item!r}")
+        parts = key.split(".")
+        node = cfg
+        for part in parts[:-1]:
+            if not isinstance(node.get(part), dict):
+                raise ValueError(f"unknown configuration section: {key}")
+            node = node[part]
+        optional = {"features.param_dtype", "features.accumulator", "device.mode"}
+        if parts[-1] not in node and key not in optional:
+            raise ValueError(f"unknown configuration key: {key}")
+        val = yaml.safe_load(value)
+        if parts[0] == "paths":
+            expanded = os.path.expandvars(os.path.expanduser(str(val)))
+            if "$" in expanded:
+                raise ValueError(f"unresolved environment variable: {val}")
+            val = str(Path(expanded).resolve())
+        node[parts[-1]] = val
+    if cfg["generation"]["batch_size"] < 1:
+        raise ValueError("batch size must be positive")
+    dtype = cfg["features"].get("param_dtype", "float32")
+    if dtype not in ("float32", "bfloat16"):
+        raise ValueError(f"unsupported gradient dtype: {dtype}")
+    if cfg["features"].get("accumulator", "memory") not in ("memory", "disk"):
+        raise ValueError("features.accumulator must be memory or disk")
+    return cfg
+
+
+def _main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="sire")
     ap.add_argument("command", choices=["audit", "prepare-data", "collect-features", "baselines",
                                         "search", "select", "test", "report", "run", "resume",
@@ -490,8 +560,31 @@ def main(argv=None) -> int:
     ap.add_argument("--config", default=str(WORK / "configs" / "v0.yaml"))
     ap.add_argument("--run-id")
     ap.add_argument("--gpu-budget-seconds", type=float, default=None)
+    ap.add_argument("--set", action="append", default=[], metavar="KEY=VALUE",
+                    help="override a dotted YAML key before the run is frozen (repeatable)")
+    ap.add_argument("--gradient-dtype", choices=["float32", "bfloat16"])
+    ap.add_argument("--device-mode", choices=["physical", "slurm", "visible"])
+    ap.add_argument("--gpu-index", type=int)
+    ap.add_argument("--expected-gpu-uuid")
+    ap.add_argument("--base-model")
+    ap.add_argument("--reasoning-model")
+    ap.add_argument("--data-root")
+    ap.add_argument("--work-dir")
+    ap.add_argument("--runs-dir")
+    ap.add_argument("--batch-size", type=int)
     args = ap.parse_args(argv)
     cfg = load_config(args.config)
+    explicit = {"features.param_dtype": args.gradient_dtype,
+                "device.mode": args.device_mode, "device.physical_index": args.gpu_index,
+                "device.expected_uuid": args.expected_gpu_uuid,
+                "paths.base_model": args.base_model, "paths.reasoning_model": args.reasoning_model,
+                "paths.work": args.work_dir, "paths.runs": args.runs_dir,
+                "generation.batch_size": args.batch_size}
+    if args.data_root:
+        explicit.update({"paths.data_root": args.data_root,
+                         "paths.raw_data": str(Path(args.data_root) / "raw")})
+    cfg = apply_overrides(cfg, [f"{k}={json.dumps(v)}"
+                               for k, v in explicit.items() if v is not None] + args.set)
 
     if args.command == "prepare-data":
         from . import data as data_mod
@@ -533,6 +626,18 @@ def main(argv=None) -> int:
         # baselines only: full R + three baselines, no searched row
         cfg["_baselines_only"] = True
     return execute(cfg, args.run_id, args.gpu_budget_seconds, only=stages)
+
+
+def main(argv=None) -> int:
+    try:
+        return _main(argv)
+    except (Exception, KeyboardInterrupt) as exc:
+        from .diagnostics import record_failure
+        record_failure(WORK / "diagnostics" / f"startup-{os.getpid()}", exc,
+                       "startup_or_data_preparation", traceback.format_exc(),
+                       paths={"work": WORK})
+        traceback.print_exc()
+        return 130 if isinstance(exc, KeyboardInterrupt) else 1
 
 
 if __name__ == "__main__":

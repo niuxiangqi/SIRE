@@ -33,16 +33,26 @@ def verify(cfg: dict, run_id: str) -> dict:
     budget = read_json(run_dir / "budget.json") or {}
     mon_path = run_dir / "gpu_monitor.jsonl"
     mon = read_jsonl(mon_path)
-    expected_uuid = cfg["device"]["expected_uuid"]
-    mon_uuid_ok = bool(mon) and any(r.get("uuid") == expected_uuid for r in mon) and \
-        all(r.get("uuid") == expected_uuid for r in mon if "uuid" in r)
+    expected_uuid = cfg["device"].get("expected_uuid")
+    allocations = read_jsonl(run_dir / "allocations.jsonl")
+    allowed = {(a.get("pid"), a.get("uuid")) for a in allocations
+               if a.get("uuid") and a.get("CUDA_VISIBLE_DEVICES") and
+               (cfg["device"].get("mode", "physical") != "slurm" or a.get("slurm_job_id"))}
+    if not allocations and expected_uuid:
+        allowed = {(pid, expected_uuid) for pid in (read_json(run_dir / "processes.json", default=[]) or [])}
+    observed = [row for row in mon if "uuid" in row]
+    mon_uuid_ok = bool(observed) and all(
+        (row.get("task_pid"), row["uuid"]) in allowed and
+        (not expected_uuid or row["uuid"] == expected_uuid) for row in observed)
     procs = set(read_json(run_dir / "processes.json", default=[]) or [])
     mon_pids = {r.get("task_pid") for r in mon if "task_pid" in r}
     pid_ok = bool(mon) and mon_pids <= procs and env.get("gpu", {}).get("pid") in procs
-    c1 = (env.get("conda_prefix", "").endswith("/envs/sire") or "/envs/sire" in env.get("sys_executable", "")
-          ) and env.get("gpu", {}).get("uuid") == expected_uuid and \
+    prefix = env.get("conda_prefix") or ""
+    exe = env.get("sys_executable") or ""
+    conda_ok = bool(prefix) and exe.startswith(prefix.rstrip("/") + "/")
+    c1 = conda_ok and (env.get("gpu", {}).get("pid"), env.get("gpu", {}).get("uuid")) in allowed and \
         env.get("torch", {}).get("visible_count") == 1 and mon_uuid_ok and pid_ok
-    checks.append(_chk("C1", "Miniconda env, physical GPU 4 only", c1,
+    checks.append(_chk("C1", "Conda env, one configured/allocated GPU per process", c1,
                        [str(run_dir / "env.json"), str(mon_path)],
                        {"sys_executable": env.get("sys_executable"),
                         "conda_prefix": env.get("conda_prefix"),

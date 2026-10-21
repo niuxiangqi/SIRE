@@ -10,7 +10,8 @@ import argparse
 import sys
 from pathlib import Path
 
-import yaml
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from sire.util import load_config
 
 DATASETS = {
     "NuminaMath-CoT": "AI-MO/NuminaMath-CoT",
@@ -29,8 +30,7 @@ def main() -> int:
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
 
-    with open(args.config) as f:
-        cfg = yaml.safe_load(f)
+    cfg = load_config(args.config)
     raw = Path(cfg["paths"]["raw_data"])
     raw.mkdir(parents=True, exist_ok=True)
 

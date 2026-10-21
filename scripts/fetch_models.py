@@ -11,7 +11,8 @@ import argparse
 import sys
 from pathlib import Path
 
-import yaml
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from sire.util import load_config
 
 MODELS = [
     ("Qwen/Qwen2.5-7B", "base_model"),
@@ -30,8 +31,7 @@ def main() -> int:
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
 
-    with open(args.config) as f:
-        cfg = yaml.safe_load(f)
+    cfg = load_config(args.config)
 
     for repo, key in MODELS:
         dest = Path(cfg["paths"][key])

@@ -1,0 +1,93 @@
+# New precision profile; never resume FP32 v0 runs with this configuration.
+version: v0-bf16-cluster
+run_prefix: a100-bf16
+paths:
+  work: ~/SIRE
+  base_model: ~/data/models/Qwen2.5-7B
+  reasoning_model: ~/data/models/DeepSeek-R1-Distill-Qwen-7B
+  data_root: ~/data/SIRE
+  raw_data: ~/data/SIRE/raw
+  runs: ~/SIRE/runs-cluster
+device:
+  mode: slurm
+  physical_index: null
+  expected_uuid: null
+budget:
+  total_gpu_seconds: 7200
+  grace_gpu_seconds: 300
+data:
+  dataset: AI-MO/NuminaMath-CoT
+  dataset_source: cn_k12
+  monitor_dataset: HuggingFaceH4/no_robots
+  global_seed: 20261020
+  sizes:
+    pilot: 4
+    calibration: 8
+    search: 8
+    selection: 8
+    test: 16
+    monitor: 8
+  max_calibration_tokens: 2048
+  max_problem_chars: 2000
+  pool_cap: 50000
+  near_duplicate_hamming: 3
+  gsm8k_files: []
+features:
+  dtype: float32
+  max_seq_len: 2048
+  calibration_samples: 8
+  grad_checkpointing: true
+  storage_dtype: float16
+  param_dtype: bfloat16
+  accumulator: disk
+generation:
+  temperature: 0.6
+  top_p: 0.95
+  max_new_tokens: 2048
+  do_sample: true
+  stop_ids:
+  - 151643
+  - 151645
+  batch_size: 1
+curve:
+  rhos:
+  - 0.01
+  - 0.02
+  - 0.05
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.5
+  - 1.0
+  anchors:
+  - 0.05
+  - 0.2
+search:
+  seed: 20261020
+  initial:
+  - A
+  - Neg(U)
+  - Mul(A, U)
+  - SafeDiv(A, U)
+  min_new_candidates: 8
+  max_new_candidates: 16
+  max_depth: 3
+  max_ops: 4
+mask:
+  target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+baselines:
+  random_seed: 20261020
+  methods:
+  - random
+  - magnitude_A
+  - low_grad_NegU
+runtime:
+  reference_storage: stream
+  require_conda: true
