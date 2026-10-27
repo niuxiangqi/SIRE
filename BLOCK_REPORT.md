@@ -93,10 +93,11 @@ configuration and launcher were updated:
   (`runs/<run_id>/device_migration.json`)
 
 GPU 2 is visible and healthy in `nvidia-smi` (0 MiB, P0), but **no new CUDA
-context can be created** on it either:
+context can be created** on it either. A follow-up check shows the same failure on
+the other free cards, GPU 0 and GPU 1, so this is not a GPU 2 fault:
 
 ```
-$ CUDA_VISIBLE_DEVICES=2 python -c "import torch; torch.cuda.init()"
+$ for i in 0 1 2; do CUDA_VISIBLE_DEVICES=$i python -c "import torch; torch.cuda.init()"; done
 RuntimeError: CUDA unknown error ... Setting the available devices to be zero.
 ```
 

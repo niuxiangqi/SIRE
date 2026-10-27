@@ -43,3 +43,27 @@ RuntimeError: CUDA unknown error - this may be due to an incorrectly set up envi
 count 0
 --- reset GPU2 ---
 Unable to reset GPU 00000000:14:00.0: Insufficient Permissions
+
+=== 2026-10-27 follow-up: GPU0/GPU1 also fail new CUDA contexts ===
+Tue Oct 27 08:24:48 AM UTC 2026
+--- GPU0 ---
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+count 0
+--- GPU1 ---
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+count 0
+--- GPU2 ---
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+count 0
+--- nvidia-smi ---
+Unable to determine the device handle for GPU4: 0000:1A:00.0: Unknown Error
+0, GPU-a73fdd31-a0e4-c6bb-cf5f-88e6b241915b, 0 MiB, P0
+1, GPU-f0da13d3-8de3-2c28-cc04-8d54df28af14, 0 MiB, P0
+2, GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7, 0 MiB, P0
+3, GPU-ae105b55-58b6-8199-0316-8bb741aa0a5e, 33619 MiB, P0
+5, GPU-d0730ebd-0302-00bd-a271-8d7b82561242, 33619 MiB, P0
+6, GPU-7f90f3e6-6f62-e582-4e62-9f8bd0a2b59c, 33597 MiB, P0
+7, GPU-16a14f9f-5a04-2aa6-238f-ae828c7004b7, 33597 MiB, P0
