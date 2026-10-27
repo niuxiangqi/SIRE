@@ -1,0 +1,205 @@
+{
+  "run_id": "v0-20261021-formal",
+  "passed": true,
+  "n_passed": 8,
+  "checks": [
+    {
+      "id": "C1",
+      "name": "Miniconda env, physical GPU 4 only",
+      "passed": true,
+      "evidence": [
+        "/home/nxq/SIRE/runs/v0-20261021-formal/env.json",
+        "/home/nxq/SIRE/runs/v0-20261021-formal/gpu_monitor.jsonl"
+      ],
+      "detail": {
+        "sys_executable": "/home/nxq/miniconda3/envs/sire/bin/python",
+        "conda_prefix": "/home/nxq/miniconda3/envs/sire",
+        "uuid": "GPU-d7952610-13af-406a-e102-716a3f90ad66",
+        "expected_uuid": "GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7",
+        "migrations": [
+          {
+            "utc": "2026-10-27T09:14:32Z",
+            "from_uuid": "GPU-d7952610-13af-406a-e102-716a3f90ad66",
+            "to_uuid": "GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7",
+            "physical_index": 2,
+            "reason": "physical GPU 4 unreachable at the PCIe level; user authorized GPU 2 on 2026-10-27; same model/data/precision protocol",
+            "pid": 9719
+          }
+        ],
+        "monitor_records": 1623,
+        "monitor_uuid_ok": true,
+        "monitor_pid_ok": true
+      }
+    },
+    {
+      "id": "C2",
+      "name": "Frozen disjoint splits and dedup audit",
+      "passed": true,
+      "evidence": [
+        "/home/nxq/data/dataset/SIRE/prepared/splits.json",
+        "/home/nxq/data/dataset/SIRE/prepared/split_hashes.json"
+      ],
+      "detail": {
+        "sizes": {
+          "pilot": 4,
+          "calibration": 8,
+          "search": 4,
+          "selection": 4,
+          "test": 8
+        },
+        "requested": {
+          "pilot": 4,
+          "calibration": 8,
+          "search": 4,
+          "selection": 4,
+          "test": 8,
+          "monitor": 8
+        },
+        "unique_items": 28,
+        "unique_clusters": 28,
+        "hash_ok": true,
+        "dedup": {
+          "method": "exact normalised + 64-bit SimHash(4x16 bands, verified Jaccard>=0.8 or Hamming<=3)",
+          "exact_duplicates_removed": 1184,
+          "clusters": 48012,
+          "items_after_dedup": 48012,
+          "largest_cluster": 12
+        }
+      }
+    },
+    {
+      "id": "C3",
+      "name": "Exact quota, non-target R, no drift, rho=1 bitwise",
+      "passed": true,
+      "evidence": [
+        "/home/nxq/SIRE/runs/v0-20261021-formal/correctness/results.json",
+        "/home/nxq/SIRE/runs/v0-20261021-formal/evals"
+      ],
+      "detail": {
+        "mask_audits": 28,
+        "quota_bad": [],
+        "checks": {
+          "rho1_where_path_bitwise": true,
+          "rho1_full_reconstruction_bitwise": true,
+          "nontarget_parameters_equal_R": true,
+          "no_drift_after_mask_switches": true,
+          "real_mask_quota_exact": true,
+          "mean_abs_g_not_abs_mean_g": true,
+          "tie_break_lowest_index": true,
+          "safediv_zero_behaviour": true,
+          "hand_criteria_matches_dsl": true,
+          "resume_does_not_recompute": true
+        },
+        "u_vs_absg_max_rel": 0.48731980970951344
+      }
+    },
+    {
+      "id": "C4",
+      "name": ">=4 non-baseline masks, >=8 new formulas, parent-child",
+      "passed": true,
+      "evidence": [
+        "/home/nxq/SIRE/runs/v0-20261021-formal/candidates.jsonl"
+      ],
+      "detail": {
+        "candidates": 14,
+        "nonbaseline": 12,
+        "distinct_mask_signatures": 8,
+        "mutations": 8,
+        "per_sample_ok": true
+      }
+    },
+    {
+      "id": "C5",
+      "name": "Frozen formula measured on held-out test vs baselines",
+      "passed": true,
+      "evidence": [
+        "/home/nxq/SIRE/runs/v0-20261021-formal/freeze.json",
+        "/home/nxq/SIRE/runs/v0-20261021-formal/evals"
+      ],
+      "detail": {
+        "frozen": "s = (A * U)",
+        "methods": [
+          "full_R",
+          "low_grad_NegU",
+          "magnitude_A",
+          "random",
+          "searched"
+        ],
+        "rows": 21,
+        "test_n": 8,
+        "error": null
+      }
+    },
+    {
+      "id": "C6",
+      "name": "GPU budget ledger, monitor, clean completion",
+      "passed": true,
+      "evidence": [
+        "/home/nxq/SIRE/runs/v0-20261021-formal/budget.json",
+        "/home/nxq/SIRE/runs/v0-20261021-formal/gpu_monitor.jsonl",
+        "/home/nxq/SIRE/runs/v0-20261021-formal/run_state.json"
+      ],
+      "detail": {
+        "gpu_used": 7006.399,
+        "total": 7200.0,
+        "grace": 300.0,
+        "stages": [
+          "correctness",
+          "device_migration",
+          "features_delta",
+          "features_grad",
+          "model_load",
+          "pilot",
+          "search",
+          "select",
+          "test"
+        ],
+        "status": "complete"
+      }
+    },
+    {
+      "id": "C7",
+      "name": "Single-command start, resumable, traceable report",
+      "passed": true,
+      "evidence": [
+        "/home/nxq/SIRE/runs/v0-20261021-formal/run_state.json",
+        "/home/nxq/SIRE/runs/v0-20261021-formal/env/pip-freeze.txt",
+        "/home/nxq/SIRE/reports/REPORT_EN.md",
+        "/home/nxq/SIRE/runs/v0-20261021-formal/resume_test.json"
+      ],
+      "detail": {
+        "resume_command": "bash scripts/run_gpu4.sh resume --run-id v0-20261021-formal",
+        "resume_test": {
+          "tested_utc": "2026-10-21T06:16:17Z",
+          "interrupted_after": "features",
+          "budget_before_resume": 0.0,
+          "features_meta_present": false,
+          "candidates_preserved": 0,
+          "note": "real clean interrupt at a stage boundary followed by resume; finished stages and sample records are reused, not recomputed"
+        }
+      }
+    },
+    {
+      "id": "C8",
+      "name": "Root artifacts consistent with regenerated logs",
+      "passed": true,
+      "evidence": [
+        "/home/nxq/SIRE/RESULTS.md",
+        "/home/nxq/SIRE/FORMULA.txt",
+        "/home/nxq/SIRE/curve.csv",
+        "/home/nxq/SIRE/curve.png"
+      ],
+      "detail": {
+        "run_dir": "/home/nxq/SIRE/runs/v0-20261021-formal",
+        "RESULTS.md": true,
+        "FORMULA.txt": true,
+        "curve.csv": true,
+        "curve.png": true,
+        "curve_png_sha": [
+          "81c4599f2a8cf53637a6b9cfdc6458348e3beed2dedf3ba1d7300ff3b6a8239a",
+          "81c4599f2a8cf53637a6b9cfdc6458348e3beed2dedf3ba1d7300ff3b6a8239a"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "method": "low_grad_NegU",
+  "formula_id": "low_grad_NegU",
+  "formula_ast": null,
+  "rho": 0.3,
+  "split": "test",
+  "n_items": 8,
+  "n_correct": 0,
+  "accuracy": 0.0,
+  "mean_new_tokens": 1862.125,
+  "truncation_rate": 0.875,
+  "nll": 13.406912326812744,
+  "nll_delta": 10.726313531398773,
+  "seconds": 73.20262715199988,
+  "mask_sha256": "cb0004714764ecfab780c4734d00279faa2a99306519de8dde7ebd9e8d123e92",
+  "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/low_grad_NegU__low_grad_NegU__rho0.3000__test/samples.jsonl"
+}

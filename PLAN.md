@@ -10,9 +10,9 @@
 - [x] M5: Feature collection (D/A/G/U/B/R with RMS scales) — dev evidence in `runs/dev-features/`.
 - [x] M6: Correctness checks: small-network 7/7; real-weight suite 14/14 in the formal run.
 - [~] M7: Real-7B pilot — development pilot passed (4/4 correct, 58 s); formal-run pilot interrupted by the second GPU 4 PCIe failure.
-- [ ] M8: Formal search and selection/freeze — **blocked** by GPU 4 loss (formal run advanced through features + correctness).
-- [ ] M9: Held-out test curve — not started; test never opened.
-- [ ] M10: C1–C8 verify — blocked. See `BLOCK_REPORT.md`.
+- [x] M8: Formal search and selection/freeze — 8 distinct non-baseline mask signatures; frozen `s = (A * U)`.
+- [x] M9: Held-out test curve — 8 test items, 5 keep-rates + full R, all baselines; negative result.
+- [x] M10: C1–C8 verify all pass; root artifacts and `reports/REPORT_EN.md` generated.
 
 ## Verification commands
 

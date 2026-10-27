@@ -109,21 +109,30 @@ def verify(cfg: dict, run_id: str) -> dict:
     # ---------------- C4 real evaluated candidates ----------------
     cands = read_jsonl(run_dir / "candidates.jsonl")
     nonbase = [c for c in cands if c.get("formula_ast") not in ("A", "(Neg U)")]
-    mask_hashes = set()
+    mask_sigs = set()
+    baseline_sigs = set()
+    for c in cands:
+        if c.get("formula_ast") in ("A", "(Neg U)"):
+            sig = tuple(sorted((k, a["mask_sha256"]) for k, a in c.get("anchors", {}).items()))
+            if sig:
+                baseline_sigs.add(sig)
     per_sample_ok = True
     n_search = sizes.get("search", 0) if manifest else 0
     for c in nonbase:
+        sig = tuple(sorted((k, a["mask_sha256"]) for k, a in c.get("anchors", {}).items()))
+        if sig and sig not in baseline_sigs:
+            mask_sigs.add(sig)
         for rho, a in c.get("anchors", {}).items():
-            mask_hashes.add(a["mask_sha256"])
             recs = read_jsonl(Path(a["records"]))
             per_sample_ok &= len(recs) == n_search and len(recs) > 0
     mutation_children = [c for c in cands if c.get("origin") == "mutation" and c.get("parent_id")]
-    c4 = len(mask_hashes) >= 4 and per_sample_ok and len(mutation_children) >= 1 and \
-        len(nonbase) >= int(cfg["search"]["min_new_candidates"])
+    c4 = len(mask_sigs) >= 4 and per_sample_ok and len(mutation_children) >= 1 and \
+        len(mask_sigs) >= int(cfg["search"]["min_new_candidates"])
     checks.append(_chk("C4", ">=4 non-baseline masks, >=8 new formulas, parent-child", c4,
                        [str(run_dir / "candidates.jsonl")],
                        {"candidates": len(cands), "nonbaseline": len(nonbase),
-                        "distinct_masks": len(mask_hashes), "mutations": len(mutation_children),
+                        "distinct_mask_signatures": len(mask_sigs),
+                        "mutations": len(mutation_children),
                         "per_sample_ok": per_sample_ok}))
 
     # ---------------- C5 frozen formula measured on held-out test ----------------
@@ -149,8 +158,9 @@ def verify(cfg: dict, run_id: str) -> dict:
     grace = float(cfg["budget"]["grace_gpu_seconds"])
     stages = {e["stage"] for e in budget.get("entries", [])}
     state = read_json(run_dir / "run_state.json") or {}
-    c6 = bool(budget) and used <= total + grace and \
-        {"features", "search", "test"} <= stages and state.get("status") == "complete"
+    has_features = "features" in stages or {"features_delta", "features_grad"} <= stages
+    c6 = bool(budget) and used <= total + grace and has_features and \
+        {"search", "test"} <= stages and state.get("status") == "complete"
     checks.append(_chk("C6", "GPU budget ledger, monitor, clean completion", c6,
                        [str(run_dir / "budget.json"), str(mon_path), str(run_dir / "run_state.json")],
                        {"gpu_used": used, "total": total, "grace": grace,

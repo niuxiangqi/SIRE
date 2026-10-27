@@ -1,7 +1,7 @@
 {
   "run_id": "v0-20261021-formal",
   "created_utc": "2026-10-21T06:07:29Z",
-  "status": "failed",
+  "status": "complete",
   "stages": {
     "audit": {
       "status": "done",
@@ -39,10 +39,125 @@
       "status": "done",
       "utc": "2026-10-21T06:40:47Z",
       "n": 14
+    },
+    "pilot": {
+      "status": "done",
+      "utc": "2026-10-27T09:19:34Z",
+      "mean_new_tokens": 1216.75,
+      "throughput": 89.0288545976834
+    },
+    "search": {
+      "status": "done",
+      "utc": "2026-10-27T10:10:56Z",
+      "n_candidates": 12,
+      "n_new": 8,
+      "ranked": [
+        {
+          "candidate_id": "092a20d1c53df1e3",
+          "formula_ast": "(Mul A U)",
+          "formula_infix": "s = (A * U)",
+          "complexity": 2,
+          "depth": 1,
+          "n_ops": 1,
+          "parent_id": null,
+          "origin": "seed",
+          "split": "search",
+          "anchors": {
+            "0.0500": {
+              "accuracy": 0.25,
+              "n_correct": 1,
+              "n_items": 4,
+              "mask_sha256": "694d6dc4e19316992780bcf2c190f964c8d8bde4a60635c0d9b2effdd42d04fd",
+              "summary": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/candidate__092a20d1c53df1e3__rho0.0500__search/summary.json",
+              "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/candidate__092a20d1c53df1e3__rho0.0500__search/samples.jsonl"
+            },
+            "0.2000": {
+              "accuracy": 0.0,
+              "n_correct": 0,
+              "n_items": 4,
+              "mask_sha256": "abc3b41c8c9e3e16157e27893c97cea2c7d11d803c2054e605942c9b101bb1ba",
+              "summary": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/candidate__092a20d1c53df1e3__rho0.2000__search/summary.json",
+              "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/candidate__092a20d1c53df1e3__rho0.2000__search/samples.jsonl"
+            }
+          },
+          "J": 0.125,
+          "seconds": 140.43243732300016,
+          "evaluated_at": 1793093460.6341414
+        },
+        {
+          "candidate_id": "08bf90ff85310089",
+          "formula_ast": "(Mul (Abs A) U)",
+          "formula_infix": "s = (|A| * U)",
+          "complexity": 3,
+          "depth": 2,
+          "n_ops": 2,
+          "parent_id": "092a20d1c53df1e3",
+          "origin": "mutation",
+          "split": "search",
+          "anchors": {
+            "0.0500": {
+              "accuracy": 0.25,
+              "n_correct": 1,
+              "n_items": 4,
+              "mask_sha256": "694d6dc4e19316992780bcf2c190f964c8d8bde4a60635c0d9b2effdd42d04fd",
+              "summary": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/candidate__08bf90ff85310089__rho0.0500__search/summary.json",
+              "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/candidate__08bf90ff85310089__rho0.0500__search/samples.jsonl"
+            },
+            "0.2000": {
+              "accuracy": 0.0,
+              "n_correct": 0,
+              "n_items": 4,
+              "mask_sha256": "abc3b41c8c9e3e16157e27893c97cea2c7d11d803c2054e605942c9b101bb1ba",
+              "summary": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/candidate__08bf90ff85310089__rho0.2000__search/summary.json",
+              "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/candidate__08bf90ff85310089__rho0.2000__search/samples.jsonl"
+            }
+          },
+          "J": 0.125,
+          "seconds": 0.0,
+          "evaluated_at": 1793093792.8264687
+        }
+      ]
+    },
+    "select": {
+      "status": "done",
+      "utc": "2026-10-27T10:16:54Z",
+      "frozen": "s = (A * U)",
+      "complexity": 2,
+      "selection_J": 0.125
+    },
+    "test": {
+      "status": "done",
+      "utc": "2026-10-27T11:00:39Z",
+      "rhos": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3
+      ],
+      "n_items": 8
+    },
+    "report": {
+      "status": "done",
+      "utc": "2026-10-27T11:09:25Z",
+      "artifacts": [
+        "/home/nxq/SIRE/RESULTS.md",
+        "/home/nxq/SIRE/FORMULA.txt",
+        "/home/nxq/SIRE/curve.csv",
+        "/home/nxq/SIRE/curve.png"
+      ],
+      "report_en": "/home/nxq/SIRE/reports/REPORT_EN.md"
+    },
+    "verify": {
+      "status": "done",
+      "utc": "2026-10-27T11:09:30Z",
+      "passed": true,
+      "n_passed": 8
     }
   },
-  "next_stage": "pilot",
+  "next_stage": null,
   "resume_command": "bash scripts/run_gpu4.sh resume --run-id v0-20261021-formal",
-  "updated_utc": "2026-10-21T06:43:32Z",
-  "last_error": "AcceleratorError(\"CUDA error: unknown error\\nSearch for `cudaErrorUnknown' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\\nFor more detailed error information, run with CUDA_LOG_FILE=stderr\\n\")"
+  "updated_utc": "2026-10-27T11:09:30Z",
+  "last_error": "RuntimeError('acceptance verification failed: C6')",
+  "completed_utc": "2026-10-27T11:09:30Z"
 }

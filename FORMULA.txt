@@ -1,0 +1,4 @@
+s = (A * U)
+canonical_ast: (Mul A U)
+complexity: 2
+mask_sha256: 0.0500=694d6dc4e19316992780bcf2c190f964c8d8bde4a60635c0d9b2effdd42d04fd,0.2000=abc3b41c8c9e3e16157e27893c97cea2c7d11d803c2054e605942c9b101bb1ba

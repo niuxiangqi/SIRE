@@ -1,0 +1,306 @@
+version: v0
+run_prefix: v0
+paths:
+  work: /home/nxq/SIRE
+  base_model: /home/nxq/data/KEPT/models/Qwen2.5-7B
+  reasoning_model: /home/nxq/data/KEPT/models/DeepSeek-R1-Distill-Qwen-7B
+  data_root: /home/nxq/data/dataset/SIRE
+  raw_data: /home/nxq/data/dataset/SIRE/raw
+  runs: /home/nxq/SIRE/runs
+device:
+  physical_index: 2
+  expected_uuid: GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7
+budget:
+  total_gpu_seconds: 7200
+  grace_gpu_seconds: 300
+data:
+  dataset: AI-MO/NuminaMath-CoT
+  dataset_source: cn_k12
+  monitor_dataset: HuggingFaceH4/no_robots
+  global_seed: 20261020
+  sizes:
+    pilot: 4
+    calibration: 8
+    search: 4
+    selection: 4
+    test: 8
+    monitor: 8
+  max_calibration_tokens: 2048
+  max_problem_chars: 2000
+  pool_cap: 50000
+  near_duplicate_hamming: 3
+features:
+  dtype: float32
+  max_seq_len: 2048
+  calibration_samples: 8
+  grad_checkpointing: true
+  storage_dtype: float16
+generation:
+  temperature: 0.6
+  top_p: 0.95
+  max_new_tokens: 2048
+  do_sample: true
+  stop_ids:
+  - 151643
+  - 151645
+  batch_size: 8
+curve:
+  rhos:
+  - 0.01
+  - 0.02
+  - 0.05
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.5
+  - 1.0
+  anchors:
+  - 0.05
+  - 0.2
+  _active_rhos:
+  - 0.01
+  - 0.05
+  - 0.1
+  - 0.2
+  - 0.3
+search:
+  seed: 20261020
+  initial:
+  - A
+  - Neg(U)
+  - Mul(A, U)
+  - SafeDiv(A, U)
+  min_new_candidates: 8
+  max_new_candidates: 16
+  max_depth: 3
+  max_ops: 4
+mask:
+  target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+baselines:
+  random_seed: 20261020
+  methods:
+  - random
+  - magnitude_A
+  - low_grad_NegU
+_monitor_items:
+- item_id: nr-dd5dbda72441d0c3
+  problem: Help me write an email to a customer I just mailed a live SCOBY to about
+    how to keep it fresh until they start their kombucha process. It should be conversational
+    and concise and any instructions can have bullet points. By the way my company
+    name is George's SCOBYs. One last thing, please mention our website (george.com)
+    which has many recipes, articles, more tips, and a staff-moderated forum.
+  reference: "Hey there! Thank you so much for purchasing from George's SCOBYs. We\
+    \ can't wait for you to receive your \"mother!\" Remember that a SCOBY is a live\
+    \ bacterial colony, so there are a few things you'll need to do to keep it happy\
+    \ when it arrives:\n\n\u2022 If you want to use your SCOBY right away, you can\
+    \ immediately brew a batch of kombucha! Head to George.com to find a recipe you'll\
+    \ love.\n\u2022 If you're not quite ready to brew some kombucha, pop the SCOBY\
+    \ in a Ziploc bag or glass jar with a bit of liquid to cover it and place it in\
+    \ the fridge. Your SCOBY will stay nice and fresh for up to 3 months with this\
+    \ method.\n\u2022 Let your SCOBY take up residence in a \"SCOBY hotel\" for the\
+    \ most long-term storage solution. \n\nYou can always log onto George.com for\
+    \ more tips or to use our forum, where many other brewers post and converse in\
+    \ our staff-moderated forum! Don't hesitate to reach out with any questions.\n\
+    \nCheers,\nGeorge's SCOBYs"
+  prompt_sha256: dd5dbda72441d0c3d1a69fed1bae6bcfd475e4cfd1d0b10d56ec3337232b2d01
+- item_id: nr-dd5dbda72441d0c3
+  problem: Help me write an email to a customer I just mailed a live SCOBY to about
+    how to keep it fresh until they start their kombucha process. It should be conversational
+    and concise and any instructions can have bullet points. By the way my company
+    name is George's SCOBYs. One last thing, please mention our website (george.com)
+    which has many recipes, articles, more tips, and a staff-moderated forum.
+  reference: "Hey there! Thank you so much for purchasing from George's SCOBYs. We\
+    \ can't wait for you to receive your \"mother!\" Remember that a SCOBY is a live\
+    \ bacterial colony, so there are a few things you'll need to do to keep it happy\
+    \ when it arrives:\n\n\u2022 If you want to use your SCOBY right away, you can\
+    \ immediately brew a batch of kombucha! Head to George.com to find a recipe you'll\
+    \ love.\n\u2022 If you're not quite ready to brew some kombucha, pop the SCOBY\
+    \ in a Ziploc bag or glass jar with a bit of liquid to cover it and place it in\
+    \ the fridge. Your SCOBY will stay nice and fresh for up to 3 months with this\
+    \ method.\n\u2022 Let your SCOBY take up residence in a \"SCOBY hotel\" for the\
+    \ most long-term storage solution. \n\nYou can always log onto George.com for\
+    \ more tips or to use our forum, where many other brewers post and converse in\
+    \ our staff-moderated forum! Don't hesitate to reach out with any questions.\n\
+    \nCheers,\nGeorge's SCOBYs"
+  prompt_sha256: dd5dbda72441d0c3d1a69fed1bae6bcfd475e4cfd1d0b10d56ec3337232b2d01
+- item_id: nr-fadc11c8af1f5d48
+  problem: "I\u2019m going to visit San Francisco in July. Can you recommend six activities\
+    \ we could do in the city or nearby? Please include an equal amount of indoor\
+    \ and outdoor activities. Please specify if we need to purchase tickets or admission\
+    \ in advance."
+  reference: "Sure! Here are six activities to consider for your July trip to San\
+    \ Fran. \nIndoor Options: \n\u2022\tSan Francisco Museum of Modern Art \u2013\
+    \ This museum is one of the country's most prominent modern and contemporary art\
+    \ museums. Visitors are encouraged to order tickets online but they are also available\
+    \ onsite. Check the website for prices and current exhibits. \n\u2022\tCalifornia\
+    \ Academy of Sciences \u2013 Try out the California Museum of Sciences, which\
+    \ features an aquarium, a living rainforest exhibit, a planetarium, and a natural\
+    \ history museum. In addition to being a museum, it is an active research facility\
+    \ for conservation research. Tickets can be purchased online or in person.\n\u2022\
+    \tExploratorium \u2013 This interactive science museum is located at Pier 15.\
+    \ The Exploratorium offers more than 600 hands-on exhibits centered around art,\
+    \ human perception, and science. Since entry is subject to availability, ordering\
+    \ tickets online before the visit is recommended. \n\nOutdoor Options:\n\u2022\
+    \tBike across the Golden Gate Bridge \u2013 This activity gets you up close and\
+    \ personal with one of the most iconic attractions in San Francisco. Rent a bike\
+    \ from one of the many rental shops near the bridge and enjoy a leisurely ride\
+    \ with views of the bridge, the city skyline, and the surrounding nature. \n\u2022\
+    \tAlcatraz Island \u2013 Enjoy a ferry ride to the middle of San Francisco Bay,\
+    \ home of the former Alcatraz prison, the water tower, and the oldest working\
+    \ lighthouse on the West Coast. Tickets sell out quickly, so purchasing tickets\
+    \ well before your visit day is advised.\n\u2022\tGolden Gate Park and its gardens\
+    \ \u2013 Golden Gate Park is popular among locals and tourists alike. The park\
+    \ is famous for its many gardens, including the Japanese Tea Garden and the Conservatory\
+    \ of Flowers. It also has many other exciting attractions like the Portals of\
+    \ the Past monument, the Koret Children\u2019s Quarter, and the Carousel. It is\
+    \ free to walk the park, but some attractions within may require tickets to be\
+    \ purchased during the visit. \n\nEnjoy your trip to San Francisco, and for the\
+    \ best experience, be sure to check the website for each attraction for the most\
+    \ up-to-date information."
+  prompt_sha256: fadc11c8af1f5d48832088a600f4492daed0f087b55d6772bc2304f9df2ba4b3
+- item_id: nr-fadc11c8af1f5d48
+  problem: "I\u2019m going to visit San Francisco in July. Can you recommend six activities\
+    \ we could do in the city or nearby? Please include an equal amount of indoor\
+    \ and outdoor activities. Please specify if we need to purchase tickets or admission\
+    \ in advance."
+  reference: "Sure! Here are six activities to consider for your July trip to San\
+    \ Fran. \nIndoor Options: \n\u2022\tSan Francisco Museum of Modern Art \u2013\
+    \ This museum is one of the country's most prominent modern and contemporary art\
+    \ museums. Visitors are encouraged to order tickets online but they are also available\
+    \ onsite. Check the website for prices and current exhibits. \n\u2022\tCalifornia\
+    \ Academy of Sciences \u2013 Try out the California Museum of Sciences, which\
+    \ features an aquarium, a living rainforest exhibit, a planetarium, and a natural\
+    \ history museum. In addition to being a museum, it is an active research facility\
+    \ for conservation research. Tickets can be purchased online or in person.\n\u2022\
+    \tExploratorium \u2013 This interactive science museum is located at Pier 15.\
+    \ The Exploratorium offers more than 600 hands-on exhibits centered around art,\
+    \ human perception, and science. Since entry is subject to availability, ordering\
+    \ tickets online before the visit is recommended. \n\nOutdoor Options:\n\u2022\
+    \tBike across the Golden Gate Bridge \u2013 This activity gets you up close and\
+    \ personal with one of the most iconic attractions in San Francisco. Rent a bike\
+    \ from one of the many rental shops near the bridge and enjoy a leisurely ride\
+    \ with views of the bridge, the city skyline, and the surrounding nature. \n\u2022\
+    \tAlcatraz Island \u2013 Enjoy a ferry ride to the middle of San Francisco Bay,\
+    \ home of the former Alcatraz prison, the water tower, and the oldest working\
+    \ lighthouse on the West Coast. Tickets sell out quickly, so purchasing tickets\
+    \ well before your visit day is advised.\n\u2022\tGolden Gate Park and its gardens\
+    \ \u2013 Golden Gate Park is popular among locals and tourists alike. The park\
+    \ is famous for its many gardens, including the Japanese Tea Garden and the Conservatory\
+    \ of Flowers. It also has many other exciting attractions like the Portals of\
+    \ the Past monument, the Koret Children\u2019s Quarter, and the Carousel. It is\
+    \ free to walk the park, but some attractions within may require tickets to be\
+    \ purchased during the visit. \n\nEnjoy your trip to San Francisco, and for the\
+    \ best experience, be sure to check the website for each attraction for the most\
+    \ up-to-date information."
+  prompt_sha256: fadc11c8af1f5d48832088a600f4492daed0f087b55d6772bc2304f9df2ba4b3
+- item_id: nr-adf271d60c6d87f2
+  problem: 'What genres of music do the following composers cover:
+
+
+    Hayato Asano
+
+    Masashi Hamauzu
+
+    Naoshi Mizuta
+
+    Yasunori Mitsuda'
+  reference: 'Hayato Asano: Orchestral, Artcore, Rock, Folk, Indie, Ambient, Electronic,
+    Dubstep
+
+    Masashi Hamauzu: Classic, Orchestral, Electronic, Ambient, Vocal
+
+    Naoshi Mizuta: Rock, Orchestral, Electronic, Ambient, World
+
+    Yasunori Mitsuda: Folk, Vocal, World, Orchestral'
+  prompt_sha256: adf271d60c6d87f23f2a87833c75a840fcf2178c343dff3ee6ceee163228dabc
+- item_id: nr-adf271d60c6d87f2
+  problem: 'What genres of music do the following composers cover:
+
+
+    Hayato Asano
+
+    Masashi Hamauzu
+
+    Naoshi Mizuta
+
+    Yasunori Mitsuda'
+  reference: 'Hayato Asano: Orchestral, Artcore, Rock, Folk, Indie, Ambient, Electronic,
+    Dubstep
+
+    Masashi Hamauzu: Classic, Orchestral, Electronic, Ambient, Vocal
+
+    Naoshi Mizuta: Rock, Orchestral, Electronic, Ambient, World
+
+    Yasunori Mitsuda: Folk, Vocal, World, Orchestral'
+  prompt_sha256: adf271d60c6d87f23f2a87833c75a840fcf2178c343dff3ee6ceee163228dabc
+- item_id: nr-6bbbbf48f770911b
+  problem: Please write a nice blog post about healthy foods that can improve hair
+    health. Be nice when talking about it. These foods should be easily accessible
+    and should be available at homes. I want you to format it in a numbered list,
+    each item mentioning a food and the details about it.
+  reference: "Fuel Your Hair with these Yummy and Nutritious Foods\n\nLike your body,\
+    \ your hair also needs fuel to function well and be healthy. Try out these yummy\
+    \ foods that will make your hair troubles go away:\n\n1. Sweet Potatoes: No more\
+    \ lifeless hair with this delicious root vegetable that's loaded with beta-carotene\
+    \ \u2013 a nutrient that converts into vitamin A that helps keep your scalp moisturized\
+    \ and promotes hair growth.\n\n2. Spinach: Don't tolerate dry tresses \u2013 add\
+    \ spinach to your diet! This yummy and leafy green is rich in iron and vitamins\
+    \ A and C. These are essential nutrients that keep hair healthy and prevent brittleness\
+    \ and hair loss.\n\n3. Salmon: Get your shine on with this seafood! Salmon is\
+    \ packed with omega-3 fatty acids, which are anti-inflammatory and can reduce\
+    \ hair loss. Plus, it contains a hefty amount of protein that helps the body produce\
+    \ keratin, a key element of healthy and strong hair.\n\n4. Lean Poultry: Tired\
+    \ of thin and limp hair? Make lean poultry a staple in your diet! Meats like chicken\
+    \ and turkey pack proteins that your hair is craving. They need it to grow and\
+    \ stay thick and healthy. It also contains B vitamins that can reduce hair loss.\n\
+    \n5. Iron Up with Iron-Fortified Cereal to Stop Hair Fall: Start your day with\
+    \ a bowl of iron-fortified cereal to boost hemoglobin production in your body,\
+    \ and prevent hair loss caused by iron deficiency.\n \n6. Go Bananas over Guava\
+    \ to Beat Breakage: This tropical fruit is high in vitamin C, which helps your\
+    \ body produce collagen that keeps your hair strong and prevents breakage. The\
+    \ next time you're in the mood for a snack, reach for juicy guava!\n\n7. Pump\
+    \ it Up with Greek Yogurt: Greek yogurt is a protein powerhouse and contains vitamin\
+    \ B5. It's sure to improve blood flow to the scalp and prevents hair thinning.\
+    \ Swap your regular yogurt with a creamy bowl of Greek goodness for those crazy\
+    \ locks from within.\n\nSo, these are some of the foods that will give you more\
+    \ than just good hair days. Try these out and let us know about your experience."
+  prompt_sha256: 6bbbbf48f770911b2a3371e5ac26773787766942a5eaf054cb6d2c776f9f5138
+- item_id: nr-6bbbbf48f770911b
+  problem: Please write a nice blog post about healthy foods that can improve hair
+    health. Be nice when talking about it. These foods should be easily accessible
+    and should be available at homes. I want you to format it in a numbered list,
+    each item mentioning a food and the details about it.
+  reference: "Fuel Your Hair with these Yummy and Nutritious Foods\n\nLike your body,\
+    \ your hair also needs fuel to function well and be healthy. Try out these yummy\
+    \ foods that will make your hair troubles go away:\n\n1. Sweet Potatoes: No more\
+    \ lifeless hair with this delicious root vegetable that's loaded with beta-carotene\
+    \ \u2013 a nutrient that converts into vitamin A that helps keep your scalp moisturized\
+    \ and promotes hair growth.\n\n2. Spinach: Don't tolerate dry tresses \u2013 add\
+    \ spinach to your diet! This yummy and leafy green is rich in iron and vitamins\
+    \ A and C. These are essential nutrients that keep hair healthy and prevent brittleness\
+    \ and hair loss.\n\n3. Salmon: Get your shine on with this seafood! Salmon is\
+    \ packed with omega-3 fatty acids, which are anti-inflammatory and can reduce\
+    \ hair loss. Plus, it contains a hefty amount of protein that helps the body produce\
+    \ keratin, a key element of healthy and strong hair.\n\n4. Lean Poultry: Tired\
+    \ of thin and limp hair? Make lean poultry a staple in your diet! Meats like chicken\
+    \ and turkey pack proteins that your hair is craving. They need it to grow and\
+    \ stay thick and healthy. It also contains B vitamins that can reduce hair loss.\n\
+    \n5. Iron Up with Iron-Fortified Cereal to Stop Hair Fall: Start your day with\
+    \ a bowl of iron-fortified cereal to boost hemoglobin production in your body,\
+    \ and prevent hair loss caused by iron deficiency.\n \n6. Go Bananas over Guava\
+    \ to Beat Breakage: This tropical fruit is high in vitamin C, which helps your\
+    \ body produce collagen that keeps your hair strong and prevents breakage. The\
+    \ next time you're in the mood for a snack, reach for juicy guava!\n\n7. Pump\
+    \ it Up with Greek Yogurt: Greek yogurt is a protein powerhouse and contains vitamin\
+    \ B5. It's sure to improve blood flow to the scalp and prevents hair thinning.\
+    \ Swap your regular yogurt with a creamy bowl of Greek goodness for those crazy\
+    \ locks from within.\n\nSo, these are some of the foods that will give you more\
+    \ than just good hair days. Try these out and let us know about your experience."
+  prompt_sha256: 6bbbbf48f770911b2a3371e5ac26773787766942a5eaf054cb6d2c776f9f5138

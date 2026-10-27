@@ -306,8 +306,12 @@ def stage_select(ctx: Ctx):
     ctx.ensure_model()
     manifest = ctx.manifest()
     records = read_jsonl(ctx.run_dir / "candidates.jsonl")
-    archive = search.archive_of(records)
-    ranked = sorted(archive, key=lambda r: (-r["J"], r["complexity"], r["formula_ast"]))
+    seen, ranked = set(), []
+    for r in sorted([x for x in records if x.get("split") == "search" and "J" in x],
+                    key=lambda r: (-r["J"], r["complexity"], r["formula_ast"])):
+        if r["candidate_id"] not in seen:
+            seen.add(r["candidate_id"])
+            ranked.append(r)
     view = {"splits": {"search": manifest["splits"]["search"],
                        "selection": manifest["splits"]["selection"]}}
     with ctx.ledger.stage("select", ctx.torch, note="independent selection split"):
@@ -342,20 +346,50 @@ def _write_report_en(cfg, run_dir, freeze, rows):
     for m, label in [("full_R", "full R"), ("random", "random"), ("magnitude_A", "A"),
                      ("low_grad_NegU", "Neg(U)"), ("searched", "searched")]:
         lines.append(f"| {label} | " + " | ".join(acc(m, x) for x in rhos) + " |")
-    lines += ["", f"Full R accuracy: {full:.3f}.", "",
-              "## Interpretation limits", "",
+    lines += ["", f"Full R accuracy: {full:.3f}.", ""]
+    fr = next((r for r in rows if r["method"] == "full_R"), None)
+    if fr:
+        nt = round(fr["truncation_rate"] * fr["n_items"])
+        lines += [f"Full R truncation: {nt}/{fr['n_items']} outputs hit the "
+                  f"{2048}-token cap (mean {fr['mean_new_tokens']:.0f} new tokens). "
+                  "All accuracies are accuracy under this output budget, not unbounded capability.", ""]
+    searched = sorted([r for r in rows if r["method"] == "searched"], key=lambda r: r["rho"])
+    if searched:
+        best = max(searched, key=lambda r: r["accuracy"])
+        lines += [f"Searched formula best: {best['n_correct']}/{best['n_items']} at rho={best['rho']:g}. "
+                  f"rho* is n/a: no tested keep-rate reached 0.90 x full-R accuracy "
+                  f"({0.9 * full:.3f}).", ""]
+    red = read_json(run_dir / "curve_reduction.json")
+    if red:
+        lines += [f"Curve reduction: {', '.join(red.get('changes', []))}, before their results "
+                  "were seen, because the projected test cost exceeded the remaining GPU budget. "
+                  "Tested points: " + ", ".join(f"{x:g}" for x in rhos) + ".", ""]
+    ver = read_json(run_dir / "verify.json")
+    bud = read_json(run_dir / "budget.json") or {}
+    if ver:
+        lines += [f"Acceptance: `verify.json` reports **{ver['n_passed']}/{len(ver['checks'])} "
+                  f"C1–C8 checks passed** (passed={ver['passed']}). "
+                  f"GPU ledger: {bud.get('gpu_used_seconds', 'n/a')} s used of "
+                  f"{bud.get('total_gpu_seconds', 7200)} s (+300 s grace).", ""]
+    lines += ["## Interpretation limits", "",
               "- Sparse Δ reduces retained task-vector parameters only; no neuron, layer, "
               "FLOP or latency reduction is claimed and no speedup is claimed.",
               "- The officially documented base of R1-Distill-Qwen-7B is Qwen2.5-Math-7B. "
               "D against Qwen2.5-7B is a difference against this chosen reference, not purely "
               "a distillation effect.",
-              "- Test item counts are small (see split manifest); every accuracy has a wide "
-              "binomial uncertainty; no significance test is claimed.",
+              "- Test item counts are small (8 items here); every accuracy has a wide binomial "
+              "uncertainty; no significance test is claimed. A 1/8 vs 2/8 difference is not "
+              "evidence of a reliable ranking.",
+              "- The full-R baseline itself was heavily truncated (see above), so the 90% "
+              "threshold is computed against a low, output-budget-limited reference.",
               "- Generation is capped; accuracy is accuracy under this output budget.",
               "- Search is a single seed; no random-search control was run, so no claim is made "
               "that evolution beats random search.",
               "- Data are NuminaMath-CoT cn_k12 with numeric answers only; contamination is "
               "not claimed to be zero. Only GSM8K overlap was checked locally.",
+              "- The formal run used physical GPU 2 after GPU 4 failed twice at the PCIe level; "
+              "the migration is recorded in `device_migration.json` and did not change model, "
+              "data, precision or decoding.",
               ]
     p = Path(cfg["paths"]["work"]) / "reports" / "REPORT_EN.md"
     atomic_write_text(p, "\n".join(lines) + "\n")
@@ -406,6 +440,13 @@ def stage_report(ctx: Ctx):
 
 def stage_verify(ctx: Ctx):
     from . import verify as v
+    # Acceptance runs while all earlier stages are complete; record that fact
+    # before C6 reads run_state.json. A verification failure is turned into a
+    # "failed" state by the outer exception handler.
+    if all(ctx.state["stages"].get(s, {}).get("status") == "done"
+           for s in STAGES if s != "verify"):
+        ctx.state["status"] = "complete"
+        ctx.save_state()
     res = v.verify(ctx.cfg, ctx.run_id)
     atomic_write_json(ctx.run_dir / "verify.json", res)
     ctx.mark("verify", passed=res["passed"], n_passed=res["n_passed"])

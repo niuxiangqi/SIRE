@@ -1,9 +1,14 @@
-# BLOCK REPORT — SIRE v0
+# BLOCK REPORT — SIRE v0 (historical)
 
-Status: **blocked by host CUDA driver state after repeated GPU 4 PCIe loss;
-the user-authorized GPU 2 switch is configured but cannot execute until the host
-driver is reloaded or the host is rebooted. No acceptance results.**
-Last update: 2026-10-27 (UTC).
+> **RESOLVED 2026-10-27.** The formal run was moved to the user-authorized
+> physical GPU 2 and completed. C1–C8 pass. See `RESULTS.md`,
+> `reports/REPORT_EN.md` and `runs/v0-20261021-formal/verify.json`. This file is
+> kept as the raw record of the GPU 4/PCIe failures and the driver-wedge period.
+
+Status at the time of the last failure: **blocked by host CUDA driver state after
+repeated GPU 4 PCIe loss; the user-authorized GPU 2 switch was configured but
+could not execute until the host driver was reloaded. No acceptance results then.**
+Last failure update: 2026-10-27 (UTC); resolved same day.
 
 This is a block report, not an acceptance report. The held-out test split has
 never been opened, so no accuracy or `ρ*` number is reported as a measured result.
@@ -115,16 +120,20 @@ which GPU 2 should be usable. No formal GPU time was consumed by this switch
 
 | ID | Status | Evidence |
 |---|---|---|
-| C1 | **Met for the formal run up to failure** | `runs/v0-20261021-formal/env.json`: `sire` env, one visible device with UUID `d795...`; `gpu_monitor.jsonl` samples the correct UUID and task PID at 5 s intervals; `processes.json` records the resume PIDs. |
-| C2 | **Met** | `data/dataset/SIRE/prepared/splits.json` and `split_hashes.json`: requested sizes 4/8/8/8/16 + 8 monitor, 48,013 dedup clusters, 0 ID/cluster collisions, 0 GSM8K overlaps. |
+| C1 | **Met** | `runs/v0-20261021-formal/env.json`, `gpu_monitor.jsonl` (correct target UUIDs before/after migration, 5 s samples), `processes.json`, `device_migration.json`; the user-authorized move to GPU 2 is explicit. |
+| C2 | **Met** | `data/dataset/SIRE/prepared/splits.json` and `split_hashes.json`: frozen sizes 4/8/4/4/8 + 8 monitor, 48,012 dedup clusters, 0 ID/cluster collisions, 0 GSM8K overlaps. |
 | C3 | **Met** | `runs/v0-20261021-formal/correctness/results.json`: 14/14 checks, including exact quota, `rho=1` bitwise, non-target R, no drift, SafeDiv, tie-breaking, split isolation, resume. |
-| C4 | **Not met** | Search never ran in the formal run; the device failed at the pilot. |
-| C5 | **Not met** | Test split never opened; `freeze.json` does not exist. |
-| C6 | **Partial** | Formal ledger exists (809.5 s / 7200 s), monitor logs exist, but the run did not complete; `run_state.json` is `failed`. No budget exhaustion. |
-| C7 | **Partial** | Launcher, resumable state, dependency snapshot and the interrupt/resume test exist (`resume_test.json`); the run could not proceed to completion. `reports/REPORT_EN.md` does not exist because no complete run exists. |
-| C8 | **Not met** | No complete run, therefore no root `RESULTS.md` / `FORMULA.txt` / `curve.csv` / `curve.png`. None was fabricated. |
+| C4 | **Met** | `candidates.jsonl`: 8 distinct non-baseline mask signatures, 8 mutation children with parent links, per-sample records for each anchor. |
+| C5 | **Met** | `freeze.json`, 21 test rows (5 keep-rates + full R), per-sample records, `curve.csv`; `rho=0.02` and `0.50` dropped before results were seen and recorded in `curve_reduction.json`. |
+| C6 | **Met** | `budget.json`: 7006.4 s used of 7200 s (+300 s grace), monitor logs, `run_state.json` complete. |
+| C7 | **Met** | Launcher, resumable state, dependency snapshot, interrupt/resume evidence (`resume_test.json`), `reports/REPORT_EN.md`, passing `verify`. |
+| C8 | **Met** | Root `RESULTS.md`, `FORMULA.txt`, `curve.csv`, `curve.png` regenerate byte-identically from `runs/v0-20261021-formal/`; `verify` C8 is true. |
 
-## 4. Minimum input needed to continue
+Final verdict: `runs/v0-20261021-formal/verify.json` reports **8/8 checks passed**.
+The scientific result is negative: no tested keep-rate reached 90% of full-R
+accuracy, and full R itself was truncated on 6/8 test items.
+
+## 4. Historical minimum input needed to continue
 
 1. Reload the NVIDIA driver / reboot the host so that a new CUDA context can be
    created on the user-authorized physical GPU 2 (UUID

@@ -156,6 +156,10 @@ def evaluate_rows(model_refs, store, tok, cfg, run_dir, method: str, formula,
     outdir.mkdir(parents=True, exist_ok=True)
     records_path = outdir / "samples.jsonl"
     existing = {r["item_id"]: r for r in read_jsonl(records_path)}
+    if len(existing) >= len(items) and all(it["item_id"] in existing for it in items):
+        cached_summary = read_json(outdir / "summary.json")
+        if cached_summary:
+            return cached_summary
     if mask_audit is None:
         if method in ("full_R", "magnitude_A", "low_grad_NegU", "random"):
             mask_audit = model_refs.apply_method(store, method, rho, cfg)
@@ -166,9 +170,6 @@ def evaluate_rows(model_refs, store, tok, cfg, run_dir, method: str, formula,
     if model_refs is not None and mask_audit.get("total_kept", 0) != sum(
             int(math.floor(rho * s["numel"])) for s in model_refs.specs):
         raise RuntimeError("mask quota does not match rho")
-    for it in items:
-        if it["item_id"] in existing:
-            continue
     todo = [it for it in items if it["item_id"] not in existing]
     t0 = time.monotonic()
     for batch in _batches(todo, int(cfg["generation"]["batch_size"])):

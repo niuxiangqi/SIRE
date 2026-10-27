@@ -4,14 +4,12 @@ This document is for someone who **clones this repository and wants to run the
 experiment from scratch**. It assumes the protocol in [`GOAL.md`](GOAL.md) and the
 decisions in [`DECISIONS.md`](DECISIONS.md).
 
-> Current status: the formal run (`v0-20261021-formal`) advanced through audit,
-> data, features and 14/14 correctness checks, then **physical GPU 4 failed again
-> during the pilot** (`0000:1A:00.0: Unknown Error`, `lspci ... rev ff`). On
-> 2026-10-27 the user authorized switching to **physical GPU 2**; the config and
-> launcher now target GPU 2, but the host driver is still wedged by failed GPU 4,
-> so new CUDA contexts fail until the host is rebooted/driver reloaded. No pilot,
-> search or test result exists. See [`BLOCK_REPORT.md`](BLOCK_REPORT.md). The
-> `runs/dev-*` directories are development evidence, not results.
+> Current status: **completed on 2026-10-27** (run `v0-20261021-formal`, physical
+> GPU 2 after GPU 4 failed twice at the PCIe level). C1–C8 pass. The result is
+> negative: full R 3/8, searched formula `s = (A * U)` best 2/8 at `rho=0.30`,
+> all baselines 0/8; `rho* = n/a`. Full R was truncated on 6/8 items, so the
+> comparison is output-budget-limited and statistically weak. The instructions
+> below are still the reproducible path for a fresh machine.
 
 ## 0. What you need
 
@@ -225,33 +223,39 @@ These are development measurements, not formal results:
 
 Budget the formal run from the pilot, not from these numbers.
 
-## 9. Current blocker and what “done” means
+## 9. Result and how to reproduce it
 
-GPU 4 failed twice at the PCIe level (2026-10-20 development search, 2026-10-21
-formal pilot). On 2026-10-27 the user authorized **physical GPU 2**
-(`GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7`); `configs/v0.yaml` and
-`scripts/run_gpu4.sh` now target GPU 2, and `verify` accepts the recorded device
-migration. GPU 2 is visible in `nvidia-smi`, but the host driver is still wedged
-by failed GPU 4, so any new CUDA context fails with `CUDA unknown error` until the
-driver is reloaded or the host is rebooted. Evidence:
-`evidence/gpu4_failure_20261020/`, `evidence/gpu4_failure_20261021/`,
-`evidence/gpu2_switch_20261027/`.
+The formal run `v0-20261021-formal` completed on physical GPU 2 after GPU 4 failed
+twice at the PCIe level. `verify` reports C1–C8 all pass. Raw evidence of the
+hardware failures is in `evidence/gpu4_failure_20261020/`,
+`evidence/gpu4_failure_20261021/` and `evidence/gpu2_switch_20261027/`; the
+device migration is recorded in `runs/v0-20261021-formal/device_migration.json`.
 
-After a host reboot/driver reload, resume instead of starting over:
+Measured (8 test items, 2048-token output cap):
+
+- full R: 3/8 (6/8 outputs truncated)
+- searched formula `s = (A * U)`: 0/8, 1/8, 0/8, 0/8, 2/8 at
+  `rho = 0.01, 0.05, 0.10, 0.20, 0.30`; best 2/8
+- random, magnitude `A`, low-gradient `Neg(U)`: 0/8 at every tested keep-rate
+- `rho*`: n/a for every method (no tested point reached 0.90 × full-R accuracy)
+
+The test curve has 5 keep-rates plus full R. `rho=0.02` and `rho=0.50` were
+dropped before their results were seen because the projected test cost exceeded
+the remaining budget (`curve_reduction.json`). This is a negative v0 result with
+wide uncertainty, not evidence that symbolic search fails in general.
+
+To reproduce on a fresh machine:
 
 ```bash
-nvidia-smi --query-gpu=index,uuid --format=csv,noheader   # GPU 2 must be usable
-CUDA_VISIBLE_DEVICES=2 python -c "import torch; torch.cuda.init(); print('cuda ok')"
-bash scripts/run_gpu4.sh resume --run-id v0-20261021-formal
-bash scripts/run_gpu4.sh verify --run-id v0-20261021-formal
+nvidia-smi --query-gpu=index,uuid --format=csv,noheader
+python scripts/fetch_models.py --config configs/v0.yaml --source modelscope
+python scripts/fetch_data.py --config configs/v0.yaml --source modelscope
+bash scripts/run_gpu4.sh prepare-data --config configs/v0.yaml
+bash scripts/run_gpu4.sh run --config configs/v0.yaml --gpu-budget-seconds 7200
+bash scripts/run_gpu4.sh verify --run-id RUN_ID
+bash scripts/run_gpu4.sh report --run-id RUN_ID
 ```
 
-Resume records the GPU migration, skips the finished stages (features and
-correctness are not recomputed) and continues from `pilot`, with the budget ledger
-starting at 809.5 s used. If you prefer a fresh run, use
-`run --config configs/v0.yaml --gpu-budget-seconds 7200`.
-
 The experiment is complete only when C1–C8 pass and the root artifacts exist and
-match regenerated logs. A running process, passing unit tests, a full budget
-ledger, or one lucky candidate is **not** completion. Never edit ground truth,
-loosen quotas, drop failing items, or fabricate timings to reach a passing state.
+match regenerated logs. Never edit ground truth, loosen quotas, drop failing
+items, or fabricate timings to reach a passing state.

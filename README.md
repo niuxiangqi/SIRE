@@ -3,15 +3,16 @@
 Search a compact symbolic score over a task vector `Δ = θ_R − θ_B`, keep only a
 fraction `ρ` of its entries, and measure how much reasoning accuracy survives.
 
-> **Status: blocked, no acceptance results.**
-> The implementation, frozen data pipeline, model audit, feature extraction and a
-> 4-item real-7B pilot are complete. Formal run `v0-20261021-formal` passed audit,
-> data, features and 14/14 correctness checks, then **physical GPU 4 disappeared
-> from the PCIe bus again** (`0000:1A:00.0: Unknown Error`) during the pilot. On
-> 2026-10-27 the run was moved to user-authorized **physical GPU 2**; the host
-> driver is still wedged by failed GPU 4, so CUDA contexts fail until a reboot or
-> driver reload. The held-out test split was never opened. See
-> [`BLOCK_REPORT.md`](BLOCK_REPORT.md) and [`HANDOFF.md`](HANDOFF.md).
+> **Status: formal v0 run completed on 2026-10-27 (physical GPU 2). Negative result.**
+> C1–C8 pass (`runs/v0-20261021-formal/verify.json`). The frozen formula is
+> `s = (A * U)`. On 8 held-out test items, full R scored 3/8 (0.375) and the
+> searched formula peaked at 2/8 (rho=0.30); random, magnitude `A` and `Neg(U)`
+> scored 0/8 at every tested keep-rate. No tested keep-rate reached 90% of full R,
+> so `rho* = n/a` for every method. Full R itself hit the 2048-token cap on 6/8
+> items, so all accuracies are output-budget-limited. See
+> [`RESULTS.md`](RESULTS.md), [`reports/REPORT_EN.md`](reports/REPORT_EN.md) and
+> [`BLOCK_REPORT.md`](BLOCK_REPORT.md) (the latter preserves the GPU-failure
+> history from the earlier attempts).
 
 This repository is the full, auditable implementation of the v0 protocol in
 [`GOAL.md`](GOAL.md). It intentionally contains **no model weights and no raw
@@ -51,7 +52,7 @@ It does **not** reduce neurons, layers, FLOPs or latency. No speedup is claimed.
 
 ```text
 GOAL.md                  execution contract and acceptance conditions
-BLOCK_REPORT.md          why the formal run stopped (GPU 4 hardware loss)
+BLOCK_REPORT.md          historical GPU 4 failure evidence and final resolution
 PLAN.md                  milestones and verification commands
 DECISIONS.md             consequential choices and evidence
 HANDOFF.md               step-by-step retry guide for a fresh clone
@@ -85,17 +86,19 @@ runs/                    per-run evidence (feature arrays are git-ignored)
 
 ### 1. Hardware
 
-One 80 GB-class NVIDIA GPU. The protocol and launcher are written for **physical
-GPU index 4** and verify its UUID before importing torch:
+One 80 GB-class NVIDIA GPU. The checked-in config currently targets **physical
+GPU index 2** (the user-authorized replacement after GPU 4 failed at the PCIe
+level) and verifies its UUID before importing torch:
 
 ```bash
 nvidia-smi --query-gpu=index,uuid --format=csv,noheader
-# GPU 4 must be listed; the expected UUID is in configs/v0.yaml
+# GPU 2 must be listed with the UUID in configs/v0.yaml
 ```
 
-If your GPU index is different, edit `device.physical_index` in
-`configs/v0.yaml` and the `awk` index in `scripts/run_gpu4.sh`. Do not silently
-change the card during a run.
+For a different machine, edit `device.physical_index` and
+`device.expected_uuid` in `configs/v0.yaml`, and set `SIRE_GPU_INDEX` (or the
+default in `scripts/run_gpu4.sh`) to the same index. Do not silently change the
+card during a run.
 
 ### 2. Models (not included)
 
@@ -190,16 +193,24 @@ the reference machine, dominated by the one-time 54 GB gradient checkpoint).
 
 ## What is in this repository now
 
-- `runs/dev-audit/` — real B/R audit (339/339 tensors, no shape/dtype mismatch;
-  tokenizer vocab identical; config differences recorded).
-- `runs/dev-features/` — feature metadata and small logs for 8 calibration
-  samples. The 37 GB of `.npy` features stayed local and are git-ignored.
-- `runs/dev-flow/` — partial search attempt and the raw CUDA failure traceback.
-- `evidence/gpu4_failure_20261020/` — `nvidia-smi`/`lspci`/sysfs evidence of the
-  GPU 4 PCIe loss.
+- `runs/v0-20261021-formal/` — the completed formal run: audit, frozen splits,
+  feature metadata, 14/14 correctness results, search candidates, freeze record,
+  per-sample test predictions, budget ledger, GPU monitor, `verify.json` (C1–C8
+  all pass).
+- `RESULTS.md`, `FORMULA.txt`, `curve.csv`, `curve.png` — regenerated from the
+  per-sample logs, not hand-written.
+- `reports/REPORT_EN.md` — English report with the result and its limits.
+- `runs/dev-audit/`, `runs/dev-features/`, `runs/dev-flow/` — development evidence.
+  The 37 GB of `.npy` features stayed local and are git-ignored.
+- `evidence/gpu4_failure_20261020/`, `evidence/gpu4_failure_20261021/`,
+  `evidence/gpu2_switch_20261027/` — raw hardware-failure evidence. The run was
+  completed on the user-authorized GPU 2 after GPU 4 failed twice at the PCIe
+  level; the device migration is recorded in
+  `runs/v0-20261021-formal/device_migration.json`.
 
-These are **development evidence, not acceptance results**. The test split was
-never opened and no `RESULTS.md`/`curve.csv` was fabricated.
+The result is negative: no tested low keep-rate reached 90% of full-R accuracy.
+The searched formula is the only low-rho method with non-zero accuracy, but 1/8–2/8
+on eight items is not evidence of a reliable ranking. No positive claim is made.
 
 ## Reproducibility and audit hooks
 
@@ -215,15 +226,25 @@ never opened and no `RESULTS.md`/`curve.csv` was fabricated.
 
 ## Limitations
 
-- Small v0 samples (pilot 4, calibration 8, search/selection 8, test 16; the
-  protocol permits one reduction to 4/4/8 if the pilot projects over budget).
-- Accuracy is accuracy under the frozen output cap, not unbounded capability.
+- Small v0 samples: pilot 4, calibration 8, search/selection 4, test 8. The
+  protocol permits one pre-formal reduction; this run used 4/4/8.
+- The test curve has 5 keep-rates (0.01, 0.05, 0.10, 0.20, 0.30) plus full R.
+  `rho=0.02` and `rho=0.50` were dropped in the frozen order before their results
+  were seen, because the projected test cost exceeded the remaining GPU budget.
+  Recorded in `runs/v0-20261021-formal/curve_reduction.json`.
+- Full R hit the 2048-token cap on 6/8 test items; the searched formula also
+  truncated heavily at low keep-rates. Accuracy is accuracy under this output
+  budget, not unbounded capability.
 - Numeric-answer filtering excludes proof/open/expression answers.
 - Near-duplicate control is SimHash+LSH, not exhaustive pairwise comparison.
 - Only GSM8K overlap was checked locally; MATH/AIME overlap is un-audited.
-- No zero-contamination claim. No statistical significance claim.
+- No zero-contamination claim. No statistical significance claim; 1/8 vs 2/8 is
+  not a reliable ranking.
 - Search is a single seed; no random-search control was run.
 - Sparse `Δ` is not a sparse model and is not an inference speedup.
+- The formal run used physical GPU 2 after GPU 4 failed twice at the PCIe level;
+  model, data, precision and decoding were unchanged, and the migration is
+  recorded per run.
 
 ## License and contact
 

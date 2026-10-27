@@ -1,0 +1,1383 @@
+{
+  "method": "formula",
+  "rho": 0.05,
+  "formula_ast": null,
+  "mask_sha256": "7dce7920aadbfc7dbf52121705b26dcec7dcdf5a2d054d00ebc005c0c8594a0e",
+  "tensors": [
+    {
+      "name": "model.layers.0.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "998ba18096c1509023a82a172907c0df051c9ac57ffc3f4da2e11f20d729e716"
+    },
+    {
+      "name": "model.layers.0.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "e3e22929f42049a30af5018d35b35b84d1ed9dc73515c35d1d2461697b7bf5bc"
+    },
+    {
+      "name": "model.layers.0.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "5b2a7a05e043090b9d53edff995bfd3e65c246e6b6568f8d50c0641bd40e2417"
+    },
+    {
+      "name": "model.layers.0.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "3ec7f32fe8afefe112c0e3128979e9f985faa8cce977e0083768dc7d6ef9c02d"
+    },
+    {
+      "name": "model.layers.0.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "13d0a053f5e62b95948d21b14facd07d48ab2f1b1bcbc3c05139ac9109e5b8de"
+    },
+    {
+      "name": "model.layers.0.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "bf08de7224f1542dd7f1feafbee4961b2e1c58dd2fcdec900886c0808493f273"
+    },
+    {
+      "name": "model.layers.0.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "1623a450a19eabc4d046f95a4417ec928c52988f7c4b588a68a6c8d374e4f276"
+    },
+    {
+      "name": "model.layers.1.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "70fbad7609ca7907d169c31f784d651c53d783ee0aeb935b0c532e699aaac644"
+    },
+    {
+      "name": "model.layers.1.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "a1b79995aed80ff6b9691397613cd7e7435cebdb8e10d29be3f87b0074156e26"
+    },
+    {
+      "name": "model.layers.1.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "ef4a921292608d4e7bc2c59a91b1c74627936a8fc244d40bd45c067d5a3bf064"
+    },
+    {
+      "name": "model.layers.1.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "8fe6d09d7e85048d63b693441d5aae7944aecc008a8b5de83471dce52cd87ef9"
+    },
+    {
+      "name": "model.layers.1.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "a8404d494acfd2bbef7bd0908dc6b950e15c9dc4d056d1d123d0b09fe15fbbdf"
+    },
+    {
+      "name": "model.layers.1.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "7e2de4472e727241d0bf465f4d890a1803ef122619be59e1c820f766beecca25"
+    },
+    {
+      "name": "model.layers.1.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "e80ed16f6508a110fb2a38d84881cf44e4a14fbb7bae2a4cd8c08d188504cb52"
+    },
+    {
+      "name": "model.layers.10.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "2d3361f11b4b4d51e74f4dcbb5cfddd0f4b13c0b154290588eddc1acaa2ace0a"
+    },
+    {
+      "name": "model.layers.10.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "1a0904765c9485824cec103da480cdc4ba471d6a674cb55367ff323abd5f1645"
+    },
+    {
+      "name": "model.layers.10.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "b9139e0e7cdf4bdfb9bc5792b41b0f38e49a65bfe4fa678e5a194f0397957290"
+    },
+    {
+      "name": "model.layers.10.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "e3e681374eaf0ac1ff5d6b05a3c3757b44b5384c14117b47d0e96d5a8648900a"
+    },
+    {
+      "name": "model.layers.10.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "57ce20b58b0a215d661fc2dfc94a8fd9d74d577ff68678f4a4c6363fc062853b"
+    },
+    {
+      "name": "model.layers.10.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "947846f4c63ca7ca522e5a81b2287ff445bcd3a894d495466732d83e2ea90c9e"
+    },
+    {
+      "name": "model.layers.10.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "71ad65d5551de04a82549b8da6f5724f3f4f9d4f73e89e16271a76fe4ba35ba2"
+    },
+    {
+      "name": "model.layers.11.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "78a30e81423c8767428db4aaf46b2a3e7ea1fd23964bcdf0b9220e63ef20f053"
+    },
+    {
+      "name": "model.layers.11.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "dade9aa5641266c1a1912afac7dbf37addb92471371ef76b77ef32e3b127f9e2"
+    },
+    {
+      "name": "model.layers.11.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "dd59dcddaa859d5b3469b599efdad6e264c9f766039bef5e5c64e3b0b54a8f58"
+    },
+    {
+      "name": "model.layers.11.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "dbbe088750fb15bd5bc02b6dde97d50c125f9af5056ed75c14dfb797ec082b7d"
+    },
+    {
+      "name": "model.layers.11.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "3e4c482015516a40075f1814cdc214c9dabdaf28d75f25dc02066de611c5be35"
+    },
+    {
+      "name": "model.layers.11.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "d4a67e5e5587cf0d1d399085b5931530aae2d2c94fe023c14ee73d0fa51a1d7f"
+    },
+    {
+      "name": "model.layers.11.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "b5194f0a487e7f368248c7be6862af58da5d57bd31791c7dfab75a2eba65f216"
+    },
+    {
+      "name": "model.layers.12.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "77d5ab68de09f79eb1338538a9ce13f9667bcd8c90bc411c06f5f2dc45534c9a"
+    },
+    {
+      "name": "model.layers.12.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "fed3df2221c8e9af8912b00e9049807ac9f351f2f481ead02766ca55aae908e8"
+    },
+    {
+      "name": "model.layers.12.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "10e8b31a599b8789c50a8583e0ef089fd831d770a490034bccbee588009f5a42"
+    },
+    {
+      "name": "model.layers.12.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "efdae95cd89f822c82b47055f869be6c78000021336a8e14b19880a91f536a23"
+    },
+    {
+      "name": "model.layers.12.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "57f063553961043d7933e167e05ed600ed286a067a0ceb8e82aba3e496124887"
+    },
+    {
+      "name": "model.layers.12.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "344c1970e31697105f7bdc58940a3d21c2008a621e2e340ef45f39d6a5932afc"
+    },
+    {
+      "name": "model.layers.12.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "e78756c09d2092a9dd17ec85e16dd5b1494d9f6c66bf92c25e31d40d4363c9da"
+    },
+    {
+      "name": "model.layers.13.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "1910ef6482d6c2a1480a5b9bc13a5baa640f39f45db1f4b899b5f5e1654ce30f"
+    },
+    {
+      "name": "model.layers.13.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "5caa31e328dc8b86055b09ec072c791ce60cff4af4ada3cc207beceaf34b3076"
+    },
+    {
+      "name": "model.layers.13.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "740c343e8e5a644c96b0aa57ebdc9221c660ef93c87355eca3b0e435dfab69cb"
+    },
+    {
+      "name": "model.layers.13.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "90258b5b9099b5c1a04aed91ddb058135bff719b7a71cd801da126f2681a6df5"
+    },
+    {
+      "name": "model.layers.13.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "27590dd420aeb85b99e4fc339e0de9f65e8412fb215b68625eaa1ab94104d407"
+    },
+    {
+      "name": "model.layers.13.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "a45a9c8cdeddfe3e29f28b69faf2990b6c53abfc47979c4f8b745580aa553e9d"
+    },
+    {
+      "name": "model.layers.13.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "68ed469e9a24e8c671556eb4ab929ea60639d4da80e35d649dc836e866f3941a"
+    },
+    {
+      "name": "model.layers.14.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "1fe9435565ff7b8ce5325ef703f9310efa8fceeb97ff9fab957c3c3dd0fc1801"
+    },
+    {
+      "name": "model.layers.14.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "70fb9a6d038a38e8c182a1b98481b8e91419039f95a4ec00e22b3b72817e16bc"
+    },
+    {
+      "name": "model.layers.14.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "b1e1d266c55acde546c8d822a3cde66bc45f5b1bbb1293aa4741e08b1913de74"
+    },
+    {
+      "name": "model.layers.14.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "f67a5d0ed97b8296a2fb72635011c205a2d1854a8dea8a808bca24d1d0d79144"
+    },
+    {
+      "name": "model.layers.14.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "a6996f801d089e94e06d02eba7c4c0b873435fdc075304a8524b9ff9fd2ce92d"
+    },
+    {
+      "name": "model.layers.14.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "5baea358880f537b48c59d3d7697c49cffed1e01ae6605145a4c7bd44015abf1"
+    },
+    {
+      "name": "model.layers.14.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "ea84be89515ddb688df70cd3fa5af032a6032ac3cb8747d1f2774c864b9c8c0f"
+    },
+    {
+      "name": "model.layers.15.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "addc52bcdb946707cb5143cead038ddf609a0ac23d1ec28f9202708254201fad"
+    },
+    {
+      "name": "model.layers.15.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "91b03a9bc9ef55d5e42d820bb3aec7237f82fa69f786e557e982e52504a11ca8"
+    },
+    {
+      "name": "model.layers.15.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "444ec34f976e80b5bb805580fa78e61ce5b58e84e2503b0d3e10309eb3a278f3"
+    },
+    {
+      "name": "model.layers.15.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "c171050ee3e4a29802c31f480c93d8939663fc91550d3448453e6d1d15b29ddc"
+    },
+    {
+      "name": "model.layers.15.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "0a309bd849d8e5c864904dbb4292eff41c077353066c585c12b8535d37a43d38"
+    },
+    {
+      "name": "model.layers.15.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "d5f4e7506abf6cb7a22b119b4528997317c843d5d1e8062ca12a5eac92e6fb8f"
+    },
+    {
+      "name": "model.layers.15.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "354f8435c37a2333a485cdefd36c0d317668d5287294ebec3b0f1cdcb182ba4b"
+    },
+    {
+      "name": "model.layers.16.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "e79980b2047395ab82a4be300c57d952989a21573777c7ee6f305bc3d09ab4e8"
+    },
+    {
+      "name": "model.layers.16.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "004f9d5231bed04632f9776d580b29977069cc73671d40d39ddc70f4dd3472a3"
+    },
+    {
+      "name": "model.layers.16.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "fa5d912c115c7b8e474d0e198bee8de38225cc061347c8d77b7ebdf7e4ea43fa"
+    },
+    {
+      "name": "model.layers.16.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "2d624c19fa08e4fbe9d28615603b32218db0e39564518511954ddeaf50062183"
+    },
+    {
+      "name": "model.layers.16.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "a4128438e885ffd7013b1fc7681a20475901d598e8681fe50a001f8d5443c514"
+    },
+    {
+      "name": "model.layers.16.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "fca84e1f5f5339679905eaef839c0b9deed7ad0fb36ec7171596d07b2e2fad36"
+    },
+    {
+      "name": "model.layers.16.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "14f80852def7dfd1df31222699d5d9fa28f92912cd8633e55174d9f4e3d93ea2"
+    },
+    {
+      "name": "model.layers.17.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "fed7f3dec1825dd0b832950e551a0c65b08113e30fad5f908edfc13ad9078e37"
+    },
+    {
+      "name": "model.layers.17.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "e1e3c8bff1cb0cebfba9394194bbc45f56c23ebb841c19c10d6354080e245f60"
+    },
+    {
+      "name": "model.layers.17.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "ecac67314e0df90603ecbd045cfdd6458bc94d5a3a470c5e8c1cb01bebe91e61"
+    },
+    {
+      "name": "model.layers.17.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "843b00ef65e9b304be4ae4987476318d98fadde3b03abeed1ac1b7cfd64ef2f0"
+    },
+    {
+      "name": "model.layers.17.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "addb63b70a9b0a292653575ad8fa19470851f0af584fb99886eaa0f7136e45cf"
+    },
+    {
+      "name": "model.layers.17.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "c540f1777fe372b601e6fc6a2fb216d37602bca39a05ac0d8a89d2159e5dfe0f"
+    },
+    {
+      "name": "model.layers.17.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "80cc58b6609db16ece68ecbcfa4ff514c180a99d856abba98791194101505ef5"
+    },
+    {
+      "name": "model.layers.18.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "7ffd0bb172a8b89361d16b9ce69c9f6e1e820ffde9bbbc6213870c87252f21fb"
+    },
+    {
+      "name": "model.layers.18.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "e12afa29a6ade7b81689b9ce0aed461d344839b8dcc87efe95373add72250103"
+    },
+    {
+      "name": "model.layers.18.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "5481b7cb9ed0a49a5596d144e069f284597aebd4f442e9ec9a2a653424c0f5c1"
+    },
+    {
+      "name": "model.layers.18.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "068680043f2a4ea41269a3a8c0ca025e5602362f7f441eb6c968686fb9d2c0b0"
+    },
+    {
+      "name": "model.layers.18.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "54139934ee49733eb09cd803f658a5eece02172eba5444442a0292fcfab0687e"
+    },
+    {
+      "name": "model.layers.18.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "db5ac66c8071df35b4eefb84b9e5836fa2176785488c7d1f764be143ad34f24f"
+    },
+    {
+      "name": "model.layers.18.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "410eea07e96ab672b5ca511b798aa878eb3e9952f73304316a74391debb949c0"
+    },
+    {
+      "name": "model.layers.19.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "bb1a3483052d830fa027d4a03d2692434c016b2a88562cad97998c7beedb895b"
+    },
+    {
+      "name": "model.layers.19.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "6d3aba23142ae6160e37e875f06c54b5da710dd73f404006af99163b7ac4f0bb"
+    },
+    {
+      "name": "model.layers.19.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "831849193808d05f3eaace0f4e7f3a2090a01833f3f6093b114350c98c5e208a"
+    },
+    {
+      "name": "model.layers.19.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "633aa169766e61a7cf4fe0e9cc85b88061a228ec8d47bd6b28ead8c51327756f"
+    },
+    {
+      "name": "model.layers.19.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "44ef1a9b94d333d29d08e6c8febfe20c0ef0f7733768f2f712e2a0ea8e40275f"
+    },
+    {
+      "name": "model.layers.19.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "40e8daf7b8db4b1fe946000ca06a28820aa46f0d7e76a4c4b304cef156859859"
+    },
+    {
+      "name": "model.layers.19.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "1f14a2d8b07800ca10f098868e105c2d95d9859d17d8ecd4ce4689c3c1c32c73"
+    },
+    {
+      "name": "model.layers.2.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "2668a483876ad1bbd2b069a436b2364566de84698cbe0cdabc64131890dcfac8"
+    },
+    {
+      "name": "model.layers.2.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "6171f5f8aaf85fb8be5cc273a136f8477e33dafcb0c5c3175d5824e9ffc8afbf"
+    },
+    {
+      "name": "model.layers.2.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "4ac54a6f7779d23807dc307fa4c848e19763d407ef48c416128f4e79b36f80e2"
+    },
+    {
+      "name": "model.layers.2.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "93dc1634c2d5941e134bc4e09c903b11249aac8de0d830d62f7a148689075398"
+    },
+    {
+      "name": "model.layers.2.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "80e5592d9fb2948fb56c96bebbe33d567c51a7856bfca95db905ebc823b2d87a"
+    },
+    {
+      "name": "model.layers.2.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "0455728324006e522865563d11955c0ebf25498cffa26395c67ecb2d78c11daa"
+    },
+    {
+      "name": "model.layers.2.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "7b26393ccd4ef8eee7247999320727be38a49139bc90e72179d0c4f1ccf24cb2"
+    },
+    {
+      "name": "model.layers.20.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "368a28c0d22e4ac67633bda40f677cb4746a0f78180a938b3062b513d11b20e1"
+    },
+    {
+      "name": "model.layers.20.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "03ea2151004a4be0ae282522d88b5af771d378c88b7f8fee960d5f31a779aeb9"
+    },
+    {
+      "name": "model.layers.20.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "3f96214ca04dba0b7c29813df4a7d703a54e31b25f33cd3e4474235d23bc21e0"
+    },
+    {
+      "name": "model.layers.20.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "902d25383d7eb860386ee1027b8b787cb14ab3a92f3f7e531702fb7dbd56d0e2"
+    },
+    {
+      "name": "model.layers.20.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "8734ac344dee367d78c4f13b2900427e79ff326773f806ff5df577a1a6c2c4b0"
+    },
+    {
+      "name": "model.layers.20.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "00f5986e1949928110ea6857209edee17ab789e107c476eeae65ac5264af4658"
+    },
+    {
+      "name": "model.layers.20.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "6afb8c5555ec61aa8d968d82b48a797fff3a9298cbf0051e1dc7f043452773b4"
+    },
+    {
+      "name": "model.layers.21.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "6be27c10d8c556e5a08b51c1ed8da0d079fb243821c2599168053d7d23af052b"
+    },
+    {
+      "name": "model.layers.21.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "dbabcfd93fea1cc098c162f65a935d9123c9120961c2a4e3d957756fd7a611a0"
+    },
+    {
+      "name": "model.layers.21.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "627b7e4c9cb047c15adaccc30e0798981a65f12685ec0b8bb4d9a638e6a3698a"
+    },
+    {
+      "name": "model.layers.21.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "c9b1d7eb0f409a16ce1af9d9daa7c36ab196af64681066a94b9e7479196243d5"
+    },
+    {
+      "name": "model.layers.21.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "77923f7e5ae99f581b3ab3d23e8e90b41409a6312041f0a5c7ff5513f960c2fd"
+    },
+    {
+      "name": "model.layers.21.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "dd793f8ac1f45b53d204248edb9a7ac6eedd2df3d0182757f5f933223bb460d5"
+    },
+    {
+      "name": "model.layers.21.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "f8034bf6b7138adacc64abb527bde264c49d3f2aa661448cdeebfb3d37231044"
+    },
+    {
+      "name": "model.layers.22.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "d753e2eec9ce9391cea192d1eb6adfedf7e12b8c616435faef43bbf76311a7d6"
+    },
+    {
+      "name": "model.layers.22.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "87f31645f2a501fa132ad5f4f48756de5bf45510b6cf94677c6c74f43f6500c4"
+    },
+    {
+      "name": "model.layers.22.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "91da6cf34a3825fee3ffc3aa6b1941c2d1b9c62f85d2bc289ee804d4e17f221a"
+    },
+    {
+      "name": "model.layers.22.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "a254f66d98fd5b1443ff3a5931fa3f50891841dc422d565126a8c3c64fe1fbbe"
+    },
+    {
+      "name": "model.layers.22.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "fc24d7639debd0017b6b7ff3ce8c00bf2a38e4ec8ae09aabc1af423d7ea50bed"
+    },
+    {
+      "name": "model.layers.22.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "d545e6ddc37d5c6acf9c5dede024e85ca00c5865c8da51848f997f6c7c6fb48e"
+    },
+    {
+      "name": "model.layers.22.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "3ea20f664dc38b1dc69a7770ccb035fa792296726ef3ea9ef9e0465174846914"
+    },
+    {
+      "name": "model.layers.23.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "892b093f4bb2654aa52d77974b5f055d1ac3b13b9fc77279ffa5afaee2c09958"
+    },
+    {
+      "name": "model.layers.23.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "d7a09c7a70f227b0e4ca25702eabce98544e4c79cab2648474e879d7484ebc49"
+    },
+    {
+      "name": "model.layers.23.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "2e5d1e65ddf746cf270088b0fa6e218ca5ce537a31835ba4933c550f842d23f1"
+    },
+    {
+      "name": "model.layers.23.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "0b2e84e4e5d46350b18b7bf3ad71450442f1836f3c5ffe898a77914d7c07767b"
+    },
+    {
+      "name": "model.layers.23.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "e0dac8cda6c0bf8e8ab7cbac62b703b98296c6b88797742b5a0db8dd3ebf0823"
+    },
+    {
+      "name": "model.layers.23.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "522b4424f861cc0e77d681afacca3e48f471b0aaf8ea301dcc22815dfec0e564"
+    },
+    {
+      "name": "model.layers.23.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "5932044403ef6a62293402e9df4a5244b3c09f46d44440f93e99ae1041522f2d"
+    },
+    {
+      "name": "model.layers.24.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "8530885f84e1eea14a2b697d16e3a35fe84836194f6b20f7cfdfac3a685292fd"
+    },
+    {
+      "name": "model.layers.24.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "9d6c6282dcc1ec269526cb279580dc5662967f9d5d41f49e4e7f662dc9342f24"
+    },
+    {
+      "name": "model.layers.24.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "f7d9d557ec71885c3302a387c22f8852d520181f84d9976ddd432ac92778435c"
+    },
+    {
+      "name": "model.layers.24.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "5c3f42009e43ee8dab4a2206ebaa843df4bd26e9aaaed2c179e43949a6e0f1ac"
+    },
+    {
+      "name": "model.layers.24.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "f50c6a1f90cee045ab587ceb79254d013340c0d94d96122bd86ab6530d6cc63b"
+    },
+    {
+      "name": "model.layers.24.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "ccfacec7979754d5827c9d1845158681b141f23f09dd2d95f6d45042b94f13c7"
+    },
+    {
+      "name": "model.layers.24.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "180d4d1a14d27a21a170b9d8dee4e4418a746ce011ee80573cf4077305d45912"
+    },
+    {
+      "name": "model.layers.25.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "34bc3c9694a1bde4b8ac2ca21389aa24f262435da72e630a54f9479e096220b3"
+    },
+    {
+      "name": "model.layers.25.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "f6d570255d17aaaa124d82df3b1b1b9bb54da0afb5828b2022e36d86e23db8e8"
+    },
+    {
+      "name": "model.layers.25.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "f5882d42e0afcee5d134358b85d51768fc581efccfdccdeec19c78b6d3842741"
+    },
+    {
+      "name": "model.layers.25.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "ab22cbf0219ee15b2e1773a2f9da3d4f21f74197b35065aedc13f67b7d6a3923"
+    },
+    {
+      "name": "model.layers.25.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "9629088ec976986528e5b6e379941d4842fb6cf3d5322122ee4881d51e58802d"
+    },
+    {
+      "name": "model.layers.25.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "c3b37a4acbe8466626dc59f869bd784a722f50710719ca4fc91ef66cfe96f0e0"
+    },
+    {
+      "name": "model.layers.25.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "d91d2967f0e3c73b8da2e3baf78ce555639eccd0424368dbbbfc8504473f237d"
+    },
+    {
+      "name": "model.layers.26.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "d7ee1cadd5c4e2bfcac3b931a3f9a6e16d5bcdc04b07aa92174ee8d232884ab1"
+    },
+    {
+      "name": "model.layers.26.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "c466dc475f23b183af270667216a869c4cf1c10aba940cc485a3b281694d189f"
+    },
+    {
+      "name": "model.layers.26.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "34917296190a432ac1107d91ebf96cfd3adafa0c3c494c32c19b6c2fdfce0382"
+    },
+    {
+      "name": "model.layers.26.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "a0a99f3df218983fa4da936485b8c22b49a11249107aebbbeb69d747ee088c23"
+    },
+    {
+      "name": "model.layers.26.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "578ee3574367d19682001cf310490596b1a3b5a0044d1c73bdcb2e73ce5cd83e"
+    },
+    {
+      "name": "model.layers.26.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "43cdb2d751a39f3da46b1965564865fa9ab6b2f0d43e485581defac0a247cf07"
+    },
+    {
+      "name": "model.layers.26.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "b831fb80131ce815bf816c1d277de53e82303745e67e97cc00d55aac5e068cf3"
+    },
+    {
+      "name": "model.layers.27.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "720e6eac263dd027c9d7ac64b8ce25252856c3b922a19ca61906bfd3975f8db4"
+    },
+    {
+      "name": "model.layers.27.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "0ffa8d8443872f4539b1c2c9cc18946a724e635453a393ca645f4f302c9e7007"
+    },
+    {
+      "name": "model.layers.27.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "fddd911c2faa8be21b07a51b68a10838fc17196aa45d6bb13e502ea0109b8300"
+    },
+    {
+      "name": "model.layers.27.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "42f5d68c064d79ef9e945f7cbc6a6d0ff91e2a6d46e11dbff1f4604a184f7463"
+    },
+    {
+      "name": "model.layers.27.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "864ab587470aa3076c64b34bb28d1c93e4f219bb80ba35e855dbff6cc0a306ed"
+    },
+    {
+      "name": "model.layers.27.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "50ca8ea1f27bf426ea721511707fe1a7273b0c1621ead4dac290fc19d3a93a45"
+    },
+    {
+      "name": "model.layers.27.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "930e47d5e9387339d7d039944ffce269191286e856f6084d9a1c566dab3773c9"
+    },
+    {
+      "name": "model.layers.3.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "70e55131ede92b01788430d549d58a75adb36b712077cf1f0e3c438ae419435f"
+    },
+    {
+      "name": "model.layers.3.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "9e8a8b2de256e08b9cdb185bdedbcee97d3118b2335a46c1f9e64b388442c37b"
+    },
+    {
+      "name": "model.layers.3.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "02daf28c2739febd888fa3090356f57c099878be2b8653205fea33ed41176998"
+    },
+    {
+      "name": "model.layers.3.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "feae6d247fd3c72be50aa07f436f2e5ee4219de822b3b817ff6e4fc43a302ece"
+    },
+    {
+      "name": "model.layers.3.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "cde2182c21b9143d952914540a1f785e6f6cb2285596e117ef3630f7d3a0d0f0"
+    },
+    {
+      "name": "model.layers.3.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "483ebb9edb5b67f39902ac10dc6bffe570966e390a458d1fc884ee7d61c8f8a4"
+    },
+    {
+      "name": "model.layers.3.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "8965b723fc3025084c843d3166b897031e62b98a831738a5be5a78052a057eae"
+    },
+    {
+      "name": "model.layers.4.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "c31d1adc1c7670f3443fcf1d0dac9981432fd0e2a60cc0a0d02fb1a59f94858c"
+    },
+    {
+      "name": "model.layers.4.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "8bd0885d4ab7c0b6b72bb222d5b3e9dca47c603cd487254cbd7b7f73fd8d8703"
+    },
+    {
+      "name": "model.layers.4.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "f43cbdcb8f305697f6aed54325e20a8ec4d028e047e9d481492f541203af5ff6"
+    },
+    {
+      "name": "model.layers.4.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "c64c86dc2382d89bb9ecd327bc4036609ad08370ea26ce165c30e76dfaf3c03e"
+    },
+    {
+      "name": "model.layers.4.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "d43af5ba511c2db3ab9847b7a5083d1e6eeb5b612f0b08977b9386acf07f63a2"
+    },
+    {
+      "name": "model.layers.4.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "a30a19fa94508944fc3d386035a121806e27b4de021ddd862e9b80044c26d5f7"
+    },
+    {
+      "name": "model.layers.4.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "8e86932be514ce17c9cbd19003afefead5fd2aa6403c94881c13f9c7ac5194aa"
+    },
+    {
+      "name": "model.layers.5.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "84094f1434ae0c922e1cd87d484b394ffc55bdba2be0a390a060559bb346eb30"
+    },
+    {
+      "name": "model.layers.5.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "59ab3beb6096894b06cf7fca9bd5579724e7629a295a47f01e48cb173c5bc7f0"
+    },
+    {
+      "name": "model.layers.5.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "8116325d47baac312a651ca3fe503391399eeba426f79541a9e3d09baa83f1b8"
+    },
+    {
+      "name": "model.layers.5.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "b3e0622395d26933157838adbe06dcff28043b2e8a277660ff4460de6e036fe5"
+    },
+    {
+      "name": "model.layers.5.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "4c1f969b576244e1bacf706c71508dde8bb5d2185d22fe942931c4216d08dde9"
+    },
+    {
+      "name": "model.layers.5.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "46fcbaa8cd7fb0a70c5dc72c0aad18e25c9ba9845286846f19804ea1787fd542"
+    },
+    {
+      "name": "model.layers.5.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "6788143fd174a3d2478ba2f058d41bdb0b87314b95a5994067a552c23b188dd2"
+    },
+    {
+      "name": "model.layers.6.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "af063783cadd161796e91987dcab950e52f0083405ba4126ef3fb927ebb06f29"
+    },
+    {
+      "name": "model.layers.6.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "fe8e1f7069745259cf6b929a35f17c891dfad3d00fe1cc6311169114f1f9f844"
+    },
+    {
+      "name": "model.layers.6.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "892af7d7d97cd2f3edb02555689fd7dbf9ae58a6da3898fa9e024c36ca01a89d"
+    },
+    {
+      "name": "model.layers.6.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "38e94db25bc59c607ec87b4758686b103877f4b6cada02adb246e7ee86a993b2"
+    },
+    {
+      "name": "model.layers.6.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "46e03fd1f54bf17080be1f494e94a44798757c6404f1b925cc88bd4d5fe66a2e"
+    },
+    {
+      "name": "model.layers.6.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "5945cac8682c32cb3fc3de7de3c3879a1a627230c9ed6aee550faac31800c00b"
+    },
+    {
+      "name": "model.layers.6.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "2822d64afabe21a2b692a6e2136a20347a1e14201069c3db54adfd448db0d4a5"
+    },
+    {
+      "name": "model.layers.7.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "2601ea671663193096889c01a668f4ea0ac1b3a0d15b3f9f080ae30043dae96e"
+    },
+    {
+      "name": "model.layers.7.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "93c8c454127a9addb4f96010d1a1805d29da2d5273c7145e3939108a9a3a8b02"
+    },
+    {
+      "name": "model.layers.7.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "d856c7387ab8bafe78f6ec6cb54e3d7ad2e8253fc32e36fa6f04fb303908341b"
+    },
+    {
+      "name": "model.layers.7.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "a68ce4b443ec2b8694730542e0d296e8048878338352a938ce990a2c7ff33fba"
+    },
+    {
+      "name": "model.layers.7.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "79451ed150cdc12254840eed46370b428fc4625974065d54169d7a5edda8d325"
+    },
+    {
+      "name": "model.layers.7.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "da71365f3bf376cdb7f545693d262b83fdc0a84ee1695733e212fe97e2a3ba47"
+    },
+    {
+      "name": "model.layers.7.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "30855ae462fee4c7c66327ff65dbdecb7df1166e0a1bb6e834fd0eae15ce75fd"
+    },
+    {
+      "name": "model.layers.8.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "7ce0915d39f2d464564e8fbed6ed2f7f8b45c15e51e984b082b1f9a2181ddb19"
+    },
+    {
+      "name": "model.layers.8.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "9781c5ef08a75741dc17c880ad3defe59c7fe3fd9eb1ad6767e20b6840a20e4e"
+    },
+    {
+      "name": "model.layers.8.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "0dda7ef9b0e5d2c81a3dc0afde78d5f63d79e68dcce3aaa401e2e6b658706302"
+    },
+    {
+      "name": "model.layers.8.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "acfc31a3a57d7bcc55b9cbb0790b976ef59e99e090fcbd9da9cb8627ce6386a7"
+    },
+    {
+      "name": "model.layers.8.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "69f96841c49c01e237717380c196935ecbcfc31d94c3f881ba5990163c81301e"
+    },
+    {
+      "name": "model.layers.8.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "e2d16366454c0ddcf3bc2e4968ba46d5438ecc92eeca846318dbb132966476c5"
+    },
+    {
+      "name": "model.layers.8.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "d637af5bfbbf0d4574a5380def024ba9dc776274aaeb5e00d97a6f9e672e0876"
+    },
+    {
+      "name": "model.layers.9.mlp.down_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "ee798a777cc50eac1092269b635a4fc4c2ee545c2b88859dcefaf0dc51c446bc"
+    },
+    {
+      "name": "model.layers.9.mlp.gate_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "eff8548bbefd0dbbbcae8f7c2a24b4d1f8aca617c75de694ba64a5c8f1718d8e"
+    },
+    {
+      "name": "model.layers.9.mlp.up_proj.weight",
+      "numel": 67895296,
+      "quota": 3394764,
+      "rho": 0.05,
+      "kept_sha256": "c1df3a9ad81104a2811d5504a7630dceb9b352978d4f6340090eb539f552d590"
+    },
+    {
+      "name": "model.layers.9.self_attn.k_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "3958fd9b064b7bce02ff5489b27216f86492c71d08ec4307fcc63ab1b62b24d8"
+    },
+    {
+      "name": "model.layers.9.self_attn.o_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "1f0d8cd131b63847fe950aea447918ea9399d2bb4140419426ece1c435ef9c0a"
+    },
+    {
+      "name": "model.layers.9.self_attn.q_proj.weight",
+      "numel": 12845056,
+      "quota": 642252,
+      "rho": 0.05,
+      "kept_sha256": "4593d04ff22f08dc8ec8a5b550765d68ff7149d119efa612fdf15d9395d6e499"
+    },
+    {
+      "name": "model.layers.9.self_attn.v_proj.weight",
+      "numel": 1835008,
+      "quota": 91750,
+      "rho": 0.05,
+      "kept_sha256": "5c3257402f7b683b54e90b5046eed63a38db4c2e4612b0fcfebb67ee81f6c287"
+    }
+  ],
+  "total_numel": 6525288448,
+  "total_kept": 326264288,
+  "formula_id": "low_grad_NegU"
+}

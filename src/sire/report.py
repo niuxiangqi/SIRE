@@ -73,6 +73,8 @@ def curve_rows(run_dir: Path, test_n: int) -> list[dict]:
         for rho in sorted(by_method.get(m, {})):
             r = dict(by_method[m][rho])
             r["rel_to_full_R"] = r["accuracy"] / full["accuracy"] if full["accuracy"] else None
+            if m == "full_R":
+                r["nll_delta"] = 0.0
             rows.append(r)
     return rows
 
@@ -146,6 +148,17 @@ def _run_section(run_dir: Path, rows: list[dict], freeze: dict, test_n: int) -> 
     lines.append("Mask hashes (formula): " + ", ".join(
         f"rho={k}:`{v['mask_sha256'][:16]}`" for k, v in
         sorted(freeze.get("selection_record", {}).get("anchors", {}).items())))
+    full = next((r for r in rows if r["method"] == "full_R"), None)
+    if full:
+        n_trunc = round(full["truncation_rate"] * full["n_items"])
+        lines.append(f"- Full R truncation rate at rho=1: {full['truncation_rate']:.3f} "
+                     f"({n_trunc}/{full['n_items']} outputs hit the output cap).")
+    lines.append(f"- Tested keep-rates: {', '.join(f'{x:g}' for x in sorted({r['rho'] for r in rows}))}.")
+    red = read_json(run_dir / "curve_reduction.json")
+    if red:
+        lines.append(f"- Curve reduction: {', '.join(red.get('changes', []))}, before their "
+                     f"results were seen, because the projected test cost exceeded the remaining "
+                     f"GPU budget.")
     lines.append("")
     return "\n".join(lines)
 

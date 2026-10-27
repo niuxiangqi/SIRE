@@ -1,0 +1,17 @@
+{
+  "method": "searched",
+  "formula_id": "092a20d1c53df1e3",
+  "formula_ast": "(Mul A U)",
+  "rho": 0.2,
+  "split": "test",
+  "n_items": 8,
+  "n_correct": 0,
+  "accuracy": 0.0,
+  "mean_new_tokens": 2048.0,
+  "truncation_rate": 1.0,
+  "nll": 4.804808616638184,
+  "nll_delta": 2.1242098212242126,
+  "seconds": 72.90811180800029,
+  "mask_sha256": "abc3b41c8c9e3e16157e27893c97cea2c7d11d803c2054e605942c9b101bb1ba",
+  "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/searched__092a20d1c53df1e3__rho0.2000__test/samples.jsonl"
+}

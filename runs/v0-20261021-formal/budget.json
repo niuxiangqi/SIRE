@@ -1,8 +1,8 @@
 {
   "total_gpu_seconds": 7200.0,
   "grace_gpu_seconds": 300.0,
-  "gpu_used_seconds": 809.515,
-  "remaining_seconds": 6390.485,
+  "gpu_used_seconds": 7006.399,
+  "remaining_seconds": 193.601,
   "entries": [
     {
       "stage": "features_delta",
@@ -64,6 +64,118 @@
       "cuda_seconds": 421.396,
       "note": "",
       "ts": 1792564847.7757964
+    },
+    {
+      "stage": "device_migration",
+      "wall_seconds": 0.0,
+      "gpu_seconds": 0.0,
+      "cuda_seconds": null,
+      "note": "GPU-d7952610-13af-406a-e102-716a3f90ad66 -> GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7",
+      "ts": 1793092472.2838762
+    },
+    {
+      "stage": "model_load",
+      "wall_seconds": 27.898,
+      "gpu_seconds": 27.898,
+      "cuda_seconds": 27.899,
+      "note": "R model + pristine B/R copies",
+      "ts": 1793092500.4746704
+    },
+    {
+      "stage": "pilot",
+      "wall_seconds": 220.758,
+      "gpu_seconds": 220.758,
+      "cuda_seconds": 220.77,
+      "note": "full R throughput and truncation",
+      "ts": 1793092722.113568
+    },
+    {
+      "stage": "search",
+      "wall_seconds": 1243.574,
+      "gpu_seconds": 1243.574,
+      "cuda_seconds": 1243.523,
+      "note": "evolution on search split anchors",
+      "ts": 1793094017.8448508
+    },
+    {
+      "stage": "model_load",
+      "wall_seconds": 18.676,
+      "gpu_seconds": 18.676,
+      "cuda_seconds": 18.676,
+      "note": "R model + pristine B/R copies",
+      "ts": 1793094060.4273117
+    },
+    {
+      "stage": "search",
+      "wall_seconds": 491.375,
+      "gpu_seconds": 491.375,
+      "cuda_seconds": 491.376,
+      "note": "evolution on search split anchors",
+      "ts": 1793094552.7235808
+    },
+    {
+      "stage": "model_load",
+      "wall_seconds": 17.812,
+      "gpu_seconds": 17.812,
+      "cuda_seconds": 17.813,
+      "note": "R model + pristine B/R copies",
+      "ts": 1793094589.334435
+    },
+    {
+      "stage": "search",
+      "wall_seconds": 1227.774,
+      "gpu_seconds": 1227.774,
+      "cuda_seconds": 1227.788,
+      "note": "evolution on search split anchors",
+      "ts": 1793095818.0124316
+    },
+    {
+      "stage": "model_load",
+      "wall_seconds": 17.509,
+      "gpu_seconds": 17.509,
+      "cuda_seconds": 17.509,
+      "note": "R model + pristine B/R copies",
+      "ts": 1793095855.3405204
+    },
+    {
+      "stage": "search",
+      "wall_seconds": 0.001,
+      "gpu_seconds": 0.001,
+      "cuda_seconds": 0.001,
+      "note": "evolution on search split anchors",
+      "ts": 1793095856.2949564
+    },
+    {
+      "stage": "select",
+      "wall_seconds": 358.556,
+      "gpu_seconds": 358.556,
+      "cuda_seconds": 358.559,
+      "note": "independent selection split",
+      "ts": 1793096214.853451
+    },
+    {
+      "stage": "test",
+      "wall_seconds": 382.063,
+      "gpu_seconds": 382.063,
+      "cuda_seconds": 382.061,
+      "note": "held-out curve: full R, baselines, frozen formula",
+      "ts": 1793096596.9185035
+    },
+    {
+      "stage": "model_load",
+      "wall_seconds": 17.518,
+      "gpu_seconds": 17.518,
+      "cuda_seconds": 17.517,
+      "note": "R model + pristine B/R copies",
+      "ts": 1793096665.0184615
+    },
+    {
+      "stage": "test",
+      "wall_seconds": 2173.37,
+      "gpu_seconds": 2173.37,
+      "cuda_seconds": 2173.316,
+      "note": "held-out curve: full R, baselines, frozen formula",
+      "ts": 1793098839.3318355
     }
   ]
 }

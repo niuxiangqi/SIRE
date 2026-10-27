@@ -1,0 +1,17 @@
+{
+  "method": "candidate",
+  "formula_id": "a6355b1b8c3c5826",
+  "formula_ast": "(Neg A)",
+  "rho": 0.05,
+  "split": "search",
+  "n_items": 4,
+  "n_correct": 0,
+  "accuracy": 0.0,
+  "mean_new_tokens": 2048.0,
+  "truncation_rate": 1.0,
+  "nll": null,
+  "nll_delta": null,
+  "seconds": 68.2129590510001,
+  "mask_sha256": "ef00866f95ee0b1c22372b29129701d7e6506c219e619949bfb43970b22b06fc",
+  "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/candidate__a6355b1b8c3c5826__rho0.0500__search/samples.jsonl"
+}

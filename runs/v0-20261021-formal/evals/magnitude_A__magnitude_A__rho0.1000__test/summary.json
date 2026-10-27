@@ -1,0 +1,17 @@
+{
+  "method": "magnitude_A",
+  "formula_id": "magnitude_A",
+  "formula_ast": null,
+  "rho": 0.1,
+  "split": "test",
+  "n_items": 8,
+  "n_correct": 0,
+  "accuracy": 0.0,
+  "mean_new_tokens": 2048.0,
+  "truncation_rate": 1.0,
+  "nll": 9.238239288330078,
+  "nll_delta": 6.557640492916107,
+  "seconds": 75.46765632499955,
+  "mask_sha256": "d09b8a7686f67ac2287f06b147085b05e4a6696de2efc8c27d79908b6ae5715c",
+  "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/magnitude_A__magnitude_A__rho0.1000__test/samples.jsonl"
+}

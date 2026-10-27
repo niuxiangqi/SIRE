@@ -369,11 +369,11 @@ sparse model and is not an inference speedup.
 ## 15. Initial progress
 
 - [x] Goal contract and v0 acceptance conditions written.
-- [ ] Environment, existing code, and resource audit complete.
-- [ ] Correctness checks and real-model pilot complete.
-- [ ] Config and data frozen.
-- [ ] Formal search and held-out curve measurement complete.
-- [ ] C1–C8 verified; root artifacts and report generated.
+- [x] Environment, existing code, and resource audit complete.
+- [x] Correctness checks and real-model pilot complete.
+- [x] Config and data frozen.
+- [x] Formal search and held-out curve measurement complete.
+- [x] C1–C8 verified; root artifacts and report generated.
 
 Unchecked items must be updated by the executing agent from real evidence. This
 document does not assert anything has run.

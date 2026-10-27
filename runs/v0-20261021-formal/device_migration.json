@@ -1,0 +1,12 @@
+{
+  "migrations": [
+    {
+      "utc": "2026-10-27T09:14:32Z",
+      "from_uuid": "GPU-d7952610-13af-406a-e102-716a3f90ad66",
+      "to_uuid": "GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7",
+      "physical_index": 2,
+      "reason": "physical GPU 4 unreachable at the PCIe level; user authorized GPU 2 on 2026-10-27; same model/data/precision protocol",
+      "pid": 9719
+    }
+  ]
+}

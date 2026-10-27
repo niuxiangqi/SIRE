@@ -1,0 +1,17 @@
+{
+  "method": "full_R",
+  "formula_id": "full_R",
+  "formula_ast": null,
+  "rho": 1.0,
+  "split": "test",
+  "n_items": 8,
+  "n_correct": 3,
+  "accuracy": 0.375,
+  "mean_new_tokens": 1777.0,
+  "truncation_rate": 0.75,
+  "nll": 2.680598795413971,
+  "nll_delta": null,
+  "seconds": 75.04182144900005,
+  "mask_sha256": "8ac4d30424ca8d7139b578a97a46ab66da6d76df6fe7935d0280194643e3e7ea",
+  "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/full_R__full_R__rho1.0000__test/samples.jsonl"
+}

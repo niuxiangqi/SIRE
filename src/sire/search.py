@@ -178,6 +178,15 @@ def _find(e, target: str):
     return None
 
 
+def mask_signature(r: dict):
+    return tuple(sorted((k, a["mask_sha256"]) for k, a in r.get("anchors", {}).items()))
+
+
+def baseline_signatures(records: list[dict]) -> set:
+    return {mask_signature(r) for r in records
+            if r.get("formula_ast") in ("A", "(Neg U)")}
+
+
 def run_search(model_refs, store, tok, cfg, run_dir, run_id, split_manifest,
                nll_full: float | None, reserve_seconds: float, budget_left) -> dict:
     rng = random.Random(int(cfg["search"]["seed"]))
@@ -204,7 +213,22 @@ def run_search(model_refs, store, tok, cfg, run_dir, run_id, split_manifest,
         seeds.append(rec)
         print(f"[search] seed {s}: J={rec['J']:.3f} complexity={rec['complexity']}", flush=True)
 
-    new_count = len([r for r in records if r["formula_ast"] not in ("A", "(Neg U)")])
+    def distinct_new_masks(rs):
+        # A candidate counts once, with its whole anchor mask signature. Two
+        # formulas that produce the same masks at every anchor (e.g. A*U and
+        # |A|*U), or the same masks as a baseline, are mask-equivalent and do
+        # not count as new candidates.
+        baselines = baseline_signatures(records)
+        sigs = set()
+        for r in rs:
+            if r["formula_ast"] in ("A", "(Neg U)"):
+                continue
+            sig = mask_signature(r)
+            if sig and sig not in baselines:
+                sigs.add(sig)
+        return len(sigs)
+
+    new_count = distinct_new_masks(records)
     target_new = int(cfg["search"]["min_new_candidates"])
     max_new = int(cfg["search"]["max_new_candidates"])
     t0 = time.monotonic()
@@ -213,7 +237,7 @@ def run_search(model_refs, store, tok, cfg, run_dir, run_id, split_manifest,
     while new_count < max_new:
         # Always secure the contract minimum first; then use spare budget for
         # extra search, but never eat into the reserve kept for selection/test.
-        if new_count >= target_new and budget_left() - last_cost * 3.0 < reserve_seconds:
+        if new_count >= target_new and budget_left() - last_cost * 3.0 < reserve_seconds + 600.0:
             print("[search] stopping: reserve would be violated", flush=True)
             break
         if budget_left() - last_cost * 1.2 < reserve_seconds:
@@ -235,18 +259,30 @@ def run_search(model_refs, store, tok, cfg, run_dir, run_id, split_manifest,
         _save_eval_index(run_dir, eval_index)
         records.append(rec)
         done.add(cid)
-        new_count = len([r for r in records if r["formula_ast"] not in ("A", "(Neg U)")])
+        new_count = distinct_new_masks(records)
         last_cost = rec["seconds"] + 20.0
-        print(f"[search] {new_count} new | {rec['formula_infix']} | J={rec['J']:.3f} "
+        print(f"[search] {new_count} distinct new masks | {rec['formula_infix']} | J={rec['J']:.3f} "
               f"complexity={rec['complexity']} ({rec['seconds']:.0f}s)", flush=True)
         if new_count >= max_new:
             break
 
     archive = archive_of(records)
-    ranked = sorted(archive, key=lambda r: (-r["J"], r["complexity"], r["formula_ast"]))
-    return {"n_candidates": len(records), "n_new": len([r for r in records if is_new(r)]),
+    # Parent selection uses the non-dominated archive, but selection ranking must
+    # not discard every non-baseline formula when A dominates an all-zero-J
+    # archive. Rank all evaluated search candidates and let run_selection skip
+    # baselines explicitly.
+    ranked_all = sorted(
+        [r for r in records if r.get("split") == "search" and "J" in r],
+        key=lambda r: (-r["J"], r["complexity"], r["formula_ast"]))
+    seen_ids, ranked_unique = set(), []
+    for r in ranked_all:
+        if r["candidate_id"] not in seen_ids:
+            seen_ids.add(r["candidate_id"])
+            ranked_unique.append(r)
+    return {"n_candidates": len(records),
+            "n_new": distinct_new_masks(records),
             "archive": [r["candidate_id"] for r in archive],
-            "ranked": ranked[:4], "wall_seconds": time.monotonic() - t0,
+            "ranked": ranked_unique, "wall_seconds": time.monotonic() - t0,
             "seed_ids": [s["candidate_id"] for s in seeds]}
 
 
@@ -257,6 +293,7 @@ def run_selection(model_refs, store, tok, cfg, run_dir, run_id, split_manifest,
     eval_index = load_eval_index(run_dir)
     records = read_jsonl(Path(run_dir) / "candidates.jsonl")
     by_id = {r["candidate_id"]: r for r in records}
+    baselines = baseline_signatures(records)
     # best search entries; allow at most max_formulas, both non-baseline.
     chosen = []
     for r in search_result["ranked"]:
@@ -264,6 +301,8 @@ def run_selection(model_refs, store, tok, cfg, run_dir, run_id, split_manifest,
         f = dsl.parse_sexpr(by_id[fid]["formula_ast"])
         formula_ast = dsl.canonical_str(f)
         if formula_ast in ("A", "(Neg U)"):
+            continue
+        if mask_signature(by_id[fid]) in baselines:
             continue
         chosen.append((fid, f))
         if len(chosen) >= max_formulas:

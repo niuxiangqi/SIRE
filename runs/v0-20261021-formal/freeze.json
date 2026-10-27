@@ -1,0 +1,49 @@
+{
+  "run_id": "v0-20261021-formal",
+  "frozen_at": 1793096214.8526201,
+  "candidate_id": "092a20d1c53df1e3",
+  "formula_ast": "(Mul A U)",
+  "formula_infix": "s = (A * U)",
+  "complexity": 2,
+  "depth": 1,
+  "n_ops": 1,
+  "search_J": 0.125,
+  "selection_J": 0.125,
+  "selection_record": {
+    "candidate_id": "092a20d1c53df1e3",
+    "formula_ast": "(Mul A U)",
+    "formula_infix": "s = (A * U)",
+    "complexity": 2,
+    "depth": 1,
+    "n_ops": 1,
+    "parent_id": null,
+    "origin": "selection",
+    "split": "selection",
+    "anchors": {
+      "0.0500": {
+        "accuracy": 0.25,
+        "n_correct": 1,
+        "n_items": 4,
+        "mask_sha256": "694d6dc4e19316992780bcf2c190f964c8d8bde4a60635c0d9b2effdd42d04fd",
+        "summary": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/selection__092a20d1c53df1e3__rho0.0500__selection/summary.json",
+        "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/selection__092a20d1c53df1e3__rho0.0500__selection/samples.jsonl"
+      },
+      "0.2000": {
+        "accuracy": 0.0,
+        "n_correct": 0,
+        "n_items": 4,
+        "mask_sha256": "abc3b41c8c9e3e16157e27893c97cea2c7d11d803c2054e605942c9b101bb1ba",
+        "summary": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/selection__092a20d1c53df1e3__rho0.2000__selection/summary.json",
+        "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/selection__092a20d1c53df1e3__rho0.2000__selection/samples.jsonl"
+      }
+    },
+    "J": 0.125,
+    "seconds": 122.60097887599977,
+    "evaluated_at": 1793096106.9167347
+  },
+  "selection_candidates": [
+    "092a20d1c53df1e3",
+    "08bf90ff85310089"
+  ],
+  "rule": "rank by J on selection split; ties lower complexity then canonical AST"
+}

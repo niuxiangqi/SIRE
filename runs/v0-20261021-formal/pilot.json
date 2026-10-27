@@ -1,0 +1,129 @@
+{
+  "items": 4,
+  "mean_new_tokens": 1216.75,
+  "truncation_rate": 0.0,
+  "tokens_per_second_batch": 89.0288545976834,
+  "generation_seconds": 54.667669509999996,
+  "records": [
+    {
+      "item_id": "nm-ea4c8d31a695e3cc",
+      "text": " To solve this problem, let's break it down step by step.\n\nFirst, the minimum parking fee is 0.5 yuan, which covers the first hour. Any time beyond that is charged at 0.5 yuan for every extra 0.5 hour. The car paid a total of 5.5 yuan. To find out how long the car was parked, we'll subtract the minimum fee from the total amount paid to determine the additional charges.\n\nSo, the additional amount charged is 5.5 yuan minus 0.5 yuan, which equals 5 yuan. Now, each extra 0.5 hour costs 0.5 yuan. To find out how many 0.5 hour intervals are covered by the additional 5 yuan, we divide 5 by 0.5. This gives us 10 intervals.\n\nSince each interval is 0.5 hours, multiplying 10 intervals by 0.5 hours gives us 5 hours of extra parking time beyond the first hour.\n\nFinally, adding the initial hour to the extra 5 hours, the total parking time is 6 hours.\n</think>\n\nTo determine how long the car was parked, let's break down the parking fee structure and the total amount paid.\n\n1. **Minimum Fee:**  \n   The first hour costs **0.5 yuan**.\n\n2. **Additional Charges:**  \n   Beyond the first hour, the parking fee is **0.5 yuan** for every additional **0.5 hours**.\n\n3. **Total Amount Paid:**  \n   The car paid a total of **5.5 yuan**.\n\n4. **Calculating Additional Charges:**  \n   Subtract the minimum fee from the total amount to find the additional charges paid:\n   \\[\n   5.5 \\text{ yuan} - 0.5 \\text{ yuan} = 5 \\text{ yuan}\n   \\]\n\n5. **Determining Extra Time:**  \n   Each **0.5 hours** costs **0.5 yuan**. To find out how many **0.5 hours** intervals are covered by the additional **5 yuan**:\n   \\[\n   \\frac{5 \\text{ yuan}}{0.5 \\text{ yuan per } 0.5 \\text{ hours}} = 10 \\text{ intervals}\n   \\]\n   Each interval represents **0.5 hours**, so:\n   \\[\n   10 \\times 0.5 \\text{ hours} = 5 \\text{ hours}\n   \\]\n\n6. **Total Parking Time:**  \n   Add the initial **1 hour** to the extra **5 hours**:\n   \\[\n   1 \\text{ hour} + 5 \\text{ hours} = 6 \\text{ hours}\n   \\]\n\n**Final Answer:**  \n\\boxed{6}",
+      "n_new_tokens": 583,
+      "truncated": false,
+      "seconds": 13.666917377499999,
+      "correct": true,
+      "parsed_pred": "6"
+    },
+    {
+      "item_id": "nm-5bf6db817f140b13",
+      "text": " To solve this problem, let's break it down step by step.\n\nFirst, we'll identify all the given information and what we need to find.\n\nGiven:\n- Xiao Ming's scores in games 6 to 9: 23, 14, 11, and 20 points.\n- The average score for the first nine games is higher than the average for the first five games.\n- The average score for the first ten games is higher than 18 points.\n\nWe need to find the minimum score Xiao Ming must have scored in his tenth game.\n\nLet's denote:\n- Let \\( S \\) be the total points scored in the first five games.\n- Let \\( T \\) be the total points scored in the first ten games.\n\nWe know that:\n- The total points for games 6 to 9: 23 + 14 + 11 + 20 = 68 points.\n- So, the total points for the first nine games: \\( S + 68 \\).\n- The average for the first nine games: \\( \\frac{S + 68}{9} \\).\n- The average for the first five games: \\( \\frac{S}{5} \\).\n\nAccording to the problem, the average for the first nine games is higher than the average for the first five games:\n\\[ \\frac{S + 68}{9} > \\frac{S}{5} \\]\n\nLet's solve this inequality:\nMultiply both sides by 45 (the least common multiple of 9 and 5) to eliminate denominators:\n\\[ 5(S + 68) > 9S \\]\n\\[ 5S + 340 > 9S \\]\n\\[ 340 > 4S \\]\n\\[ S < 85 \\]\n\nSo, the total points in the first five games must be less than 85.\n\nNext, we consider the average for the first ten games. Let \\( x \\) be the score in the tenth game. The total points for ten games will be \\( S + 68 + x \\). The average is:\n\\[ \\frac{S + 68 + x}{10} > 18 \\]\nMultiply both sides by 10:\n\\[ S + 68 + x > 180 \\]\n\\[ S + x > 112 \\]\n\nSince we know \\( S < 85 \\), let's substitute the maximum possible value of \\( S \\) just below 85. To find the minimum \\( x \\), we should assume \\( S \\) is as large as possible, which is just under 85. But since scores are whole numbers, \\( S \\) must be an integer less than 85, so the maximum \\( S \\) can be is 84.\n\nTherefore:\n\\[ 84 + x > 112 \\]\n\\[ x > 112 - 84 \\]\n\\[ x > 28 \\]\n\nSince \\( x \\) must be an integer (you can't score a fraction of a point in basketball), the smallest integer greater than 28 is 29.\n\nTherefore, Xiao Ming must have scored at least 29 points in his tenth game.\n</think>\n\nTo determine the minimum score Xiao Ming must have in his tenth game, let's break down the problem step by step.\n\n1. **Calculate Total Scores for Games 6 to 9:**\n   - Scores: 23, 14, 11, 20\n   - Total: \\(23 + 14 + 11 + 20 = 68\\) points\n\n2. **Set Up the Inequality for Averages:**\n   - Let \\(S\\) be the total points in the first five games.\n   - First nine games average: \\(\\frac{S + 68}{9}\\)\n   - First five games average: \\(\\frac{S}{5}\\)\n   - Given: \\(\\frac{S + 68}{9} > \\frac{S}{5}\\)\n\n3. **Solve the Inequality:**\n   - Multiply both sides by 45 (LCM of 9 and 5):\n     \\[\n     5(S + 68) > 9S \\\\\n     5S + 340 > 9S \\\\\n     340 > 4S \\\\\n     S < 85\n     \\]\n   - So, \\(S < 85\\)\n\n4. **Determine the Total for Ten Games:**\n   - Let \\(x\\) be the score in the tenth game.\n   - Total for ten games: \\(S + 68 + x\\)\n   - Given: \\(\\frac{S + 68 + x}{10} > 18\\)\n   - Multiply both sides by 10:\n     \\[\n     S + 68 + x > 180 \\\\\n     S + x > 112\n     \\]\n   - Since \\(S < 85\\), the maximum \\(S\\) can be is 84:\n     \\[\n     84 + x > 112 \\\\\n     x > 28\n     \\]\n   - Since \\(x\\) must be an integer, the smallest integer greater than 28 is 29.\n\n**Final Answer:**\n\nThe score for his tenth game must be at least \\(\\boxed{29}\\) points.",
+      "n_new_tokens": 1154,
+      "truncated": false,
+      "seconds": 13.666917377499999,
+      "correct": true,
+      "parsed_pred": "29"
+    },
+    {
+      "item_id": "nm-2244fd7559af8e54",
+      "text": " (Round to the nearest whole number if necessary.)\n\nAlright, so I have this problem where someone is trying to estimate the number of fish in a lake. They catch 100 fish, mark them, and release them back. Then later, they catch another 200 fish and find that 25 of them are marked. I need to figure out how many fish are in the lake based on this information.\n\nHmm, okay, let me think. I remember something about mark and recapture methods. I think it's used in ecology to estimate animal populations. The idea is that if you mark a certain number of animals and then recapture a sample, the proportion of marked animals in the recaptured sample should reflect the proportion of marked animals in the entire population.\n\nSo, let me try to recall the formula. I think it's something like the total population is approximately equal to the number of marked fish initially released multiplied by the total number of fish caught in the second sample, divided by the number of marked fish recaptured. So, in mathematical terms, that would be:\n\n$$\n\\text{Population} = \\frac{\\text{Number of marked fish initially released} \\times \\text{Total number of fish recaptured}}{\\text{Number of marked fish recaptured}}\n$$\n\nWait, let me make sure. So, the number of marked fish initially is 100, right? Then, in the second catch, they caught 200 fish, and 25 were marked. So plugging these numbers in, it would be:\n\nPopulation \u2248 (100 \u00d7 200) / 25\n\nLet me compute that. 100 times 200 is 20,000. Then, 20,000 divided by 25 is 800. So, does that mean the estimated population is 800 fish?\n\nBut wait, is that the exact formula? Or is there a different way to think about it? Maybe I should consider the probability aspect. When they release the 100 marked fish back into the lake, the marked fish should mix uniformly with the rest. So, the proportion of marked fish in the lake should be the same as the proportion of marked fish in the second catch.\n\nSo, if M is the number of marked fish initially, which is 100. C is the total number of fish caught in the second sample, which is 200. R is the number of marked fish recaptured, which is 25. Then, the proportion of marked fish in the second sample is R/C, which should equal the proportion of marked fish in the entire population, which is M/N, where N is the total population.\n\nSo, setting up the equation:\n\n$$\n\\frac{R}{C} = \\frac{M}{N}\n$$\n\nTherefore, solving for N:\n\n$$\nN = \\frac{M \\times C}{R}\n$$\n\nYes, that's exactly the formula I used earlier. So, plugging in the numbers:\n\nN = (100 \u00d7 200) / 25\n\nWhich is 20,000 / 25 = 800.\n\nSo, that seems to confirm it. Therefore, the estimated number of fish in the lake is 800.\n\nWait, but just to be thorough, are there any other factors or considerations? For example, does this method assume that the population is closed, meaning no immigration or emigration, births or deaths between the two catchings? I think so. It assumes that the population is closed, so the total number of fish remains constant between the two sampling periods.\n\nAlso, it assumes that marking doesn't affect the behavior or survival of the fish, so that the marked fish mix uniformly with the unmarked ones. And that each fish has an equal chance of being recaptured in the second sample.\n\nIs there any chance that the second catch might not be representative? Well, if the second catch is random and representative, then it should be fine. But in practice, sometimes there might be issues with sampling bias, but for this problem, I think we can assume that the catches are random and unbiased.\n\nAlso, the problem mentions rounding to the nearest whole number if necessary. In this case, 800 is already a whole number, so no rounding is needed.\n\nJust to double-check my calculation, 100 times 200 is indeed 20,000. Then, 20,000 divided by 25 is 800 because 25 times 800 is 20,000. So, that's correct.\n\nAnother way to think about it is proportions. The proportion of marked fish in the second catch is 25 out of 200, which is 1/8 or 0.125. So, if 12.5% of the fish in the second catch were marked, then we can assume that 12.5% of the entire lake population were marked. Since we marked 100 fish, 12.5% of the total population is 100. So, to find the total population, we can set up the equation:\n\n0.125 \u00d7 N = 100\n\nTherefore, N = 100 / 0.125 = 800.\n\nYes, that also gives us 800. So, that's consistent with the previous method.\n\nSo, whether I use the formula directly or think about the proportions, I end up with the same result. Therefore, I'm confident that the estimated number of fish in the lake is 800.\n\nI don't think I've missed anything here. The problem gives straightforward numbers, and the method is the classic mark-recapture technique. It's a pretty standard problem in ecology and statistics. So, unless there's some hidden detail or a different interpretation, 800 should be the correct answer.\n\nWait, another thought: sometimes, people use the Lincoln-Petersen estimator, which is exactly what I used here. The formula is N \u2248 (M \u00d7 C) / R. So, yeah, that's the same as above. So, that's another confirmation.\n\nIn some cases, there are more complex estimators, like the Schnabel estimator, which is used when there are multiple recaptures, but in this problem, there's only one recapture. So, the Lincoln-Petersen estimator is appropriate here.\n\nSo, yeah, I think I've considered all the angles here. The answer is 800.\n\n**Final Answer**\nThe estimated number of fish in the lake is \\boxed{800}.\n</think>\n\nTo estimate the number of fish in a lake, 100 fish were caught, marked, and released back into the lake. Later, 200 fish were caught again, and 25 of them were found to be marked. Using the mark-recapture method, we can estimate the total number of fish in the lake.\n\nThe formula used is:\n\n$$\n\\text{Population} = \\frac{\\text{Number of marked fish initially released} \\times \\text{Total number of fish recaptured}}{\\text{Number of marked fish recaptured}}\n$$\n\nPlugging in the given values:\n\n- Number of marked fish initially released (M) = 100\n- Total number of fish recaptured (C) = 200\n- Number of marked fish recaptured (R) = 25\n\nUsing the formula:\n\n$$\nN = \\frac{M \\times C}{R} = \\frac{100 \\times 200}{25} = \\frac{20000}{25} = 800\n$$\n\nThus, the estimated number of fish in the lake is \\boxed{800}.",
+      "n_new_tokens": 1655,
+      "truncated": false,
+      "seconds": 13.666917377499999,
+      "correct": true,
+      "parsed_pred": "800"
+    },
+    {
+      "item_id": "nm-5015bdbb148d7097",
+      "text": " To solve the problem, let's start by understanding the given parabola and the conditions.\n\nThe equation of the parabola is \\( y^2 = 8x \\). Comparing this with the standard form \\( y^2 = 4ax \\), we can see that \\( 4a = 8 \\), so \\( a = 2 \\).\n\nFor a parabola \\( y^2 = 4ax \\), the focus is at \\( (a, 0) \\). Therefore, the focus of this parabola is at \\( (2, 0) \\).\n\nWe are given a point \\( P \\) on the parabola such that its distance to the focus is 20. Let\u2019s denote the coordinates of point \\( P \\) as \\( (x, y) \\).\n\nSince \\( P \\) lies on the parabola \\( y^2 = 8x \\), we have the equation:\n\\[ y^2 = 8x \\quad \\text{(1)} \\]\n\nThe distance between point \\( P(x, y) \\) and the focus \\( (2, 0) \\) is given by the distance formula:\n\\[ \\sqrt{(x - 2)^2 + (y - 0)^2} = 20 \\]\n\nSquaring both sides to eliminate the square root:\n\\[ (x - 2)^2 + y^2 = 400 \\quad \\text{(2)} \\]\n\nNow, we can substitute equation (1) into equation (2) to eliminate \\( y^2 \\):\n\\[ (x - 2)^2 + 8x = 400 \\]\n\nLet\u2019s expand \\( (x - 2)^2 \\):\n\\[ x^2 - 4x + 4 + 8x = 400 \\]\n\nCombine like terms:\n\\[ x^2 + 4x + 4 = 400 \\]\n\nSubtract 400 from both sides to set the equation to zero:\n\\[ x^2 + 4x - 396 = 0 \\]\n\nNow, we have a quadratic equation in terms of \\( x \\):\n\\[ x^2 + 4x - 396 = 0 \\]\n\nTo solve for \\( x \\), we can use the quadratic formula:\n\\[ x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} \\]\nwhere \\( a = 1 \\), \\( b = 4 \\), and \\( c = -396 \\).\n\nCalculating the discriminant:\n\\[ b^2 - 4ac = 16 - 4(1)(-396) = 16 + 1584 = 1600 \\]\n\nTaking the square root of the discriminant:\n\\[ \\sqrt{1600} = 40 \\]\n\nNow, plug the values back into the quadratic formula:\n\\[ x = \\frac{-4 \\pm 40}{2} \\]\n\nThis gives two solutions:\n1. \\( x = \\frac{-4 + 40}{2} = \\frac{36}{2} = 18 \\)\n2. \\( x = \\frac{-4 - 40}{2} = \\frac{-44}{2} = -22 \\)\n\nHowever, since the parabola \\( y^2 = 8x \\) only exists for \\( x \\geq 0 \\) (as squaring \\( y \\) gives a non-negative \\( x \\)), the solution \\( x = -22 \\) is not valid.\n\nTherefore, the x-coordinate of point \\( P \\) is \\( 18 \\).\n</think>\n\nTo solve the problem, let's follow these steps:\n\n1. **Identify the Parabola and Its Focus:**\n   \n   The given parabola is \\( y^2 = 8x \\). Comparing this with the standard form \\( y^2 = 4ax \\), we find that \\( 4a = 8 \\), so \\( a = 2 \\). The focus of this parabola is at \\( (2, 0) \\).\n\n2. **Set Up the Distance Equation:**\n   \n   Let the coordinates of point \\( P \\) on the parabola be \\( (x, y) \\). The distance between \\( P \\) and the focus \\( (2, 0) \\) is given as 20. Using the distance formula:\n   \\[\n   \\sqrt{(x - 2)^2 + y^2} = 20\n   \\]\n   Squaring both sides:\n   \\[\n   (x - 2)^2 + y^2 = 400 \\quad \\text{(Equation 2)}\n   \\]\n\n3. **Substitute the Parabola Equation into the Distance Equation:**\n   \n   From the parabola equation \\( y^2 = 8x \\), substitute \\( y^2 \\) in Equation 2:\n   \\[\n   (x - 2)^2 + 8x = 400\n   \\]\n   Expand \\( (x - 2)^2 \\):\n   \\[\n   x^2 - 4x + 4 + 8x = 400\n   \\]\n   Combine like terms:\n   \\[\n   x^2 + 4x + 4 = 400\n   \\]\n   Subtract 400 from both sides:\n   \\[\n   x^2 + 4x - 396 = 0\n   \\]\n\n4. **Solve the Quadratic Equation:**\n   \n   The quadratic equation is \\( x^2 + 4x - 396 = 0 \\). Use the quadratic formula:\n   \\[\n   x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}\n   \\]\n   Here, \\( a = 1 \\), \\( b = 4 \\), and \\( c = -396 \\).\n\n   Calculate the discriminant:\n   \\[\n   \\Delta = b^2 - 4ac = 16 + 1584 = 1600\n   \\]\n   Take the square root:\n   \\[\n   \\sqrt{1600} = 40\n   \\]\n   Find the solutions:\n   \\[\n   x = \\frac{-4 \\pm 40}{2}\n   \\]\n   So, \n   \\[\n   x = \\frac{36}{2} = 18 \\quad \\text{or} \\quad x = \\frac{-44}{2} = -22\n   \\]\n   \n   Since \\( x \\) must be non-negative for the parabola \\( y^2 = 8x \\), we discard \\( x = -22 \\).\n\n**Final Answer:**\n\nThe x-coordinate of point \\( P \\) is \\(\\boxed{18}\\).",
+      "n_new_tokens": 1475,
+      "truncated": false,
+      "seconds": 13.666917377499999,
+      "correct": true,
+      "parsed_pred": "18"
+    }
+  ],
+  "mask_sha256": "8ac4d30424ca8d7139b578a97a46ab66da6d76df6fe7935d0280194643e3e7ea",
+  "utc": "2026-10-27T09:18:42Z",
+  "decision": {
+    "initial_sizes": {
+      "pilot": 4,
+      "calibration": 8,
+      "search": 8,
+      "selection": 8,
+      "test": 16,
+      "monitor": 8
+    },
+    "initial_rhos": [
+      0.01,
+      0.02,
+      0.05,
+      0.1,
+      0.2,
+      0.3,
+      0.5
+    ],
+    "projected_seconds": 9562.824113069999,
+    "remaining": 6441.829,
+    "pilot_tokens_per_second": 89.0288545976834,
+    "pilot_mean_new_tokens": 1216.75,
+    "changes": [
+      "reduced search/selection/test to 4/4/8 before formal evaluation"
+    ],
+    "final_sizes": {
+      "pilot": 4,
+      "calibration": 8,
+      "search": 4,
+      "selection": 4,
+      "test": 8,
+      "monitor": 8
+    },
+    "final_rhos": [
+      0.01,
+      0.02,
+      0.05,
+      0.1,
+      0.2,
+      0.3,
+      0.5
+    ],
+    "final_projected_seconds": 5298.745891289999,
+    "reprepared_splits_sha256": "9b789ad68b666e499aee8331080e23e41573931e532ee1e97171d9b4dc2a56cd",
+    "post_pilot_curve_reduction": {
+      "utc": "2026-10-27T10:23:56Z",
+      "reason": "test throughput projection exceeded the remaining GPU budget after the full-R and random@0.01 rows; drop the dense middle points 0.02 and 0.50 first, in the frozen order, before their results are seen",
+      "before_rhos": [
+        0.01,
+        0.02,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.5
+      ],
+      "after_rhos": [
+        0.01,
+        0.05,
+        0.1,
+        0.2,
+        0.3
+      ],
+      "changes": [
+        "dropped rho=0.02",
+        "dropped rho=0.50"
+      ],
+      "already_evaluated_at_reduction": [
+        "full_R@1.0",
+        "random@0.01"
+      ],
+      "not_evaluated_at_reduction": [
+        0.02,
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.5
+      ],
+      "budget_used_at_reduction": 4815.511
+    }
+  }
+}

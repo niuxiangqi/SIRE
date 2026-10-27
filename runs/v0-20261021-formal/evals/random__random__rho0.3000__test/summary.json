@@ -1,0 +1,17 @@
+{
+  "method": "random",
+  "formula_id": "random",
+  "formula_ast": null,
+  "rho": 0.3,
+  "split": "test",
+  "n_items": 8,
+  "n_correct": 0,
+  "accuracy": 0.0,
+  "mean_new_tokens": 2048.0,
+  "truncation_rate": 1.0,
+  "nll": 13.453102827072144,
+  "nll_delta": 10.772504031658173,
+  "seconds": 76.39710625499993,
+  "mask_sha256": "eb9df3ee5b9ec2b87f9a88cb9f309b2529ba4516ba2d36b22cf538066c5393cf",
+  "records": "/home/nxq/SIRE/runs/v0-20261021-formal/evals/random__random__rho0.3000__test/samples.jsonl"
+}
