@@ -40,6 +40,12 @@ class Ctx:
             "resume_command": f"bash scripts/run_gpu4.sh resume --run-id {run_id}",
         }
         self.monitor = None
+        env_path = self.run_dir / "env.json"
+        env = read_json(env_path)
+        old_uuid = (env or {}).get("gpu", {}).get("uuid")
+        new_uuid = self.gpu_evidence["uuid"]
+        if old_uuid and old_uuid != new_uuid:
+            self._record_device_migration(old_uuid, new_uuid)
         if start_monitor:
             self.monitor = GpuMonitor(self.run_dir / "gpu_monitor.jsonl",
                                       cfg["device"]["expected_uuid"], interval=5.0)
@@ -57,6 +63,23 @@ class Ctx:
     def save_state(self):
         self.state["updated_utc"] = utc_stamp()
         atomic_write_json(self.run_dir / "run_state.json", self.state)
+
+    def _record_device_migration(self, old_uuid: str, new_uuid: str):
+        path = self.run_dir / "device_migration.json"
+        rec = read_json(path) or {"migrations": []}
+        if not any(m.get("to_uuid") == new_uuid for m in rec["migrations"]):
+            rec["migrations"].append({
+                "utc": utc_stamp(),
+                "from_uuid": old_uuid,
+                "to_uuid": new_uuid,
+                "physical_index": self.cfg["device"]["physical_index"],
+                "reason": "physical GPU 4 unreachable at the PCIe level; user authorized GPU 2 "
+                          "on 2026-10-27; same model/data/precision protocol",
+                "pid": os.getpid(),
+            })
+            atomic_write_json(path, rec)
+            self.ledger.add("device_migration", wall=0.0, gpu=0.0,
+                            note=f"{old_uuid} -> {new_uuid}")
 
     def mark(self, stage: str, status: str = "done", **extra):
         self.state["stages"].setdefault(stage, {})

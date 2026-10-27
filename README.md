@@ -7,9 +7,11 @@ fraction `ρ` of its entries, and measure how much reasoning accuracy survives.
 > The implementation, frozen data pipeline, model audit, feature extraction and a
 > 4-item real-7B pilot are complete. Formal run `v0-20261021-formal` passed audit,
 > data, features and 14/14 correctness checks, then **physical GPU 4 disappeared
-> from the PCIe bus again** (`0000:1A:00.0: Unknown Error`) during the pilot. The
-> held-out test split was never opened. See [`BLOCK_REPORT.md`](BLOCK_REPORT.md) and
-> [`HANDOFF.md`](HANDOFF.md).
+> from the PCIe bus again** (`0000:1A:00.0: Unknown Error`) during the pilot. On
+> 2026-10-27 the run was moved to user-authorized **physical GPU 2**; the host
+> driver is still wedged by failed GPU 4, so CUDA contexts fail until a reboot or
+> driver reload. The held-out test split was never opened. See
+> [`BLOCK_REPORT.md`](BLOCK_REPORT.md) and [`HANDOFF.md`](HANDOFF.md).
 
 This repository is the full, auditable implementation of the v0 protocol in
 [`GOAL.md`](GOAL.md). It intentionally contains **no model weights and no raw

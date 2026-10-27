@@ -13,8 +13,11 @@ paths:
   runs: /home/nxq/SIRE/runs
 
 device:
-  physical_index: 4
-  expected_uuid: GPU-d7952610-13af-406a-e102-716a3f90ad66
+  # User-authorized change on 2026-10-27: GPU 4 is unreachable at the PCIe level;
+  # this formal run continues on physical GPU 2 instead. Recorded in DECISIONS.md
+  # and runs/<run_id>/device_migration.json.
+  physical_index: 2
+  expected_uuid: GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7
 
 budget:
   total_gpu_seconds: 7200

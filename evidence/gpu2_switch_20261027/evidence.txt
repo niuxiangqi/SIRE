@@ -1,0 +1,45 @@
+Tue Oct 27 08:21:56 AM UTC 2026
+--- nvidia-smi ---
+Unable to determine the device handle for GPU4: 0000:1A:00.0: Unknown Error
+0, GPU-a73fdd31-a0e4-c6bb-cf5f-88e6b241915b, NVIDIA A800 80GB PCIe, 0 MiB, 0 %
+1, GPU-f0da13d3-8de3-2c28-cc04-8d54df28af14, NVIDIA A800 80GB PCIe, 0 MiB, 0 %
+2, GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7, NVIDIA A800 80GB PCIe, 0 MiB, 0 %
+3, GPU-ae105b55-58b6-8199-0316-8bb741aa0a5e, NVIDIA A800 80GB PCIe, 33619 MiB, 0 %
+5, GPU-d0730ebd-0302-00bd-a271-8d7b82561242, NVIDIA A800 80GB PCIe, 33619 MiB, 0 %
+6, GPU-7f90f3e6-6f62-e582-4e62-9f8bd0a2b59c, NVIDIA A800 80GB PCIe, 33597 MiB, 0 %
+7, GPU-16a14f9f-5a04-2aa6-238f-ae828c7004b7, NVIDIA A800 80GB PCIe, 33597 MiB, 0 %
+--- GPU2 info ---
+
+==============NVSMI LOG==============
+
+Timestamp                                              : Tue Oct 27 16:21:56 2026
+Driver Version                                         : 580.126.09
+CUDA Version                                           : 13.0
+
+Attached GPUs                                          : 8
+GPU 00000000:14:00.0
+    Product Name                                       : NVIDIA A800 80GB PCIe
+    Product Brand                                      : NVIDIA
+    Product Architecture                               : Ampere
+    Display Mode                                       : Requested functionality has been deprecated
+    Display Attached                                   : Yes
+    Display Active                                     : Disabled
+    Persistence Mode                                   : Disabled
+    Addressing Mode                                    : N/A
+    MIG Mode
+        Current                                        : Disabled
+        Pending                                        : Disabled
+--- GPU4 ---
+Unable to determine the device handle for GPU4: 0000:1A:00.0: Unknown Error
+No devices were found
+--- torch on GPU2 ---
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/home/nxq/miniconda3/envs/sire/lib/python3.12/site-packages/torch/cuda/__init__.py", line 498, in init
+    _lazy_init()
+  File "/home/nxq/miniconda3/envs/sire/lib/python3.12/site-packages/torch/cuda/__init__.py", line 529, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero.
+count 0
+--- reset GPU2 ---
+Unable to reset GPU 00000000:14:00.0: Insufficient Permissions

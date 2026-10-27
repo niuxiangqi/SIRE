@@ -6,10 +6,12 @@ decisions in [`DECISIONS.md`](DECISIONS.md).
 
 > Current status: the formal run (`v0-20261021-formal`) advanced through audit,
 > data, features and 14/14 correctness checks, then **physical GPU 4 failed again
-> during the pilot** (`0000:1A:00.0: Unknown Error`, `lspci ... rev ff`). No pilot,
-> search or test result exists. Resume skips features and correctness. See
-> [`BLOCK_REPORT.md`](BLOCK_REPORT.md). The `runs/dev-*` directories are development
-> evidence, not results.
+> during the pilot** (`0000:1A:00.0: Unknown Error`, `lspci ... rev ff`). On
+> 2026-10-27 the user authorized switching to **physical GPU 2**; the config and
+> launcher now target GPU 2, but the host driver is still wedged by failed GPU 4,
+> so new CUDA contexts fail until the host is rebooted/driver reloaded. No pilot,
+> search or test result exists. See [`BLOCK_REPORT.md`](BLOCK_REPORT.md). The
+> `runs/dev-*` directories are development evidence, not results.
 
 ## 0. What you need
 
@@ -225,27 +227,29 @@ Budget the formal run from the pilot, not from these numbers.
 
 ## 9. Current blocker and what “done” means
 
-The reference machine's GPU 4 failed twice at the PCIe level, on 2026-10-20 during
-development search and on 2026-10-21 during the formal pilot. Raw evidence is in
-`evidence/gpu4_failure_20261020/` and `evidence/gpu4_failure_20261021/`.
+GPU 4 failed twice at the PCIe level (2026-10-20 development search, 2026-10-21
+formal pilot). On 2026-10-27 the user authorized **physical GPU 2**
+(`GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7`); `configs/v0.yaml` and
+`scripts/run_gpu4.sh` now target GPU 2, and `verify` accepts the recorded device
+migration. GPU 2 is visible in `nvidia-smi`, but the host driver is still wedged
+by failed GPU 4, so any new CUDA context fails with `CUDA unknown error` until the
+driver is reloaded or the host is rebooted. Evidence:
+`evidence/gpu4_failure_20261020/`, `evidence/gpu4_failure_20261021/`,
+`evidence/gpu2_switch_20261027/`.
 
-The formal run `v0-20261021-formal` has already completed `audit`, `data`,
-`features` and `correctness` (14/14). When a stable GPU 4 is available, resume
-instead of starting over:
+After a host reboot/driver reload, resume instead of starting over:
 
 ```bash
-nvidia-smi --query-gpu=index,uuid --format=csv,noheader   # GPU 4 must be present
+nvidia-smi --query-gpu=index,uuid --format=csv,noheader   # GPU 2 must be usable
+CUDA_VISIBLE_DEVICES=2 python -c "import torch; torch.cuda.init(); print('cuda ok')"
 bash scripts/run_gpu4.sh resume --run-id v0-20261021-formal
 bash scripts/run_gpu4.sh verify --run-id v0-20261021-formal
 ```
 
-Resume skips the finished stages (features and correctness are not recomputed) and
-continues from `pilot`, with the budget ledger starting at 809.5 s used. If you
-prefer a fresh run, use `run --config configs/v0.yaml --gpu-budget-seconds 7200`.
-
-Before resuming, a burn-in test on GPU 4 is advised: repeated 13 GB weight swaps
-and long batched generation. The failure signature is reproducible enough that a
-single successful model load is not sufficient evidence of stability.
+Resume records the GPU migration, skips the finished stages (features and
+correctness are not recomputed) and continues from `pilot`, with the budget ledger
+starting at 809.5 s used. If you prefer a fresh run, use
+`run --config configs/v0.yaml --gpu-budget-seconds 7200`.
 
 The experiment is complete only when C1–C8 pass and the root artifacts exist and
 match regenerated logs. A running process, passing unit tests, a full budget

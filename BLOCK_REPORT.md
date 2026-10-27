@@ -1,8 +1,9 @@
 # BLOCK REPORT — SIRE v0
 
-Status: **blocked by repeated hardware loss of physical GPU 4. The formal run
-advanced to the pilot and then lost the device again. No acceptance results.**
-Last update: 2026-10-21 (UTC).
+Status: **blocked by host CUDA driver state after repeated GPU 4 PCIe loss;
+the user-authorized GPU 2 switch is configured but cannot execute until the host
+driver is reloaded or the host is rebooted. No acceptance results.**
+Last update: 2026-10-27 (UTC).
 
 This is a block report, not an acceptance report. The held-out test split has
 never been opened, so no accuracy or `ρ*` number is reported as a measured result.
@@ -79,6 +80,36 @@ The repetition at the same point (generation after a sequence of mask applicatio
 is consistent with an unstable GPU 4 PCIe link rather than a one-off software error.
 It should be treated as a hardware block until a burn-in test on GPU 4 passes.
 
+## 2b. 2026-10-27: user-authorized switch to GPU 2
+
+The user explicitly authorized using physical GPU 2 (UUID
+`GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7`) instead of the failed GPU 4. The
+configuration and launcher were updated:
+
+- `configs/v0.yaml`: `device.physical_index: 2`,
+  `device.expected_uuid: GPU-8a98ac52-...`
+- `scripts/run_gpu4.sh`: default index 2, overridable with `SIRE_GPU_INDEX`
+- `verify` C1 accepts the recorded per-run device migration
+  (`runs/<run_id>/device_migration.json`)
+
+GPU 2 is visible and healthy in `nvidia-smi` (0 MiB, P0), but **no new CUDA
+context can be created** on it either:
+
+```
+$ CUDA_VISIBLE_DEVICES=2 python -c "import torch; torch.cuda.init()"
+RuntimeError: CUDA unknown error ... Setting the available devices to be zero.
+```
+
+The driver is still wedged by the failed GPU 4: `nvidia-smi -i 4` reports
+`0000:1A:00.0: Unknown Error`, NVML initialization fails, and
+`nvidia-smi --gpu-reset -i 2` returns `Insufficient Permissions` (no sudo).
+This is a host-level driver state, not a GPU 2 fault and not a code error.
+Evidence: `evidence/gpu2_switch_20261027/evidence.txt`.
+
+Minimum input: reload the NVIDIA kernel modules or reboot the host (root), after
+which GPU 2 should be usable. No formal GPU time was consumed by this switch
+(ledger remains 809.5 s / 7200 s).
+
 ## 3. Which acceptance conditions were actually met
 
 | ID | Status | Evidence |
@@ -94,24 +125,24 @@ It should be treated as a hardware block until a burn-in test on GPU 4 passes.
 
 ## 4. Minimum input needed to continue
 
-1. A stable physical GPU 4 (same UUID), verified by a burn-in test that includes
-   repeated 13 GB weight swaps and long batched generation; or
-2. a documented change to the fixed-hardware constraint permitting another physical
-   GPU.
+1. Reload the NVIDIA driver / reboot the host so that a new CUDA context can be
+   created on the user-authorized physical GPU 2 (UUID
+   `GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7`); or
+2. a further documented change to the hardware constraint.
 
-When GPU 4 is visible again, the formal run can resume without redoing features or
-correctness:
+After the driver is healthy, resume without redoing features or correctness:
 
 ```bash
 cd /home/nxq/SIRE
-nvidia-smi --query-gpu=index,uuid --format=csv,noheader   # require GPU 4 = d795...
+nvidia-smi --query-gpu=index,uuid --format=csv,noheader   # GPU 2 must be usable
+CUDA_VISIBLE_DEVICES=2 python -c "import torch; torch.cuda.init(); print('cuda ok')"
 bash scripts/run_gpu4.sh resume --run-id v0-20261021-formal
 bash scripts/run_gpu4.sh verify --run-id v0-20261021-formal
 ```
 
-`resume` skips `audit`, `data`, `features` and `correctness`, then reruns `pilot`,
-`search`, `select`, `test`, `report` and `verify`. The budget ledger continues from
-809.5 s, not from zero.
+`resume` records the GPU 4 -> GPU 2 migration, skips `audit`, `data`, `features`
+and `correctness`, then reruns `pilot`, `search`, `select`, `test`, `report` and
+`verify`. The budget ledger continues from 809.5 s, not from zero.
 
 ## 5. Honest limitations already visible
 

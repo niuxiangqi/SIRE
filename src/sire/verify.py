@@ -34,19 +34,28 @@ def verify(cfg: dict, run_id: str) -> dict:
     mon_path = run_dir / "gpu_monitor.jsonl"
     mon = read_jsonl(mon_path)
     expected_uuid = cfg["device"]["expected_uuid"]
+    env_uuid = env.get("gpu", {}).get("uuid")
+    mig = read_json(run_dir / "device_migration.json") or {"migrations": []}
+    allowed_uuids = {env_uuid, expected_uuid}
+    for m in mig.get("migrations", []):
+        allowed_uuids.add(m.get("from_uuid"))
+        allowed_uuids.add(m.get("to_uuid"))
+    allowed_uuids.discard(None)
     mon_uuid_ok = bool(mon) and any(r.get("uuid") == expected_uuid for r in mon) and \
-        all(r.get("uuid") == expected_uuid for r in mon if "uuid" in r)
+        all(r.get("uuid") in allowed_uuids for r in mon if "uuid" in r)
     procs = set(read_json(run_dir / "processes.json", default=[]) or [])
     mon_pids = {r.get("task_pid") for r in mon if "task_pid" in r}
     pid_ok = bool(mon) and mon_pids <= procs and env.get("gpu", {}).get("pid") in procs
+    device_ok = env_uuid in allowed_uuids and (env_uuid == expected_uuid or bool(mig.get("migrations")))
     c1 = (env.get("conda_prefix", "").endswith("/envs/sire") or "/envs/sire" in env.get("sys_executable", "")
-          ) and env.get("gpu", {}).get("uuid") == expected_uuid and \
+          ) and device_ok and \
         env.get("torch", {}).get("visible_count") == 1 and mon_uuid_ok and pid_ok
     checks.append(_chk("C1", "Miniconda env, physical GPU 4 only", c1,
                        [str(run_dir / "env.json"), str(mon_path)],
                        {"sys_executable": env.get("sys_executable"),
                         "conda_prefix": env.get("conda_prefix"),
                         "uuid": env.get("gpu", {}).get("uuid"), "expected_uuid": expected_uuid,
+                        "migrations": mig.get("migrations", []),
                         "monitor_records": len(mon), "monitor_uuid_ok": mon_uuid_ok,
                         "monitor_pid_ok": pid_ok}))
 
