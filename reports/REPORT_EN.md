@@ -28,6 +28,14 @@ Curve reduction: dropped rho=0.02, dropped rho=0.50, before their results were s
 
 Acceptance: `verify.json` reports **8/8 C1–C8 checks passed** (passed=True). GPU ledger: 7006.399 s used of 7200.0 s (+300 s grace).
 
+## Data-quality caveat (post-hoc audit of the frozen test set)
+
+- Test items come from NuminaMath-CoT `cn_k12`, filtered to a parseable numeric boxed answer; they are not GSM8K/MATH/AIME and are not a standard benchmark.
+- 1/8 prompts already contain a `\boxed{...}` string: nm-4f7f2c94bbf173a8.
+- 1/8 contain proof-style wording: nm-379adc5f3a8906cb.
+- 4/8 are multi-part prompts: nm-379adc5f3a8906cb, nm-bc31fadd95e9407a, nm-740a5f98e874044d, nm-4f7f2c94bbf173a8.
+- These items were not removed or edited after the run. The numeric-answer filter did not exclude proof-style, multi-part, or answer-leaking prompts; this weakens the absolute accuracy estimate and is a limitation of v0.
+
 ## Interpretation limits
 
 - Sparse Δ reduces retained task-vector parameters only; no neuron, layer, FLOP or latency reduction is claimed and no speedup is claimed.

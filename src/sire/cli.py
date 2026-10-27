@@ -371,6 +371,31 @@ def _write_report_en(cfg, run_dir, freeze, rows):
                   f"C1–C8 checks passed** (passed={ver['passed']}). "
                   f"GPU ledger: {bud.get('gpu_used_seconds', 'n/a')} s used of "
                   f"{bud.get('total_gpu_seconds', 7200)} s (+300 s grace).", ""]
+    # Post-hoc data-quality audit of the frozen test prompts. This is a property
+    # of the frozen data and is reported without deleting or editing any item.
+    try:
+        import re as _re
+        manifest = read_json(Path(cfg["paths"]["data_root"]) / "prepared" / "splits.json")
+        test_items = manifest["splits"]["test"]
+        boxed = [it["item_id"] for it in test_items if "\\boxed" in it["problem"]]
+        proof = [it["item_id"] for it in test_items
+                 if _re.search(r"\bprove\b|证明", it["problem"], _re.I)]
+        multi = [it["item_id"] for it in test_items
+                 if _re.search(r"\(1\)|（1）", it["problem"])]
+        lines += ["## Data-quality caveat (post-hoc audit of the frozen test set)", ""]
+        lines += [f"- Test items come from NuminaMath-CoT `cn_k12`, filtered to a parseable "
+                  f"numeric boxed answer; they are not GSM8K/MATH/AIME and are not a standard benchmark."]
+        lines += [f"- {len(boxed)}/{len(test_items)} prompts already contain a `\\boxed{{...}}` "
+                  f"string: {', '.join(boxed) if boxed else 'none'}."]
+        lines += [f"- {len(proof)}/{len(test_items)} contain proof-style wording: "
+                  f"{', '.join(proof) if proof else 'none'}."]
+        lines += [f"- {len(multi)}/{len(test_items)} are multi-part prompts: "
+                  f"{', '.join(multi) if multi else 'none'}."]
+        lines += ["- These items were not removed or edited after the run. The numeric-answer "
+                  "filter did not exclude proof-style, multi-part, or answer-leaking prompts; "
+                  "this weakens the absolute accuracy estimate and is a limitation of v0.", ""]
+    except Exception as exc:
+        lines += [f"- Data-quality audit unavailable: {exc!r}", ""]
     lines += ["## Interpretation limits", "",
               "- Sparse Δ reduces retained task-vector parameters only; no neuron, layer, "
               "FLOP or latency reduction is claimed and no speedup is claimed.",

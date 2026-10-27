@@ -139,7 +139,7 @@
     },
     "report": {
       "status": "done",
-      "utc": "2026-10-27T11:09:25Z",
+      "utc": "2026-10-27T16:00:05Z",
       "artifacts": [
         "/home/nxq/SIRE/RESULTS.md",
         "/home/nxq/SIRE/FORMULA.txt",
@@ -150,14 +150,14 @@
     },
     "verify": {
       "status": "done",
-      "utc": "2026-10-27T11:09:30Z",
+      "utc": "2026-10-27T16:00:11Z",
       "passed": true,
       "n_passed": 8
     }
   },
   "next_stage": null,
   "resume_command": "bash scripts/run_gpu4.sh resume --run-id v0-20261021-formal",
-  "updated_utc": "2026-10-27T11:09:30Z",
+  "updated_utc": "2026-10-27T16:00:11Z",
   "last_error": "RuntimeError('acceptance verification failed: C6')",
-  "completed_utc": "2026-10-27T11:09:30Z"
+  "completed_utc": "2026-10-27T16:00:11Z"
 }
