@@ -1,0 +1,16 @@
+{
+  "dataset": "gsm8k",
+  "method": "low_grad_NegU",
+  "formula_id": "092a20d1c53df1e3",
+  "rho": 0.3,
+  "pass_k": 4,
+  "n_items": 8,
+  "n_samples": 32,
+  "pass_at_k": 0.0,
+  "pass_at_1": 0.0,
+  "mean_new_tokens": 1841.90625,
+  "truncation_rate": 0.875,
+  "utc": "2026-10-27T17:33:01Z",
+  "mask_sha256": "cb0004714764ecfab780c4734d00279faa2a99306519de8dde7ebd9e8d123e92",
+  "seconds": 308.3695318220016
+}

@@ -1,0 +1,272 @@
+{
+  "total_gpu_seconds": 6000.0,
+  "grace_gpu_seconds": 0.0,
+  "gpu_used_seconds": 5085.009,
+  "remaining_seconds": 914.991,
+  "entries": [
+    {
+      "stage": "model_load",
+      "wall_seconds": 17.256,
+      "gpu_seconds": 17.256,
+      "cuda_seconds": 17.256,
+      "note": "",
+      "ts": 1793117859.478725
+    },
+    {
+      "stage": "mask_full_R_1.0",
+      "wall_seconds": 171.567,
+      "gpu_seconds": 171.567,
+      "cuda_seconds": 171.565,
+      "note": "",
+      "ts": 1793118031.6217034
+    },
+    {
+      "stage": "gen_gsm8k_full_R_1.0",
+      "wall_seconds": 298.671,
+      "gpu_seconds": 298.671,
+      "cuda_seconds": 298.668,
+      "note": "",
+      "ts": 1793118330.2944095
+    },
+    {
+      "stage": "gen_mmlu_full_R_1.0",
+      "wall_seconds": 150.583,
+      "gpu_seconds": 150.583,
+      "cuda_seconds": 150.581,
+      "note": "",
+      "ts": 1793118480.8824763
+    },
+    {
+      "stage": "mask_searched_0.05",
+      "wall_seconds": 61.015,
+      "gpu_seconds": 61.015,
+      "cuda_seconds": 61.014,
+      "note": "",
+      "ts": 1793118541.900555
+    },
+    {
+      "stage": "gen_gsm8k_searched_0.05",
+      "wall_seconds": 295.432,
+      "gpu_seconds": 295.432,
+      "cuda_seconds": 295.428,
+      "note": "",
+      "ts": 1793118837.3339689
+    },
+    {
+      "stage": "gen_mmlu_searched_0.05",
+      "wall_seconds": 149.222,
+      "gpu_seconds": 149.222,
+      "cuda_seconds": 149.22,
+      "note": "",
+      "ts": 1793118986.5590425
+    },
+    {
+      "stage": "mask_searched_0.3",
+      "wall_seconds": 80.027,
+      "gpu_seconds": 80.027,
+      "cuda_seconds": 80.026,
+      "note": "",
+      "ts": 1793119066.588045
+    },
+    {
+      "stage": "gen_gsm8k_searched_0.3",
+      "wall_seconds": 294.542,
+      "gpu_seconds": 294.542,
+      "cuda_seconds": 294.541,
+      "note": "",
+      "ts": 1793119361.1320424
+    },
+    {
+      "stage": "gen_mmlu_searched_0.3",
+      "wall_seconds": 149.946,
+      "gpu_seconds": 149.946,
+      "cuda_seconds": 149.945,
+      "note": "",
+      "ts": 1793119511.0816772
+    },
+    {
+      "stage": "model_load",
+      "wall_seconds": 18.834,
+      "gpu_seconds": 18.834,
+      "cuda_seconds": 18.834,
+      "note": "",
+      "ts": 1793119679.8521898
+    },
+    {
+      "stage": "mask_random_0.1",
+      "wall_seconds": 13.192,
+      "gpu_seconds": 13.192,
+      "cuda_seconds": 13.192,
+      "note": "",
+      "ts": 1793119693.0459347
+    },
+    {
+      "stage": "gen_gsm8k_random_0.1",
+      "wall_seconds": 281.611,
+      "gpu_seconds": 281.611,
+      "cuda_seconds": 281.61,
+      "note": "",
+      "ts": 1793119974.6588914
+    },
+    {
+      "stage": "gen_mmlu_random_0.1",
+      "wall_seconds": 143.628,
+      "gpu_seconds": 143.628,
+      "cuda_seconds": 143.627,
+      "note": "",
+      "ts": 1793120118.2926612
+    },
+    {
+      "stage": "mask_random_0.3",
+      "wall_seconds": 36.015,
+      "gpu_seconds": 36.015,
+      "cuda_seconds": 36.014,
+      "note": "",
+      "ts": 1793120154.3097444
+    },
+    {
+      "stage": "gen_gsm8k_random_0.3",
+      "wall_seconds": 277.419,
+      "gpu_seconds": 277.419,
+      "cuda_seconds": 277.417,
+      "note": "",
+      "ts": 1793120431.730641
+    },
+    {
+      "stage": "gen_mmlu_random_0.3",
+      "wall_seconds": 142.085,
+      "gpu_seconds": 142.085,
+      "cuda_seconds": 142.084,
+      "note": "",
+      "ts": 1793120573.820789
+    },
+    {
+      "stage": "mask_magnitude_A_0.1",
+      "wall_seconds": 34.736,
+      "gpu_seconds": 34.736,
+      "cuda_seconds": 34.736,
+      "note": "",
+      "ts": 1793120608.559901
+    },
+    {
+      "stage": "gen_gsm8k_magnitude_A_0.1",
+      "wall_seconds": 279.414,
+      "gpu_seconds": 279.414,
+      "cuda_seconds": 279.411,
+      "note": "",
+      "ts": 1793120887.975181
+    },
+    {
+      "stage": "gen_mmlu_magnitude_A_0.1",
+      "wall_seconds": 142.993,
+      "gpu_seconds": 142.993,
+      "cuda_seconds": 142.992,
+      "note": "",
+      "ts": 1793121030.9732373
+    },
+    {
+      "stage": "mask_magnitude_A_0.3",
+      "wall_seconds": 58.115,
+      "gpu_seconds": 58.115,
+      "cuda_seconds": 58.115,
+      "note": "",
+      "ts": 1793121089.091235
+    },
+    {
+      "stage": "gen_gsm8k_magnitude_A_0.3",
+      "wall_seconds": 279.066,
+      "gpu_seconds": 279.066,
+      "cuda_seconds": 279.065,
+      "note": "",
+      "ts": 1793121368.1589818
+    },
+    {
+      "stage": "gen_mmlu_magnitude_A_0.3",
+      "wall_seconds": 142.437,
+      "gpu_seconds": 142.437,
+      "cuda_seconds": 142.437,
+      "note": "",
+      "ts": 1793121510.6005373
+    },
+    {
+      "stage": "mask_low_grad_NegU_0.1",
+      "wall_seconds": 39.895,
+      "gpu_seconds": 39.895,
+      "cuda_seconds": 39.895,
+      "note": "",
+      "ts": 1793121550.4987216
+    },
+    {
+      "stage": "gen_gsm8k_low_grad_NegU_0.1",
+      "wall_seconds": 305.168,
+      "gpu_seconds": 305.168,
+      "cuda_seconds": 305.167,
+      "note": "",
+      "ts": 1793121855.6689694
+    },
+    {
+      "stage": "gen_mmlu_low_grad_NegU_0.1",
+      "wall_seconds": 153.036,
+      "gpu_seconds": 153.036,
+      "cuda_seconds": 153.036,
+      "note": "",
+      "ts": 1793122008.7095037
+    },
+    {
+      "stage": "mask_low_grad_NegU_0.3",
+      "wall_seconds": 64.473,
+      "gpu_seconds": 64.473,
+      "cuda_seconds": 64.473,
+      "note": "",
+      "ts": 1793122073.185716
+    },
+    {
+      "stage": "gen_gsm8k_low_grad_NegU_0.3",
+      "wall_seconds": 308.362,
+      "gpu_seconds": 308.362,
+      "cuda_seconds": 308.36,
+      "note": "",
+      "ts": 1793122381.5495656
+    },
+    {
+      "stage": "gen_mmlu_low_grad_NegU_0.3",
+      "wall_seconds": 154.012,
+      "gpu_seconds": 154.012,
+      "cuda_seconds": 154.011,
+      "note": "",
+      "ts": 1793122535.570358
+    },
+    {
+      "stage": "model_load",
+      "wall_seconds": 17.635,
+      "gpu_seconds": 17.635,
+      "cuda_seconds": 17.635,
+      "note": "",
+      "ts": 1793122703.8101768
+    },
+    {
+      "stage": "mask_searched_0.1",
+      "wall_seconds": 67.131,
+      "gpu_seconds": 67.131,
+      "cuda_seconds": 67.131,
+      "note": "",
+      "ts": 1793122770.9437373
+    },
+    {
+      "stage": "gen_gsm8k_searched_0.1",
+      "wall_seconds": 304.578,
+      "gpu_seconds": 304.578,
+      "cuda_seconds": 304.576,
+      "note": "",
+      "ts": 1793123075.52429
+    },
+    {
+      "stage": "gen_mmlu_searched_0.1",
+      "wall_seconds": 152.913,
+      "gpu_seconds": 152.913,
+      "cuda_seconds": 152.911,
+      "note": "",
+      "ts": 1793123228.4422135
+    }
+  ]
+}

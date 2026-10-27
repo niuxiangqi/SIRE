@@ -1624,3 +1624,4 @@
 {"ts": 1793099370.0707078, "uuid": "GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7", "utilization_pct": 0.0, "memory_used_mib": 4.0, "memory_total_mib": 81920.0, "task_pid": 17317}
 {"ts": 1793116804.9374046, "uuid": "GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7", "utilization_pct": 0.0, "memory_used_mib": 4.0, "memory_total_mib": 81920.0, "task_pid": 20099}
 {"ts": 1793116810.5313108, "uuid": "GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7", "utilization_pct": 0.0, "memory_used_mib": 4.0, "memory_total_mib": 81920.0, "task_pid": 20182}
+{"ts": 1793123292.1720223, "uuid": "GPU-8a98ac52-5345-8b8d-93f5-b2f4f91decd7", "utilization_pct": 0.0, "memory_used_mib": 4.0, "memory_total_mib": 81920.0, "task_pid": 25566}

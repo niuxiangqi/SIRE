@@ -1,0 +1,16 @@
+{
+  "dataset": "gsm8k",
+  "method": "magnitude_A",
+  "formula_id": "092a20d1c53df1e3",
+  "rho": 0.3,
+  "pass_k": 4,
+  "n_items": 8,
+  "n_samples": 32,
+  "pass_at_k": 0.0,
+  "pass_at_1": 0.0,
+  "mean_new_tokens": 2048.0,
+  "truncation_rate": 1.0,
+  "utc": "2026-10-27T17:16:08Z",
+  "mask_sha256": "940dfab66bcaa310752553fef67475007350b941553c1bef00f1569be0d68ecd",
+  "seconds": 279.06952905100115
+}

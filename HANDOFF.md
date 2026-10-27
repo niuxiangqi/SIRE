@@ -259,3 +259,23 @@ bash scripts/run_gpu4.sh report --run-id RUN_ID
 The experiment is complete only when C1–C8 pass and the root artifacts exist and
 match regenerated logs. Never edit ground truth, loosen quotas, drop failing
 items, or fabricate timings to reach a passing state.
+
+## 10. Post-hoc external tests (GSM8K / MMLU)
+
+These are outside C1–C8 and reuse the frozen v0 formula:
+
+```bash
+python scripts/external_eval.py --run-id v0-20261021-formal \
+  --methods full_R searched random magnitude_A low_grad_NegU \
+  --rhos 0.1 0.3 --gsm-n 8 --mmlu-per 4 --budget-seconds 6000 --gpu-index 2
+```
+
+GSM8K uses pass@4 (4 samples/item); MMLU uses pass@1. Outputs live in
+`runs/<run_id>/external/` with their own budget ledger, so the formal 7200 s
+ledger is untouched. The current post-hoc results are in
+`runs/v0-20261021-formal/external/SUMMARY.md`; they are small debug-scale samples,
+not a formal acceptance test.
+
+No sparse model checkpoints are written. A candidate is reconstructed from pristine
+B/R + formula + feature cache; the 54 GB feature-gradient accumulator is optional
+and disabled by default (`features.save_accumulator: false`).

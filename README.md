@@ -212,10 +212,43 @@ The result is negative: no tested low keep-rate reached 90% of full-R accuracy.
 The searched formula is the only low-rho method with non-zero accuracy, but 1/8–2/8
 on eight items is not evidence of a reliable ranking. No positive claim is made.
 
+## Post-hoc external tests (GSM8K / MMLU)
+
+After the pre-registered cn_k12 run, the frozen formula `s = (A * U)` and the
+baselines were evaluated on external benchmarks. These are **post-hoc**, not part
+of C1–C8, and were not used to drive search/selection:
+
+- **GSM8K** test split, 8 deterministic items, **pass@4** (4 samples/item,
+  temperature 0.6, top_p 0.95, 2048-token cap).
+- **MMLU** 4 medical subjects × 4 items = 16 items, pass@1.
+
+| dataset | method | rho | pass@k | truncation |
+|---|---|---|---|---|
+| GSM8K | full R | 1 | **1.000** (pass@1 0.375) | 0.188 |
+| GSM8K | searched `A*U` | 0.30 | 0.750 | 0.469 |
+| GSM8K | searched `A*U` | 0.10 | 0.000 | 1.000 |
+| GSM8K | random / A / Neg(U) | 0.10, 0.30 | 0.000 | 0.875–1.000 |
+| MMLU | full R | 1 | **0.500** | 0.312 |
+| MMLU | searched `A*U` | 0.30 | 0.188 | 0.562 |
+| MMLU | magnitude A | 0.30 | 0.312 | 0.938 |
+| MMLU | random / Neg(U) | 0.10, 0.30 | 0.000–0.125 | 1.000 |
+
+At rho=0.30 the searched formula retains 75% of full-R GSM8K pass@4 (below the
+90% criterion) but only 37.5% of full-R MMLU accuracy; magnitude `A` is better on
+MMLU. At rho≤0.10 every method collapses with ~100% truncation. These are
+debug-scale samples (8 and 16 items); one item is 12.5 or 6.25 points. Full
+details: `runs/v0-20261021-formal/external/SUMMARY.md` and `summary.csv`.
+The external GPU ledger is separate from the formal 7200 s v0 budget.
+
 ## Reproducibility and audit hooks
 
 - Per-item generation seeds derive from `(global_seed, item_id)`; resume order
   cannot change sampling.
+- **No sparse model checkpoints are written.** A candidate is reconstructed from
+  pristine B/R, the formula, and the frozen feature cache; only the canonical AST,
+  mask hashes and per-sample outputs are persisted. The optional 54 GB feature
+  accumulator is disabled by default (`features.save_accumulator: false`) because
+  recomputing eight calibration gradients is cheaper than writing/reading it.
 - Search sees a manifest view containing only search/selection splits.
 - `ρ=1` is checked bit-for-bit against pristine R through the `where` path.
 - Tie-breaking is `(parameter name, flat index)`; SafeDiv is explicit.

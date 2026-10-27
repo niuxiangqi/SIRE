@@ -46,6 +46,10 @@ features:
   calibration_samples: 8
   grad_checkpointing: true
   storage_dtype: float16
+  # Feature-gradient accumulators are ~54 GB FP32. They are cheaper to recompute
+  # (a few seconds of GPU compute) than to write/read. Sparse candidate
+  # checkpoints are never saved at all; see GOAL.md section 12.
+  save_accumulator: false
 
 generation:
   temperature: 0.6

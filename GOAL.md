@@ -320,6 +320,16 @@ cumulative budget, model/data/config hashes. Atomic writes. Verify hashes before
 resuming; never reset the budget or recompute finished samples. Signals exit
 cleanly, and one real interrupt-and-resume test is performed and recorded.
 
+**Sparse checkpoints are not persisted.** A candidate is fully specified by
+`(formula, rho, pristine B, pristine R, frozen feature cache)`, so materialising a
+sparse model snapshot per candidate is redundant. Persist the canonical AST,
+per-rho mask hashes, per-sample outputs, and the feature metadata; reconstruct
+weights in place from pristine B/R on demand. Do not write per-candidate or
+per-rho model weight files. Feature-gradient accumulator checkpoints (which can be
+tens of GB) are optional: if writing them costs more than recomputing the
+calibration gradients, skip the accumulator checkpoint and recompute on resume,
+recording the choice in the stage ledger.
+
 ## 13. Commands
 
 ```bash

@@ -117,8 +117,9 @@ def collect_gradients(cfg: dict, run_dir: Path, split_manifest: dict, specs: lis
     g_sum = {s["name"]: torch.zeros(s["numel"], dtype=torch.float32) for s in specs}
     u_sum = {s["name"]: torch.zeros(s["numel"], dtype=torch.float32) for s in specs}
     cursor = 0
+    save_acc = bool(cfg["features"].get("save_accumulator", False))
     partial = feat / "accum_partial.pt"
-    if partial.exists():
+    if save_acc and partial.exists():
         state = torch.load(partial, map_location="cpu", weights_only=False)
         if state.get("n_items") != n:
             raise RuntimeError("partial gradient state has different calibration count")
@@ -158,7 +159,7 @@ def collect_gradients(cfg: dict, run_dir: Path, split_manifest: dict, specs: lis
         gc.collect()
         torch.cuda.empty_cache()
         print(f"[features] grad sample {si + 1}/{n} ({time.monotonic() - t0:.1f}s)", flush=True)
-        if (si + 1) % 4 == 0 or si + 1 == n:
+        if save_acc and ((si + 1) % 4 == 0 or si + 1 == n):
             torch.save({"cursor": si + 1, "n_items": n, "g_sum": g_sum, "u_sum": u_sum},
                        partial)
 
