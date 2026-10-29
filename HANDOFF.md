@@ -279,3 +279,16 @@ not a formal acceptance test.
 No sparse model checkpoints are written. A candidate is reconstructed from pristine
 B/R + formula + feature cache; the 54 GB feature-gradient accumulator is optional
 and disabled by default (`features.save_accumulator: false`).
+
+## 11. v1 external budget and unbounded search
+
+A larger evaluation budget was selected: `max_new_tokens=4096`, 32 GSM8K test
+items (pass@1) and 32 MMLU items (pass@1). At 2048 full R was too truncated; at
+4096 full R is 0.812 (GSM8K) and 0.438 (MMLU). The full comparison and the
+unbounded search (GSM8K train, no 7200 s cap, 24 distinct new masks, freeze
+`s=(A*U)`) are in `runs/v1-gsm8k-search/SUMMARY.md`.
+
+```bash
+python scripts/start_v1_search.py --run-id v1-gsm8k-search \
+  --search-n 12 --selection-n 16 --max-candidates 24 --max-new 4096 --gpu-index 2
+```

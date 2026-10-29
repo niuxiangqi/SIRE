@@ -1,0 +1,40 @@
+{
+  "total_gpu_seconds": 1000000000.0,
+  "grace_gpu_seconds": 0.0,
+  "gpu_used_seconds": 8794.295,
+  "remaining_seconds": 999991205.705,
+  "entries": [
+    {
+      "stage": "model_load",
+      "wall_seconds": 17.353,
+      "gpu_seconds": 17.353,
+      "cuda_seconds": 17.353,
+      "note": "",
+      "ts": 1793260673.1679122
+    },
+    {
+      "stage": "model_load",
+      "wall_seconds": 13.942,
+      "gpu_seconds": 13.942,
+      "cuda_seconds": 13.941,
+      "note": "",
+      "ts": 1793263267.1314747
+    },
+    {
+      "stage": "v1_search",
+      "wall_seconds": 8218.0,
+      "gpu_seconds": 8218.0,
+      "cuda_seconds": null,
+      "note": "unbounded 24-candidate search on GSM8K train split, rho=0.3, cap=4096",
+      "ts": 1793272804.9645894
+    },
+    {
+      "stage": "v1_selection",
+      "wall_seconds": 545.0,
+      "gpu_seconds": 545.0,
+      "cuda_seconds": null,
+      "note": "selection split, 16 items, rho=0.3, cap=4096",
+      "ts": 1793272804.966307
+    }
+  ]
+}

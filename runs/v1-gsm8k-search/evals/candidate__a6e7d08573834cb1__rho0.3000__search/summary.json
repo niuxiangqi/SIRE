@@ -1,0 +1,17 @@
+{
+  "method": "candidate",
+  "formula_id": "a6e7d08573834cb1",
+  "formula_ast": "(Mul R U)",
+  "rho": 0.3,
+  "split": "search",
+  "n_items": 12,
+  "n_correct": 0,
+  "accuracy": 0.0,
+  "mean_new_tokens": 4096.0,
+  "truncation_rate": 1.0,
+  "nll": null,
+  "nll_delta": null,
+  "seconds": 320.5456153890118,
+  "mask_sha256": "f0470e25e6e3aa99bbc3a84b4a52470129b8a94322dfbfcd99be9e61456d4b09",
+  "records": "/home/nxq/SIRE/runs/v1-gsm8k-search/evals/candidate__a6e7d08573834cb1__rho0.3000__search/samples.jsonl"
+}

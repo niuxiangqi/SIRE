@@ -1,0 +1,17 @@
+{
+  "status": "search_and_selection_complete",
+  "run_id": "v1-gsm8k-search",
+  "source_run": "v0-20261021-formal",
+  "search_n": 12,
+  "selection_n": 16,
+  "max_new_tokens": 4096,
+  "max_candidates": 24,
+  "n_new": 24,
+  "frozen": "s = (A * U)",
+  "frozen_at": 1793272013.2003658,
+  "utc": "2026-10-29T11:06:53Z",
+  "search_wall_seconds": 8218.0,
+  "selection_wall_seconds": 545.0,
+  "total_wall_seconds": 8763.0,
+  "note": "Unbounded v1 search on GSM8K train; features symlinked from v0 run; final external test uses GSM8K test + MMLU."
+}

@@ -45,7 +45,7 @@ def load_gsm8k(path: Path, n: int, seed: int) -> list[dict]:
             continue
         prompt = GSM_INSTRUCTION.format(problem=q)
         out.append({"item_id": "gsm8k-" + _h(seed, q)[:16], "problem": q,
-                    "prompt": prompt, "gt": gt, "source": "gsm8k"})
+                    "prompt": prompt, "gt": gt, "gt_value": gt, "source": "gsm8k"})
     out.sort(key=lambda x: _h(seed, "order", x["item_id"]))
     return out[:n]
 

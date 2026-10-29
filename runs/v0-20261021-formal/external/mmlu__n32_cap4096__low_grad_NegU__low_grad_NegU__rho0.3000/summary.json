@@ -1,0 +1,16 @@
+{
+  "dataset": "mmlu",
+  "method": "low_grad_NegU",
+  "formula_id": "092a20d1c53df1e3",
+  "rho": 0.3,
+  "pass_k": 1,
+  "n_items": 32,
+  "n_samples": 32,
+  "pass_at_k": 0.09375,
+  "pass_at_1": 0.09375,
+  "mean_new_tokens": 3905.0,
+  "truncation_rate": 0.90625,
+  "utc": "2026-10-29T12:40:54Z",
+  "mask_sha256": "cb0004714764ecfab780c4734d00279faa2a99306519de8dde7ebd9e8d123e92",
+  "seconds": 727.1420530640171
+}

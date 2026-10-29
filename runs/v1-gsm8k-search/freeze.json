@@ -1,0 +1,41 @@
+{
+  "run_id": "v1-gsm8k-search",
+  "frozen_at": 1793272013.2003658,
+  "candidate_id": "092a20d1c53df1e3",
+  "formula_ast": "(Mul A U)",
+  "formula_infix": "s = (A * U)",
+  "complexity": 2,
+  "depth": 1,
+  "n_ops": 1,
+  "search_J": 0.9166666666666666,
+  "selection_J": 0.625,
+  "selection_record": {
+    "candidate_id": "092a20d1c53df1e3",
+    "formula_ast": "(Mul A U)",
+    "formula_infix": "s = (A * U)",
+    "complexity": 2,
+    "depth": 1,
+    "n_ops": 1,
+    "parent_id": null,
+    "origin": "selection",
+    "split": "selection",
+    "anchors": {
+      "0.3000": {
+        "accuracy": 0.625,
+        "n_correct": 10,
+        "n_items": 16,
+        "mask_sha256": "0d9da869059f595c520deebfca65d850f0aa79b58c2788da2e7bb45cdf1fadd6",
+        "summary": "/home/nxq/SIRE/runs/v1-gsm8k-search/evals/selection__092a20d1c53df1e3__rho0.3000__selection/summary.json",
+        "records": "/home/nxq/SIRE/runs/v1-gsm8k-search/evals/selection__092a20d1c53df1e3__rho0.3000__selection/samples.jsonl"
+      }
+    },
+    "J": 0.625,
+    "seconds": 367.7887460850179,
+    "evaluated_at": 1793271933.8951263
+  },
+  "selection_candidates": [
+    "092a20d1c53df1e3",
+    "08bf90ff85310089"
+  ],
+  "rule": "rank by J on selection split; ties lower complexity then canonical AST"
+}

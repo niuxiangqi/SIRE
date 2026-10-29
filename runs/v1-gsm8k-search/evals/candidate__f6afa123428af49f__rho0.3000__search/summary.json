@@ -1,0 +1,17 @@
+{
+  "method": "candidate",
+  "formula_id": "f6afa123428af49f",
+  "formula_ast": "(Add (SafeDiv B (Sub B A)) D)",
+  "rho": 0.3,
+  "split": "search",
+  "n_items": 12,
+  "n_correct": 0,
+  "accuracy": 0.0,
+  "mean_new_tokens": 4096.0,
+  "truncation_rate": 1.0,
+  "nll": null,
+  "nll_delta": null,
+  "seconds": 323.0830977259902,
+  "mask_sha256": "6dc469b1befe94593e1717f10b4774082ee5e6a8473523505b6295364a78a196",
+  "records": "/home/nxq/SIRE/runs/v1-gsm8k-search/evals/candidate__f6afa123428af49f__rho0.3000__search/samples.jsonl"
+}

@@ -1,0 +1,16 @@
+{
+  "dataset": "mmlu",
+  "method": "random",
+  "formula_id": "092a20d1c53df1e3",
+  "rho": 0.3,
+  "pass_k": 1,
+  "n_items": 32,
+  "n_samples": 32,
+  "pass_at_k": 0.03125,
+  "pass_at_1": 0.03125,
+  "mean_new_tokens": 4096.0,
+  "truncation_rate": 1.0,
+  "utc": "2026-10-29T12:15:53Z",
+  "mask_sha256": "eb9df3ee5b9ec2b87f9a88cb9f309b2529ba4516ba2d36b22cf538066c5393cf",
+  "seconds": 724.5809375139943
+}

@@ -1,0 +1,16 @@
+{
+  "dataset": "mmlu",
+  "method": "magnitude_A",
+  "formula_id": "092a20d1c53df1e3",
+  "rho": 0.3,
+  "pass_k": 1,
+  "n_items": 32,
+  "n_samples": 32,
+  "pass_at_k": 0.1875,
+  "pass_at_1": 0.1875,
+  "mean_new_tokens": 4096.0,
+  "truncation_rate": 1.0,
+  "utc": "2026-10-29T11:45:08Z",
+  "mask_sha256": "940dfab66bcaa310752553fef67475007350b941553c1bef00f1569be0d68ecd",
+  "seconds": 751.981861244014
+}

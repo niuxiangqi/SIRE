@@ -64,11 +64,14 @@ def main() -> int:
     ap.add_argument("--subjects", nargs="+", default=SUBJECTS_DEFAULT)
     ap.add_argument("--pass-k-gsm", type=int, default=4)
     ap.add_argument("--pass-k-mmlu", type=int, default=1)
+    ap.add_argument("--max-new", type=int, default=2048)
+    ap.add_argument("--tag", default="")
     ap.add_argument("--budget-seconds", type=float, default=1800.0)
     ap.add_argument("--gpu-index", type=int, default=2)
     args = ap.parse_args()
 
     cfg = load_config(args.config)
+    cfg["generation"]["max_new_tokens"] = args.max_new
     # Explicit per-invocation GPU selection; the user authorized 0/1/2 until
     # 2026-10-28 06:00 Beijing time.
     cfg["device"]["physical_index"] = args.gpu_index
@@ -92,7 +95,7 @@ def main() -> int:
             store = FeatureStore(run_dir / "features",
                                  Path(cfg["paths"]["base_model"]),
                                  Path(cfg["paths"]["reasoning_model"]))
-        split_path = ext_dir / "splits.json"
+        split_path = ext_dir / (f"splits_{args.tag}.json" if args.tag else "splits.json")
         if split_path.exists():
             split = read_json(split_path)
         else:
@@ -110,7 +113,8 @@ def main() -> int:
         for method in args.methods:
             rhos = [1.0] if method == "full_R" else list(args.rhos)
             for rho in rhos:
-                tag = f"{method}__{fid if method == 'searched' else method}__rho{rho:.4f}"
+                prefix = (args.tag + "__") if args.tag else ""
+                tag = f"{prefix}{method}__{fid if method == 'searched' else method}__rho{rho:.4f}"
                 print(f"[external] {tag}", flush=True)
                 with ledger.stage(f"mask_{method}_{rho}", torch):
                     if method == "full_R":

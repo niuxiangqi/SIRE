@@ -1,0 +1,16 @@
+{
+  "dataset": "mmlu",
+  "method": "full_R",
+  "formula_id": "092a20d1c53df1e3",
+  "rho": 1.0,
+  "pass_k": 1,
+  "n_items": 32,
+  "n_samples": 32,
+  "pass_at_k": 0.4375,
+  "pass_at_1": 0.4375,
+  "mean_new_tokens": 1719.21875,
+  "truncation_rate": 0.1875,
+  "utc": "2026-10-29T07:22:40Z",
+  "mask_sha256": "8ac4d30424ca8d7139b578a97a46ab66da6d76df6fe7935d0280194643e3e7ea",
+  "seconds": 617.3971234250057
+}

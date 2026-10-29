@@ -240,6 +240,32 @@ debug-scale samples (8 and 16 items); one item is 12.5 or 6.25 points. Full
 details: `runs/v0-20261021-formal/external/SUMMARY.md` and `summary.csv`.
 The external GPU ledger is separate from the formal 7200 s v0 budget.
 
+### Larger external budget (chosen: 4096 tokens, 32 GSM8K + 32 MMLU items)
+
+The 2048-token cap was the v0 bottleneck: full R was often truncated. A probe at
+`max_new_tokens=4096` and 32 items per benchmark gives a usable baseline:
+
+| method | GSM8K pass@1 | GSM trunc | MMLU pass@1 | MMLU trunc |
+|---|---|---|---|---|
+| full R | **0.812** | 0.094 | **0.438** | 0.188 |
+| searched `A*U`, rho=0.30 | 0.406 | 0.500 | 0.219 | 0.469 |
+| magnitude A, rho=0.30 | 0.000 | 1.000 | 0.188 | 1.000 |
+| random, rho=0.30 | 0.000 | 1.000 | 0.031 | 1.000 |
+| Neg(U), rho=0.30 | 0.000 | 0.844 | 0.094 | 0.906 |
+
+This is the selected evaluation budget. At rho=0.30 the frozen formula retains
+50% of full-R accuracy on both benchmarks, below 90%, but beats random/A/Neg(U)
+on GSM8K and random/Neg(U) on MMLU. Magnitude A is essentially tied on MMLU.
+
+### Unbounded v1 search
+
+A second search was run without the 7200 s cap, on GSM8K **train** (12 search + 16
+selection items), objective pass@1 at rho=0.30, cap 4096. It evaluated 24 distinct
+new mask signatures (30 candidate records). The seed `A*U` stayed best
+(search J=0.917, selection J=0.625); no mutation improved it. The frozen formula
+is therefore still `s = (A * U)`. Full details:
+`runs/v1-gsm8k-search/SUMMARY.md`.
+
 ## Reproducibility and audit hooks
 
 - Per-item generation seeds derive from `(global_seed, item_id)`; resume order

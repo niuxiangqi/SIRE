@@ -244,7 +244,14 @@ def run_search(model_refs, store, tok, cfg, run_dir, run_id, split_manifest,
             print("[search] stopping early: reserve would be violated", flush=True)
             break
         archive = archive_of(records)
-        parent = rng.choice(archive)["candidate_id"] if archive else seeds[0]["candidate_id"]
+        if archive:
+            best = sorted(archive, key=lambda r: (-r["J"], r["complexity"], r["formula_ast"]))[0]
+            # Bias parent choice toward the best measured formula while still
+            # sampling from the non-dominated archive. All-zero archives fall
+            # back to the lowest-complexity member.
+            parent = best["candidate_id"] if rng.random() < 0.7 else rng.choice(archive)["candidate_id"]
+        else:
+            parent = seeds[0]["candidate_id"]
         parent_rec = next(r for r in records if r["candidate_id"] == parent)
         parent_f = dsl.parse_sexpr(parent_rec["formula_ast"])
         cand = propose(parent_f, rng, cfg["search"]["max_ops"], cfg["search"]["max_depth"])

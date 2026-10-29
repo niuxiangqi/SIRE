@@ -1,0 +1,236 @@
+{
+  "source": "gsm8k_train",
+  "search": [
+    {
+      "item_id": "gsm8k-3dde8a0e80d0805e",
+      "problem": "Peter is raking leaves. It takes him 15 minutes to rake 3 bags of leaves. If he keeps raking at the same rate, how long will it take him to rake 8 bags?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Peter is raking leaves. It takes him 15 minutes to rake 3 bags of leaves. If he keeps raking at the same rate, how long will it take him to rake 8 bags?",
+      "gt": "40",
+      "gt_value": "40",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-6c8797718dd81f0e",
+      "problem": "Rachel earned $200 babysitting. She spent 1/4 of the money on lunch. She spent 1/2 of the money on a DVD. How much did Rachel have left?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Rachel earned $200 babysitting. She spent 1/4 of the money on lunch. She spent 1/2 of the money on a DVD. How much did Rachel have left?",
+      "gt": "50",
+      "gt_value": "50",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-8d35e36614c0d408",
+      "problem": "A teacher asked Adelaide, Ephraim, and Kolton to buy ducks and monitor their growth patterns and features for their science class. Adelaide bought twice the number of ducks that Ephraim bought, while Ephraim bought 45 fewer ducks than Kolton. If Adelaide bought 30 ducks, what's the average number of ducks the three bought?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: A teacher asked Adelaide, Ephraim, and Kolton to buy ducks and monitor their growth patterns and features for their science class. Adelaide bought twice the number of ducks that Ephraim bought, while Ephraim bought 45 fewer ducks than Kolton. If Adelaide bought 30 ducks, what's the average number of ducks the three bought?",
+      "gt": "35",
+      "gt_value": "35",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-aba5702e52754be3",
+      "problem": "A yearly book sale is held in school where students can sell their old books at a cheaper price. Two-fifths of Lovely's books can be sold for $2.50 each and the rest for $2 each. How much will Lovely earn if all 10 books were sold?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: A yearly book sale is held in school where students can sell their old books at a cheaper price. Two-fifths of Lovely's books can be sold for $2.50 each and the rest for $2 each. How much will Lovely earn if all 10 books were sold?",
+      "gt": "22",
+      "gt_value": "22",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-d70b730e13b953ad",
+      "problem": "Darryl is an inventor who just designed a new machine. He had to pay $3600 for the parts to construct the machine, and $4500 for the patent he applied for once he built it. If the machine sells for $180, how many machines does Darryl need to sell to break even after the costs?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Darryl is an inventor who just designed a new machine. He had to pay $3600 for the parts to construct the machine, and $4500 for the patent he applied for once he built it. If the machine sells for $180, how many machines does Darryl need to sell to break even after the costs?",
+      "gt": "45",
+      "gt_value": "45",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-94470f968e1fb09d",
+      "problem": "Coral is reading a book that is 600 pages long.  She reads half of it in the first week, and 30 percent of the remaining pages the second week. How many pages must she read the third week in order to finish the book?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Coral is reading a book that is 600 pages long.  She reads half of it in the first week, and 30 percent of the remaining pages the second week. How many pages must she read the third week in order to finish the book?",
+      "gt": "210",
+      "gt_value": "210",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-40f04de39c64d5d9",
+      "problem": "There were 140 kids in the junior prom. Of those, a fourth of them were dancers. Of the dancers, 25 danced the slow dance. How many of the dancer students did not slow dance?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: There were 140 kids in the junior prom. Of those, a fourth of them were dancers. Of the dancers, 25 danced the slow dance. How many of the dancer students did not slow dance?",
+      "gt": "10",
+      "gt_value": "10",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-fc255a243ed25153",
+      "problem": "Miranda wants to buy a pair of heels she saw online. She saved money for 3 months. Her sister heard that she was sad and gave her $50 for her to buy the heels. If she paid $260 in total for the heels, how much money did she save per month?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Miranda wants to buy a pair of heels she saw online. She saved money for 3 months. Her sister heard that she was sad and gave her $50 for her to buy the heels. If she paid $260 in total for the heels, how much money did she save per month?",
+      "gt": "70",
+      "gt_value": "70",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-51821c992edf8e3b",
+      "problem": "A class has 60 students. The number of students who bring their lunch is thrice the number of those who eat in the school cafeteria. The rest of the students don't eat lunch. If 10 students eat in the school cafeteria, how many don't eat lunch?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: A class has 60 students. The number of students who bring their lunch is thrice the number of those who eat in the school cafeteria. The rest of the students don't eat lunch. If 10 students eat in the school cafeteria, how many don't eat lunch?",
+      "gt": "20",
+      "gt_value": "20",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-286ecc19129fb776",
+      "problem": "Joe had 200 data points on his dataset. He then added 20% more data points to the dataset. If he reduced the data points by 1/4 of the total data points, calculate the total number of data points the dataset contains.",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Joe had 200 data points on his dataset. He then added 20% more data points to the dataset. If he reduced the data points by 1/4 of the total data points, calculate the total number of data points the dataset contains.",
+      "gt": "180",
+      "gt_value": "180",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-b78b71906820c4ab",
+      "problem": "John buys 3 boxes of burritos.  He gives away a 3rd of them to his friend.  Each box has 20 burritos.  He eats 3 burritos per day for 10 days.  How many burritos does he have left?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: John buys 3 boxes of burritos.  He gives away a 3rd of them to his friend.  Each box has 20 burritos.  He eats 3 burritos per day for 10 days.  How many burritos does he have left?",
+      "gt": "10",
+      "gt_value": "10",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-472513ea709dfae8",
+      "problem": "Xander read 20% of his 500-page book in one hour.  The next night he read another 20% of the book.  On the third night, he read 30% of his book.  How many pages does he have left to read?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Xander read 20% of his 500-page book in one hour.  The next night he read another 20% of the book.  On the third night, he read 30% of his book.  How many pages does he have left to read?",
+      "gt": "150",
+      "gt_value": "150",
+      "source": "gsm8k"
+    }
+  ],
+  "selection": [
+    {
+      "item_id": "gsm8k-9dee64f5f50abf10",
+      "problem": "Sara’s house is 100 square feet larger than 2 times Nada's house. If Sara's house is 1000 square feet, how many square feet is Nada's house?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Sara’s house is 100 square feet larger than 2 times Nada's house. If Sara's house is 1000 square feet, how many square feet is Nada's house?",
+      "gt": "450",
+      "gt_value": "450",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-f042a48890c876db",
+      "problem": "Marlene wants to buy half a dozen of shirts to avail of the sale. The regular price of a shirt is $50 and is now on sale at a 20% discount. How much will Marlene pay for the shirts?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Marlene wants to buy half a dozen of shirts to avail of the sale. The regular price of a shirt is $50 and is now on sale at a 20% discount. How much will Marlene pay for the shirts?",
+      "gt": "240",
+      "gt_value": "240",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-19425972c58c0e0a",
+      "problem": "There are 100 lions in Londolozi at first. If lion cubs are born at the rate of 5 per month and lions die at the rate of 1 per month, how many lions will there be in Londolozi after 1 year?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: There are 100 lions in Londolozi at first. If lion cubs are born at the rate of 5 per month and lions die at the rate of 1 per month, how many lions will there be in Londolozi after 1 year?",
+      "gt": "148",
+      "gt_value": "148",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-40a6d750fa6b0cbd",
+      "problem": "On our last vacation, I bought 4 times as many tetras as Tim bought clowns. Tim bought twice as many clowns as Rick bought guppies. If Rick bought 30 guppies, how many animals did we buy on our last vacation?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: On our last vacation, I bought 4 times as many tetras as Tim bought clowns. Tim bought twice as many clowns as Rick bought guppies. If Rick bought 30 guppies, how many animals did we buy on our last vacation?",
+      "gt": "330",
+      "gt_value": "330",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-7180c634271f02f7",
+      "problem": "Carson runs a carpool for five of his friends. The five of them cover all the gas expenses to compensate Carson for his time. Their total commute is 21 miles one way, gas costs $2.50/gallon, Carson's car gets 30 miles/gallon, and they commute to work 5 days a week, 4 weeks a month. How much does each person pay toward gas monthly?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Carson runs a carpool for five of his friends. The five of them cover all the gas expenses to compensate Carson for his time. Their total commute is 21 miles one way, gas costs $2.50/gallon, Carson's car gets 30 miles/gallon, and they commute to work 5 days a week, 4 weeks a month. How much does each person pay toward gas monthly?",
+      "gt": "14",
+      "gt_value": "14",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-207346e9d7d975c1",
+      "problem": "Ken caught twice as many fish as Kendra, but Ken released 3 fish back into the lake. Kendra caught 30 fish and did not release any of them back into the lake. How many fish did Ken and Kendra bring home?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Ken caught twice as many fish as Kendra, but Ken released 3 fish back into the lake. Kendra caught 30 fish and did not release any of them back into the lake. How many fish did Ken and Kendra bring home?",
+      "gt": "87",
+      "gt_value": "87",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-7a51d1bfa93a34b9",
+      "problem": "Mrs. Dunbar was creating floral arrangements for her niece's wedding.  She needed to make 5 bouquets and 7 table decorations.  She uses 12 white roses in each table decoration and 5 white roses in each bouquet.  How many white roses in total does she need to complete all bouquets and table decorations?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Mrs. Dunbar was creating floral arrangements for her niece's wedding.  She needed to make 5 bouquets and 7 table decorations.  She uses 12 white roses in each table decoration and 5 white roses in each bouquet.  How many white roses in total does she need to complete all bouquets and table decorations?",
+      "gt": "109",
+      "gt_value": "109",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-b1849c875825cd13",
+      "problem": "Russel and Jen went to the circus. Jen played a shooting game twice, while Russel rode the carousel three times. If the shooting game costs 5 tickets and the carousel costs 3 tickets. How many tickets did they use?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Russel and Jen went to the circus. Jen played a shooting game twice, while Russel rode the carousel three times. If the shooting game costs 5 tickets and the carousel costs 3 tickets. How many tickets did they use?",
+      "gt": "19",
+      "gt_value": "19",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-256b87a0acd8ff6b",
+      "problem": "Ralph has $54.00 worth of products in his cart.  At the register, he asks if he could have a 20% discount on an item with a small issue.  This item is $20.00 to start.  They agree.   Ralph also has a 10% coupon on his purchase, which he uses after the 20% discount on the item with the small issue.  How much will all of his items cost?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Ralph has $54.00 worth of products in his cart.  At the register, he asks if he could have a 20% discount on an item with a small issue.  This item is $20.00 to start.  They agree.   Ralph also has a 10% coupon on his purchase, which he uses after the 20% discount on the item with the small issue.  How much will all of his items cost?",
+      "gt": "45",
+      "gt_value": "45",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-9d75f7a4a05785cc",
+      "problem": "John sublets his apartment to 3 people who each pay $400 per month.  He rents the apartment for $900 a month.  How much profit does he make in a year?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: John sublets his apartment to 3 people who each pay $400 per month.  He rents the apartment for $900 a month.  How much profit does he make in a year?",
+      "gt": "3600",
+      "gt_value": "3600",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-63d0337d34de2cae",
+      "problem": "At a gym, the blue weights are 2 pounds each, and the green weights are 3 pounds each. Harry put 4 blue weights and 5 green weights onto a metal bar. The bar itself weighs 2 pounds. What is the total amount of weight, in pounds, of Harry's custom creation?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: At a gym, the blue weights are 2 pounds each, and the green weights are 3 pounds each. Harry put 4 blue weights and 5 green weights onto a metal bar. The bar itself weighs 2 pounds. What is the total amount of weight, in pounds, of Harry's custom creation?",
+      "gt": "25",
+      "gt_value": "25",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-2eea074d286f7016",
+      "problem": "Bubba bought a new two-story warehouse.  When empty, the first floor of the building contains twice as much floor space for storage as the second floor.  The first items he brought into his empty building were several thousand boxes; and he put them all on the second floor, which filled one-quarter of the second floor storage space.  If the boxes used up 5,000 square feet of storage space, how many square feet of storage space is still available in the building?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Bubba bought a new two-story warehouse.  When empty, the first floor of the building contains twice as much floor space for storage as the second floor.  The first items he brought into his empty building were several thousand boxes; and he put them all on the second floor, which filled one-quarter of the second floor storage space.  If the boxes used up 5,000 square feet of storage space, how many square feet of storage space is still available in the building?",
+      "gt": "55000",
+      "gt_value": "55000",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-0bbe50592972a08c",
+      "problem": "Sally sold 20 cups of lemonade last week. She sold 30% more lemonade this week. How many cups of lemonade did she sell in total for both weeks?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Sally sold 20 cups of lemonade last week. She sold 30% more lemonade this week. How many cups of lemonade did she sell in total for both weeks?",
+      "gt": "46",
+      "gt_value": "46",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-e49d1bb3d9d474c5",
+      "problem": "Tropical Storm Sally brings 3 days of rain to southern Texas.  The first day it rained 4 inches.  The second day it rained 5 times as much as the first day, and the third day it rained 6 inches less than the sum of the first two days.  How much did it rain on the third day?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Tropical Storm Sally brings 3 days of rain to southern Texas.  The first day it rained 4 inches.  The second day it rained 5 times as much as the first day, and the third day it rained 6 inches less than the sum of the first two days.  How much did it rain on the third day?",
+      "gt": "18",
+      "gt_value": "18",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-3f2b7f9512861aff",
+      "problem": "Eddy’s spider plant produces 2 baby plants 2 times a year.  After 4 years, how many baby plants will the mother plant have produced?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Eddy’s spider plant produces 2 baby plants 2 times a year.  After 4 years, how many baby plants will the mother plant have produced?",
+      "gt": "16",
+      "gt_value": "16",
+      "source": "gsm8k"
+    },
+    {
+      "item_id": "gsm8k-27c6ddb74fb25011",
+      "problem": "Monica was saving money for her future. Every week he put $15 into her moneybox. After the moneybox got full, which took 60 weeks, Monica took all the money out and took it to the bank, and she started saving money again. She repeated this whole process 5 times. How much money did Monica take to the bank in total?",
+      "prompt": "Solve the following problem. Reason step by step, then put the final answer in \\boxed{}.\n\nProblem: Monica was saving money for her future. Every week he put $15 into her moneybox. After the moneybox got full, which took 60 weeks, Monica took all the money out and took it to the bank, and she started saving money again. She repeated this whole process 5 times. How much money did Monica take to the bank in total?",
+      "gt": "4500",
+      "gt_value": "4500",
+      "source": "gsm8k"
+    }
+  ],
+  "max_new_tokens": 4096,
+  "anchors": [
+    0.3
+  ],
+  "note": "GSM8K train only; GSM8K test and MMLU are held out for final external test."
+}
